@@ -129,46 +129,6 @@
 
 
 /* ============================================================
-   HOVER GIF
-   ============================================================ */
-
-.character-hover {
-
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    opacity: 0;
-
-    pointer-events: none;
-
-}
-
-
-/* ============================================================
-   RAHMAN HOVER ACTIVATION ONLY
-   ============================================================ */
-
-.game-active
-.character--rahman:hover
-.character-hover {
-
-    opacity: 1;
-
-}
-
-
-.game-active
-.character--rahman:hover
-.character-static {
-
-    opacity: 0;
-
-}
-
-
-/* ============================================================
    SCENE 2 — RAHMAN
    ============================================================ */
 
@@ -210,19 +170,6 @@
         translate(-50%, -50%);
 
     cursor: pointer;
-
-    transition:
-        filter 0.2s ease;
-
-}
-
-
-/* ============================================================
-   RAHMAN HOVER
-   ============================================================ */
-
-.game-active
-.character--rahman:hover {
 
     filter:
         drop-shadow(

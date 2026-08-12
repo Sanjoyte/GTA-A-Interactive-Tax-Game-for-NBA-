@@ -164,9 +164,9 @@
 .welcome-kicker {
 
     font-family:
+        "Cy Grotesk V3",
+        "Cy Grotesk",
         "Arial Narrow",
-        "Segoe UI",
-        Arial,
         sans-serif;
 
     font-size:
@@ -181,7 +181,7 @@
     letter-spacing:
         0.28em;
 
-    text-transform: uppercase;
+    text-transform: None;
 
     color:
         rgba(173, 248, 255, 0.86);
@@ -197,10 +197,8 @@
         0;
 
     font-family:
-        "Arial Narrow",
-        "Segoe UI",
-        Arial,
-        sans-serif;
+        "Press Start 2P",
+        monospace;
 
     font-size:
         clamp(
@@ -218,44 +216,28 @@
     text-transform: uppercase;
 
     color:
-        #d9fbff;
+        transparent;
 
-    text-shadow:
-        0 0 0.5rem
-        rgba(104, 236, 255, 0.95),
-
-        0 0 1.6rem
-        rgba(54, 198, 255, 0.42);
-
-}
-
-
-.welcome-text {
-
-    margin:
-        5%
-        0
-        0;
-
-    max-width: 92%;
-
-    font-size:
-        clamp(
-            0.9rem,
-            1.35vw,
-            1.65rem
+    background:
+        linear-gradient(
+            180deg,
+            #a5f3fc 0%,
+            #38bdf8 45%,
+            #06b6d4 50%,
+            #083344 100%
         );
 
-    line-height: 1.45;
+    background-clip:
+        text;
 
-    font-weight: 600;
+    -webkit-background-clip:
+        text;
 
-    color:
-        rgba(230, 252, 255, 0.9);
+    -webkit-text-fill-color:
+        transparent;
 
-    text-shadow:
-        0 0 0.5rem
-        rgba(0, 0, 0, 0.66);
+    filter:
+        drop-shadow(2px 4px 0px #000);
 
 }
 
@@ -266,9 +248,9 @@
         8%;
 
     font-family:
+        "Cy Grotesk V3",
+        "Cy Grotesk",
         "Arial Narrow",
-        "Segoe UI",
-        Arial,
         sans-serif;
 
     font-size:
