@@ -1,0 +1,368 @@
+/* ============================================================
+   SCENE 6 — SUBMIT RETURN
+   ============================================================ */
+
+
+/* ============================================================
+   ELEMENTS
+   ============================================================ */
+
+const scene6 =
+    document.getElementById(
+        "scene-6"
+    );
+
+
+const scene6Question =
+    document.getElementById(
+        "scene-6-question"
+    );
+
+
+const scene6Yes =
+    document.getElementById(
+        "scene-6-yes"
+    );
+
+
+const scene6No =
+    document.getElementById(
+        "scene-6-no"
+    );
+
+
+const scene6Response =
+    document.getElementById(
+        "scene-6-response"
+    );
+
+
+const scene6ResponseText =
+    document.getElementById(
+        "scene-6-response-text"
+    );
+
+
+const scene6ClickLayer =
+    document.getElementById(
+        "scene-6-click-layer"
+    );
+
+
+/* ============================================================
+   SCENE 6 STATE
+   ============================================================ */
+
+/*
+    0 = asking question
+
+    1 = response is being displayed
+
+    2 = move to Scene 7
+*/
+
+let scene6Step = 0;
+
+
+/* ============================================================
+   OPEN SCENE 6
+   ============================================================ */
+
+function openScene6() {
+
+    console.log(
+        "Opening Scene 6 — Submit Return"
+    );
+
+
+    /*
+        Hide previous scene.
+    */
+
+    if (typeof scene5 !== "undefined") {
+
+        scene5.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    /*
+        Show Scene 6.
+    */
+
+    scene6.classList.add(
+        "active"
+    );
+
+
+    /*
+        Reset state.
+    */
+
+    scene6Step = 0;
+
+
+    /*
+        Show question.
+    */
+
+    scene6Question.style.display =
+        "flex";
+
+
+    /*
+        Hide response.
+    */
+
+    scene6Response.classList.remove(
+        "active"
+    );
+
+
+    /*
+        Clear response.
+    */
+
+    scene6ResponseText.textContent =
+        "";
+
+
+    /*
+        Disable full-screen
+        click progression.
+    */
+
+    scene6.classList.remove(
+        "message-active"
+    );
+
+}
+
+
+/* ============================================================
+   YES
+   ============================================================ */
+
+scene6Yes.addEventListener(
+    "click",
+    (event) => {
+
+        /*
+            Prevent the click from
+            reaching the full-screen
+            progression layer.
+        */
+
+        event.stopPropagation();
+
+
+        /*
+            Make sure we are still
+            selecting an option.
+        */
+
+        if (scene6Step !== 0) {
+
+            return;
+
+        }
+
+
+        console.log(
+            "Return submission: YES"
+        );
+
+
+        /*
+            Move to response state.
+        */
+
+        scene6Step = 1;
+
+
+        /*
+            Hide question and buttons.
+        */
+
+        scene6Question.style.display =
+            "none";
+
+
+        /*
+            Show response.
+        */
+
+        scene6ResponseText.textContent =
+            "Proceeding to eReturn";
+
+
+        scene6Response.classList.add(
+            "active"
+        );
+
+
+        /*
+            Enable click anywhere.
+        */
+
+        scene6.classList.add(
+            "message-active"
+        );
+
+    }
+);
+
+
+/* ============================================================
+   NO
+   ============================================================ */
+
+scene6No.addEventListener(
+    "click",
+    (event) => {
+
+        /*
+            Prevent the click from
+            reaching the full-screen
+            progression layer.
+        */
+
+        event.stopPropagation();
+
+
+        /*
+            Make sure we are still
+            selecting an option.
+        */
+
+        if (scene6Step !== 0) {
+
+            return;
+
+        }
+
+
+        console.log(
+            "Return submission: NO"
+        );
+
+
+        /*
+            Move to response state.
+        */
+
+        scene6Step = 1;
+
+
+        /*
+            Hide question and buttons.
+        */
+
+        scene6Question.style.display =
+            "none";
+
+
+        /*
+            Show response.
+        */
+
+        scene6ResponseText.textContent =
+            "Oh, c'mon dude, you must submit your return!";
+
+
+        scene6Response.classList.add(
+            "active"
+        );
+
+
+        /*
+            Enable click anywhere.
+        */
+
+        scene6.classList.add(
+            "message-active"
+        );
+
+    }
+);
+
+
+/* ============================================================
+   CLICK AFTER RESPONSE
+   ============================================================ */
+
+scene6ClickLayer.addEventListener(
+    "click",
+    () => {
+
+        /*
+            Only proceed after
+            YES or NO was selected.
+        */
+
+        if (scene6Step !== 1) {
+
+            return;
+
+        }
+
+
+        scene6Step = 2;
+
+
+        console.log(
+            "Moving to Scene 7"
+        );
+
+
+        /*
+            Open Scene 7.
+        */
+
+        openScene7();
+
+    }
+);
+
+
+/* ============================================================
+   OPEN SCENE 7
+   ============================================================ */
+
+function openScene7() {
+
+    /*
+        Hide Scene 6.
+    */
+
+    scene6.classList.remove(
+        "active"
+    );
+
+
+    /*
+        Show Scene 7.
+    */
+
+    const scene7 =
+        document.getElementById(
+            "scene-7"
+        );
+
+
+    if (scene7) {
+
+        scene7.classList.add(
+            "active"
+        );
+
+    }
+
+
+    console.log(
+        "Scene 7 opened."
+    );
+
+}
