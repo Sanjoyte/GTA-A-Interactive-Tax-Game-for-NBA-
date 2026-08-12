@@ -1,0 +1,449 @@
+/* ============================================================
+   SCENE 2 — CHARACTER SELECTION
+   ============================================================ */
+
+
+/* ============================================================
+   SCENE 2 BACKGROUND
+   ============================================================ */
+
+.scene-2-background {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-image:
+        url("../assets/backgrounds/character-selection-bg.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    z-index: 0;
+
+}
+
+
+/* ============================================================
+   SCENE CONTENT
+   ============================================================ */
+
+.scene-2-content {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+
+}
+
+
+/* ============================================================
+   CHARACTERS CONTAINER
+   ============================================================ */
+
+.characters-container {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 2;
+
+}
+
+
+/* ============================================================
+   CHARACTER BASE
+   ============================================================ */
+
+.character {
+
+    position: absolute;
+
+    text-align: center;
+
+}
+
+
+/* ============================================================
+   CHARACTER IMAGE
+   ============================================================ */
+
+.character-image {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+}
+
+
+/* ============================================================
+   STATIC IMAGE
+   ============================================================ */
+
+.character-static {
+
+    position: relative;
+
+}
+
+
+/* ============================================================
+   HOVER GIF
+   ============================================================ */
+
+.character-hover {
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+/* ============================================================
+   RAHMAN HOVER ACTIVATION ONLY
+   ============================================================ */
+
+.game-active
+.character--rahman:hover
+.character-hover {
+
+    opacity: 1;
+
+}
+
+
+.game-active
+.character--rahman:hover
+.character-static {
+
+    opacity: 0;
+
+}
+
+
+/* ============================================================
+   SCENE 2 — RAHMAN
+   ============================================================ */
+
+.character--rahman {
+
+    /*
+        ============================================
+        RAHMAN POSITION AND SIZE
+        ============================================
+
+        Change ONLY these three values.
+
+        left  = left/right
+        top   = up/down
+        width = character size
+    */
+
+    --rahman-left: 30%;
+    --rahman-top: 52%;
+    --rahman-width: 60%;
+
+
+    left:
+        var(--rahman-left);
+
+    top:
+        var(--rahman-top);
+
+    width:
+        var(--rahman-width);
+
+    /*
+        Height follows the image automatically.
+    */
+
+    height: auto;
+
+    transform:
+        translate(-50%, -50%);
+
+    cursor: pointer;
+
+    transition:
+        filter 0.2s ease;
+
+}
+
+
+/* ============================================================
+   RAHMAN HOVER
+   ============================================================ */
+
+.game-active
+.character--rahman:hover {
+
+    filter:
+        drop-shadow(
+            0 0 1.5rem
+            rgba(255,255,255,0.4)
+        );
+
+}
+
+
+/* ============================================================
+   RAHMAN FOCUS
+   ============================================================ */
+
+.character--rahman:focus-visible {
+
+    outline:
+        0.3rem
+        solid
+        #fff;
+
+    outline-offset:
+        0.8rem;
+
+}
+
+
+/* ============================================================
+   SCENE 2 — RIPON
+   ============================================================ */
+
+.character--ripon {
+
+    /*
+        ============================================
+        RIPON POSITION AND SIZE
+        ============================================
+    */
+
+    --ripon-left: 72.5%;
+    --ripon-top: 52%;
+    --ripon-width: 60%;
+
+
+    left:
+        var(--ripon-left);
+
+    top:
+        var(--ripon-top);
+
+    width:
+        var(--ripon-width);
+
+    height: auto;
+
+    transform:
+        translate(-50%, -50%);
+
+    cursor: not-allowed;
+
+}
+
+
+/* ============================================================
+   RIPON LOCKED APPEARANCE
+   ============================================================ */
+
+.character--ripon.locked {
+
+    filter:
+        grayscale(1)
+        brightness(0.42)
+        contrast(1.15)
+        saturate(0.15);
+
+}
+
+
+/* ============================================================
+   RIPON LOCK ICON
+   ============================================================ */
+
+.lock-icon {
+
+    position: absolute;
+
+    left: 50%;
+    top: 30%;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 20;
+
+    /*
+        Responsive icon size.
+    */
+
+    font-size:
+        clamp(
+            2rem,
+            5vw,
+            6rem
+        );
+
+    line-height: 1;
+
+    pointer-events: none;
+
+    /*
+        Make the icon visible against
+        the character.
+    */
+
+    filter:
+        drop-shadow(
+            0 0 0.5rem
+            rgba(0,0,0,0.95)
+        );
+
+}
+
+
+/* ============================================================
+   INSERT COIN
+   ============================================================ */
+
+.insert-coin {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 7%;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 50;
+
+    font-size:
+        clamp(
+            1rem,
+            2vw,
+            2rem
+        );
+
+    font-weight: 900;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform: uppercase;
+
+    color: #fff;
+
+    pointer-events: none;
+
+    animation:
+        insertCoinBlink
+        0.8s
+        steps(2, start)
+        infinite;
+
+}
+
+
+/* ============================================================
+   INSERT COIN BLINK
+   ============================================================ */
+
+@keyframes insertCoinBlink {
+
+    50% {
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* ============================================================
+   INITIAL START OVERLAY
+   ============================================================ */
+
+.start-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 100;
+
+    background:
+        rgba(80, 80, 80, 0.72);
+
+    cursor: pointer;
+
+    transition:
+        opacity 0.35s ease;
+
+}
+
+
+/* ============================================================
+   GAME ACTIVE
+   ============================================================ */
+
+.game-active .start-overlay {
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+/* ============================================================
+   INSERT COIN AFTER START
+   ============================================================ */
+
+.game-active .insert-coin {
+
+    display: none;
+
+}
+
+
+/* ============================================================
+   NON-INTERACTIVE STATE
+   ============================================================ */
+
+.scene-2:not(.game-active)
+.character {
+
+    pointer-events: none;
+
+}

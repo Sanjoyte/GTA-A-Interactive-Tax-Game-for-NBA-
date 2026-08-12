@@ -1,0 +1,85 @@
+/* ============================================================
+   #SCENE 4 — eTIN PORTAL
+   ============================================================ */
+
+
+/* ============================================================
+   SCENE 4 BASE
+   ============================================================ */
+
+.scene-4 {
+
+    visibility:
+        hidden;
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+    transition:
+        opacity 0.5s ease;
+
+}
+
+
+/* ============================================================
+   SCENE 4 ACTIVE
+   ============================================================ */
+
+.scene-4.active {
+
+    visibility:
+        visible;
+
+    opacity:
+        1;
+
+    pointer-events:
+        auto;
+
+}
+
+
+/* ============================================================
+   SCENE 4 PLACEHOLDER
+   ============================================================ */
+
+.scene-4-placeholder {
+
+    position:
+        absolute;
+
+    inset: 0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        #020a15;
+
+    color:
+        #a9f5ff;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size:
+        clamp(
+            2rem,
+            5vw,
+            5rem
+        );
+
+    letter-spacing:
+        0.2em;
+
+}

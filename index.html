@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Tax Education Experience</title>
+
+
+    <!-- =====================================================
+         GLOBAL CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/global.css"
+    >
+
+
+    <!-- =====================================================
+         GAME STAGE CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/stage.css"
+    >
+
+
+    <!-- =====================================================
+         SCENE 2 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-2.css"
+    >
+
+
+    <!-- =====================================================
+         SCENE 3 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-3.css"
+    >
+
+
+    <!-- =====================================================
+         SCENE 4 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-4.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main id="app">
+
+
+        <!-- =====================================================
+             #SCENE 2 — CHARACTER SELECTION
+             ===================================================== -->
+
+        <section
+            id="scene-2"
+            class="scene scene-2"
+        >
+
+            <div
+                id="game-stage"
+                class="game-stage"
+            >
+
+                <div
+                    class="scene-2-background"
+                ></div>
+
+
+                <div
+                    class="scene-2-content"
+                >
+
+                    <div
+                        class="characters-container"
+                    >
+
+
+                        <!-- RAHMAN -->
+
+                        <div
+                            id="rahman-character"
+                            class="character character--rahman"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Select Mr. Rahman"
+                        >
+
+                            <img
+                                class="character-image character-static"
+                                src="assets/characters/rahman-static.png"
+                                alt="Mr. Rahman"
+                            >
+
+                            <img
+                                class="character-image character-hover"
+                                src="assets/characters/rahman-hover.gif"
+                                alt=""
+                            >
+
+                        </div>
+
+
+                        <!-- RIPON -->
+
+                        <div
+                            id="ripon-character"
+                            class="character character--ripon locked"
+                            aria-label="Mr. Ripon - Locked"
+                        >
+
+                            <img
+                                class="character-image character-static"
+                                src="assets/characters/ripon-static.png"
+                                alt="Mr. Ripon"
+                            >
+
+                            <div
+                                class="lock-icon"
+                                aria-hidden="true"
+                            >
+                                🔒
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- INSERT COIN -->
+
+                    <div
+                        id="insert-coin"
+                        class="insert-coin"
+                    >
+                        INSERT COIN
+                    </div>
+
+
+                    <!-- START OVERLAY -->
+
+                    <div
+                        id="start-overlay"
+                        class="start-overlay"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             #SCENE 3 — SERVICE SELECTION
+             ===================================================== -->
+
+        <section
+            id="scene-3"
+            class="scene scene-3"
+        >
+
+            <div
+                id="game-stage-scene-3"
+                class="game-stage"
+            >
+
+                <!-- =============================================
+                     BACKGROUND
+                     ============================================= -->
+
+                <div
+                    class="scene-3-background"
+                ></div>
+
+
+                <!-- =============================================
+                     SCENE CONTENT
+                     ============================================= -->
+
+                <div
+                    class="scene-3-content"
+                >
+
+
+                    <!-- =========================================
+                         HEADER
+                         ========================================= -->
+
+                    <div
+                        class="service-header"
+                    >
+
+
+
+                        <div
+                            class="service-title"
+                        >
+                            GOVERNMENT SERVICES
+                        </div>
+
+
+
+                    </div>
+
+
+                    <!-- =========================================
+                         SERVICE CARDS
+                         ========================================= -->
+
+                    <div
+                        id="service-cards"
+                        class="service-cards"
+                    >
+
+
+                        <!-- CARD 1 -->
+
+                        <div
+                            class="service-card"
+                            data-service="land"
+                            tabindex="0"
+                            role="button"
+                        >
+
+                            <div
+                                class="service-card-icon"
+                            >
+                                🏠
+                            </div>
+
+                            <div
+                                class="service-card-title"
+                            >
+                                BUY LAND
+                            </div>
+
+                            <div
+                                class="service-card-text"
+                            >
+                                Land document registration
+                            </div>
+
+                        </div>
+
+
+                        <!-- CARD 2 -->
+
+                        <div
+                            class="service-card"
+                            data-service="savings"
+                            tabindex="0"
+                            role="button"
+                        >
+
+                            <div
+                                class="service-card-icon"
+                            >
+                                💰
+                            </div>
+
+                            <div
+                                class="service-card-title"
+                            >
+                                SAVINGS
+                            </div>
+
+                            <div
+                                class="service-card-text"
+                            >
+                                Savings and interest
+                            </div>
+
+                        </div>
+
+
+                        <!-- CARD 3 -->
+
+                        <div
+                            class="service-card"
+                            data-service="trade-license"
+                            tabindex="0"
+                            role="button"
+                        >
+
+                            <div
+                                class="service-card-icon"
+                            >
+                                📄
+                            </div>
+
+                            <div
+                                class="service-card-title"
+                            >
+                                TRADE LICENSE
+                            </div>
+
+                            <div
+                                class="service-card-text"
+                            >
+                                Business registration
+                            </div>
+
+                        </div>
+
+
+                        <!-- CARD 4 -->
+
+                        <div
+                            class="service-card"
+                            data-service="bank-loan"
+                            tabindex="0"
+                            role="button"
+                        >
+
+                            <div
+                                class="service-card-icon"
+                            >
+                                🏦
+                            </div>
+
+                            <div
+                                class="service-card-title"
+                            >
+                                BANK LOAN
+                            </div>
+
+                            <div
+                                class="service-card-text"
+                            >
+                                Loan application
+                            </div>
+
+                        </div>
+
+
+                        <!-- CARD 5 -->
+
+                        <div
+                            class="service-card"
+                            data-service="car-registration"
+                            tabindex="0"
+                            role="button"
+                        >
+
+                            <div
+                                class="service-card-icon"
+                            >
+                                🚗
+                            </div>
+
+                            <div
+                                class="service-card-title"
+                            >
+                                CAR REGISTRATION
+                            </div>
+
+                            <div
+                                class="service-card-text"
+                            >
+                                Ownership transfer
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================================
+                         SERVICE MESSAGE
+                         ========================================= -->
+
+                    <div
+                        id="service-message"
+                        class="service-message"
+                    >
+
+                        <div
+                            id="service-message-text"
+                            class="service-message-text"
+                        ></div>
+
+                        <div
+                            id="service-message-hint"
+                            class="service-message-hint"
+                        ></div>
+
+                    </div>
+
+
+                    <!-- =========================================
+                         FULL SCREEN CLICK LAYER
+                         ========================================= -->
+
+                    <div
+                        id="scene-3-click-layer"
+                        class="scene-3-click-layer"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             #SCENE 4 — eTIN PORTAL
+             ===================================================== -->
+
+        <section
+            id="scene-4"
+            class="scene scene-4"
+        >
+
+            <div
+                class="game-stage"
+            >
+
+                <div
+                    class="scene-4-placeholder"
+                >
+                    eTIN PORTAL
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+         ========================================================= -->
+
+    <script src="js/main.js"></script>
+
+    <script src="js/scene-2.js"></script>
+
+    <script src="js/scene-3.js"></script>
+
+    <script src="js/scene-4.js"></script>
+
+</body>
+
+</html>

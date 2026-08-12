@@ -1,0 +1,61 @@
+/* ============================================================
+   RESPONSIVE 16:9 GAME STAGE
+   ============================================================ */
+
+.game-stage {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    /*
+        The game stage always remains 16:9.
+
+        It automatically fills as much of the
+        browser viewport as possible.
+    */
+
+    width: min(
+        100vw,
+        177.7777778vh
+    );
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    background: #000;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE 16:9 SAFETY
+   ============================================================ */
+
+@media (max-aspect-ratio: 16/9) {
+
+    .game-stage {
+
+        width: 100vw;
+
+    }
+
+}
+
+
+@media (min-aspect-ratio: 16/9) {
+
+    .game-stage {
+
+        height: 100vh;
+
+        width: auto;
+
+    }
+
+}
