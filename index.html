@@ -97,6 +97,16 @@
         rel="stylesheet"
         href="css/scene-6.css"
     >
+
+
+    <!-- =====================================================
+         SCENE 7 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-7.css"
+    >
     
 </head>
 
@@ -141,13 +151,13 @@
                         <h1
                             class="welcome-title"
                         >
-                            Welcome to Tax Education
+                            Tax Game Storyboard
                         </h1>
 
                         <p
                             class="welcome-text"
                         >
-                            Step into an interactive journey and learn how everyday services connect to tax responsibilities.
+                            Interactive game like experience designed for our honorable Prime Minister
                         </p>
 
                         <div
@@ -799,6 +809,173 @@
 
 </section>
 
+<!-- =====================================================
+     SCENE 7 — eRETURN DASHBOARD
+     ===================================================== -->
+
+<section
+    id="scene-7"
+    class="scene scene-7"
+>
+
+    <div
+        id="game-stage-scene-7"
+        class="game-stage"
+    >
+
+        <!-- BACKGROUND -->
+
+        <div
+            class="scene-7-background"
+        ></div>
+
+
+        <!-- CONTENT -->
+
+        <div
+            class="scene-7-content"
+        >
+
+            <!-- LOGIN -->
+
+            <div
+                id="ereturn-login-panel"
+                class="ereturn-login-panel"
+            >
+
+                <div
+                    class="ereturn-login-title"
+                >
+                    eReturn Login
+                </div>
+
+                <input
+                    id="ereturn-tin"
+                    class="ereturn-input"
+                    type="text"
+                    placeholder="TIN"
+                    disabled
+                >
+
+                <input
+                    id="ereturn-password"
+                    class="ereturn-input"
+                    type="password"
+                    placeholder="Password"
+                    disabled
+                >
+
+                <button
+                    id="ereturn-login-button"
+                    class="ereturn-login-button"
+                    type="button"
+                    disabled
+                >
+                    LOGIN
+                </button>
+
+                <div
+                    id="ereturn-login-hint"
+                    class="ereturn-login-hint"
+                >
+                    LISTENING TO eRETURN GUIDE
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD -->
+
+            <div
+                id="ereturn-dashboard"
+                class="ereturn-dashboard"
+            >
+
+                <div
+                    class="ereturn-dashboard-title"
+                >
+                    Get Automated Return
+                </div>
+
+                <div
+                    id="ereturn-document-grid"
+                    class="ereturn-document-grid"
+                >
+
+                    <button
+                        class="ereturn-document-card"
+                        type="button"
+                        data-document="income"
+                    >
+                        <span class="ereturn-page-label">Page 1</span>
+                        <span class="ereturn-page-title">Income Details</span>
+                        <span>Income from Employment = 18,10,000 BDT</span>
+                        <span>Income from Rent = 6,00,000 BDT</span>
+                        <span>Income from Other Sources (Honorarium) = 2,00,000 BDT</span>
+                        <span>Total Income = 26,10,000 BDT</span>
+                    </button>
+
+                    <button
+                        class="ereturn-document-card"
+                        type="button"
+                        data-document="expenditure"
+                    >
+                        <span class="ereturn-page-label">Page 2</span>
+                        <span class="ereturn-page-title">Expenditure Details</span>
+                        <span>Personal expense = 3,00,000 BDT</span>
+                        <span>Accomodation = 4,71,192 BDT</span>
+                        <span>Education = 75,000 BDT</span>
+                        <span>Festival expense = 50,000 BDT</span>
+                        <span>Total = 8,96,192 BDT</span>
+                    </button>
+
+                    <button
+                        class="ereturn-document-card"
+                        type="button"
+                        data-document="assets"
+                    >
+                        <span class="ereturn-page-label">Page 3</span>
+                        <span class="ereturn-page-title">Asset &amp; Liabilities</span>
+                        <span>Non-Agri Land = 67,00,000 BDT</span>
+                        <span>Car = 60,00,000 BDT</span>
+                        <span>Jewelry = 2,50,000 BDT</span>
+                        <span>Furniture &amp; Devices = 1,20,000 BDT</span>
+                        <span>Bank &amp; Cash in Hand = 40,78,000 BDT</span>
+                        <span>Institutional Liabilities = 3,12,000 BDT</span>
+                    </button>
+
+                </div>
+
+                <div
+                    id="ereturn-calculation-card"
+                    class="ereturn-calculation-card"
+                >
+                    <div class="ereturn-page-label">Page 4</div>
+                    <div class="ereturn-page-title">Tax Calculation</div>
+
+                    <div
+                        id="ereturn-calculation-lines"
+                        class="ereturn-calculation-lines"
+                    ></div>
+
+                </div>
+
+                <button
+                    id="ereturn-action-button"
+                    class="ereturn-action-button"
+                    type="button"
+                >
+                    Calculate Return
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
     </main>
 
 
@@ -821,6 +998,8 @@
     <script src="js/scene-5.js"></script>
 
     <script src="js/scene-6.js"></script>
+
+    <script src="js/scene-7.js"></script>
 </body>
 
 </html>
