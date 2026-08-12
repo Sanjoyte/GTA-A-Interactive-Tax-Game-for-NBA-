@@ -34,6 +34,26 @@
 
 
     <!-- =====================================================
+         SCENE 0 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-0.css"
+    >
+
+
+    <!-- =====================================================
+         SCENE 1 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-1.css"
+    >
+
+
+    <!-- =====================================================
          SCENE 2 CSS
          ===================================================== -->
 
@@ -77,7 +97,6 @@
         rel="stylesheet"
         href="css/scene-6.css"
     >
-    >
     
 </head>
 
@@ -85,6 +104,101 @@
 <body>
 
     <main id="app">
+
+
+        <!-- =====================================================
+             #SCENE 0 — WELCOME
+             ===================================================== -->
+
+        <section
+            id="scene-0"
+            class="scene scene-0 active"
+        >
+
+            <div
+                id="game-stage-scene-0"
+                class="game-stage"
+            >
+
+                <div
+                    class="scene-0-background"
+                ></div>
+
+                <div
+                    class="scene-0-content"
+                >
+
+                    <div
+                        class="welcome-panel"
+                    >
+
+                        <div
+                            class="welcome-kicker"
+                        >
+                            National Board of Revenue
+                        </div>
+
+                        <h1
+                            class="welcome-title"
+                        >
+                            Welcome to Tax Education
+                        </h1>
+
+                        <p
+                            class="welcome-text"
+                        >
+                            Step into an interactive journey and learn how everyday services connect to tax responsibilities.
+                        </p>
+
+                        <div
+                            class="welcome-hint"
+                        >
+                            CLICK TO BEGIN
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             #SCENE 1 — OPENING VIDEO
+             ===================================================== -->
+
+        <section
+            id="scene-1"
+            class="scene scene-1"
+        >
+
+            <div
+                id="game-stage-scene-1"
+                class="game-stage"
+            >
+
+                <video
+                    id="scene-1-video"
+                    class="scene-1-video"
+                    src="assets/video/opening.mp4"
+                    preload="auto"
+                    playsinline
+                ></video>
+
+
+                <button
+                    id="scene-1-next"
+                    class="scene-1-next"
+                    type="button"
+                >
+                    NEXT
+                </button>
+
+            </div>
+
+        </section>
 
 
         <!-- =====================================================
@@ -693,6 +807,10 @@
          ========================================================= -->
 
     <script src="js/main.js"></script>
+
+    <script src="js/scene-0.js"></script>
+
+    <script src="js/scene-1.js"></script>
 
     <script src="js/scene-2.js"></script>
 

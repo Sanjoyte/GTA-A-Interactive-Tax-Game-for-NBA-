@@ -48,11 +48,15 @@ const riponCharacter =
    ============================================================ */
 
 /*
-    Scene 2 starts locked.
+    Scene 2 starts hidden and locked.
 
-    The player must click once before
-    anything becomes interactive.
+    Scene 1 opens it after the opening
+    video has finished.
 */
+
+scene2.classList.remove(
+    "active"
+);
 
 scene2.classList.remove(
     "game-active"
@@ -60,6 +64,52 @@ scene2.classList.remove(
 
 
 gameState.coinInserted = false;
+
+
+/* ============================================================
+   OPEN SCENE 2
+   ============================================================ */
+
+function openScene2() {
+
+    console.log(
+        "Opening Scene 2 — Character Selection"
+    );
+
+
+    document
+        .querySelectorAll(".scene")
+        .forEach(
+            (scene) => {
+
+                scene.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    scene2.classList.remove(
+        "hidden"
+    );
+
+    scene2.classList.remove(
+        "game-active"
+    );
+
+    scene2.classList.add(
+        "active"
+    );
+
+
+    gameState.currentScene =
+        "scene-2";
+
+    gameState.coinInserted =
+        false;
+
+}
 
 
 /* ============================================================

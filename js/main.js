@@ -14,7 +14,7 @@ const gameState = {
         Current scene
     */
 
-    currentScene: "scene-2",
+    currentScene: "scene-0",
 
 
     /*
@@ -63,5 +63,5 @@ console.log(
 );
 
 console.log(
-    "Game waiting for INSERT COIN."
+    "Game waiting on welcome screen."
 );

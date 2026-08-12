@@ -1,0 +1,114 @@
+/* ============================================================
+   #SCENE 1 — OPENING VIDEO
+   ============================================================ */
+
+
+/* ============================================================
+   SCENE 1 BASE
+   ============================================================ */
+
+.scene-1 {
+
+    display: none;
+
+}
+
+
+.scene-1.active {
+
+    display: block;
+
+}
+
+
+/* ============================================================
+   VIDEO
+   ============================================================ */
+
+.scene-1-video {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    background:
+        #000;
+
+    z-index: 1;
+
+}
+
+
+/* ============================================================
+   NEXT BUTTON
+   ============================================================ */
+
+.scene-1-next {
+
+    position: absolute;
+
+    right: 4%;
+    bottom: 13%;
+
+    z-index: 10;
+
+    padding:
+        0.8rem
+        2rem;
+
+    font-size:
+        clamp(
+            1rem,
+            1.5vw,
+            1.8rem
+        );
+
+    font-weight: 700;
+
+    letter-spacing:
+        0.08em;
+
+    text-transform: uppercase;
+
+    color: #000;
+
+    background: #fff;
+
+    border:
+        0.15rem solid
+        #000;
+
+    border-radius:
+        0.4rem;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+/* ============================================================
+   NEXT HOVER
+   ============================================================ */
+
+.scene-1-next:hover {
+
+    transform:
+        scale(1.05);
+
+    background:
+        #e0e0e0;
+
+}
