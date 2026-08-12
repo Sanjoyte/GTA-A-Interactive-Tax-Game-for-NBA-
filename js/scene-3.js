@@ -10,8 +10,7 @@
 const scene3 =
     document.getElementById("scene-3");
 
-const scene4 =
-    document.getElementById("scene-4");
+
 
 const serviceCards =
     document.querySelectorAll(".service-card");
@@ -349,49 +348,3 @@ scene3ClickLayer.addEventListener(
 );
 
 
-/* ============================================================
-   OPEN SCENE 4
-   ============================================================ */
-
-function openScene4() {
-
-    console.log(
-        "Opening Scene 4"
-    );
-
-
-    /*
-        Hide Scene 3.
-    */
-
-    scene3.classList.remove(
-        "active"
-    );
-
-
-    /*
-        Disable Scene 3 click progression.
-    */
-
-    scene3.classList.remove(
-        "message-active"
-    );
-
-
-    /*
-        Show Scene 4.
-    */
-
-    scene4.classList.add(
-        "active"
-    );
-
-
-    /*
-        Future:
-
-        Scene 4 will contain the
-        eTIN portal transition/page.
-    */
-
-}

@@ -428,28 +428,98 @@
 
 
 
-        <!-- =====================================================
-             #SCENE 4 — eTIN PORTAL
-             ===================================================== -->
 
-        <section
-            id="scene-4"
-            class="scene scene-4"
-        >
+<!-- =====================================================
+     #SCENE 4 — eTIN PORTAL
+     ===================================================== -->
 
-            <div
+<section
+    id="scene-4"
+    class="scene scene-4"
+>
+    <div
+                id="game-stage"
                 class="game-stage"
             >
+    <div
+        id="scene-4-background"
+        class="scene-4-background"
+    ></div>
 
-                <div
-                    class="scene-4-placeholder"
-                >
-                    eTIN PORTAL
-                </div>
 
-            </div>
+    <div
+        id="scene-4-content"
+        class="scene-4-content"
+    >
 
-        </section>
+        <!-- =============================================
+             eTIN LOGIN FORM
+             ============================================= -->
+
+        <div
+            id="etin-login"
+            class="etin-login"
+        >
+
+            <!-- EMAIL -->
+
+            <input
+                id="etin-email"
+                class="etin-input"
+                type="text"
+                placeholder="Email"
+                readonly
+            >
+
+
+            <!-- PASSWORD -->
+
+            <input
+                id="etin-password"
+                class="etin-input"
+                type="text"
+                placeholder="Password"
+                readonly
+            >
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                id="etin-login-button"
+                class="etin-login-button"
+                type="button"
+            >
+                LOGIN
+            </button>
+
+        </div>
+
+
+        <!-- =============================================
+             FINAL MESSAGE
+             ============================================= -->
+
+        <div
+            id="etin-certificate-message"
+            class="etin-certificate-message"
+        >
+            Print Your eTIN Certificate
+        </div>
+
+
+        <!-- =============================================
+             CLICK LAYER
+             ============================================= -->
+
+        <div
+            id="scene-4-click-layer"
+            class="scene-4-click-layer"
+        ></div>
+
+    </div>
+
+</section>
 
     </main>
 

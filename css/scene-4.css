@@ -4,82 +4,385 @@
 
 
 /* ============================================================
-   SCENE 4 BASE
+   SCENE
    ============================================================ */
 
 .scene-4 {
 
-    visibility:
-        hidden;
-
-    opacity:
-        0;
-
-    pointer-events:
-        none;
-
-    transition:
-        opacity 0.5s ease;
-
-}
-
-
-/* ============================================================
-   SCENE 4 ACTIVE
-   ============================================================ */
-
-.scene-4.active {
-
-    visibility:
-        visible;
-
-    opacity:
-        1;
-
-    pointer-events:
-        auto;
-
-}
-
-
-/* ============================================================
-   SCENE 4 PLACEHOLDER
-   ============================================================ */
-
-.scene-4-placeholder {
-
-    position:
-        absolute;
+    position: absolute;
 
     inset: 0;
 
-    display:
-        flex;
+    width: 100%;
+    height: 100%;
 
-    align-items:
-        center;
+    overflow: hidden;
 
-    justify-content:
-        center;
+    display: none;
+
+}
+
+
+/*
+    Scene 4 becomes visible when
+    JavaScript adds .active
+*/
+
+.scene-4.active {
+
+    display: block;
+
+}
+
+
+/* ============================================================
+   BACKGROUND
+   ============================================================ */
+
+.scene-4-background {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-image:
+        url("../assets/backgrounds/etin-bg.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    z-index: 0;
+
+}
+
+
+/* ============================================================
+   CONTENT
+   ============================================================ */
+
+.scene-4-content {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+
+}
+
+
+/* ============================================================
+   LOGIN FORM
+   ============================================================ */
+
+.etin-login {
+
+    position: absolute;
+
+    /*
+        Change these values to position
+        the login form over your artwork.
+    */
+
+    left: 50%;
+
+    top: 52%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 30%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 1.2%;
+
+    z-index: 10;
+
+}
+
+
+/* ============================================================
+   INPUT BOXES
+   ============================================================ */
+
+.etin-input {
+
+    width: 100%;
+
+    /*
+        Responsive height.
+
+        Uses viewport height instead
+        of fixed pixels.
+    */
+
+    height: clamp(
+        3rem,
+        6vh,
+        6rem
+    );
+
+    padding:
+        0 1.5%;
+
+    box-sizing: border-box;
+
+    border:
+        0.15rem
+        solid
+        rgba(150, 255, 210, 0.7);
+
+    border-radius:
+        0.4rem;
 
     background:
-        #020a15;
+        rgba(0, 20, 15, 0.82);
 
     color:
-        #a9f5ff;
+        #d8ffe9;
 
     font-family:
         Arial,
+        Helvetica,
         sans-serif;
 
     font-size:
         clamp(
-            2rem,
-            5vw,
+            1rem,
+            1.5vw,
+            2rem
+        );
+
+    outline: none;
+
+    text-align: left;
+
+    box-shadow:
+        0 0 1rem
+        rgba(100, 255, 180, 0.2);
+
+}
+
+
+/* ============================================================
+   PLACEHOLDER
+   ============================================================ */
+
+.etin-input::placeholder {
+
+    color:
+        rgba(220, 255, 235, 0.7);
+
+}
+
+
+/* ============================================================
+   LOGIN BUTTON
+   ============================================================ */
+
+.etin-login-button {
+
+    display: none;
+
+    margin-top: 2%;
+
+    width: 45%;
+
+    min-height:
+        clamp(
+            3rem,
+            5vh,
             5rem
         );
 
+    border:
+        0.15rem
+        solid
+        rgba(150, 255, 210, 0.8);
+
+    border-radius:
+        0.4rem;
+
+    background:
+        rgba(30, 80, 60, 0.85);
+
+    color:
+        #d8ffe9;
+
+    font-size:
+        clamp(
+            1rem,
+            1.5vw,
+            2rem
+        );
+
+    font-weight: 800;
+
     letter-spacing:
-        0.2em;
+        0.12em;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 1rem
+        rgba(100, 255, 180, 0.25);
+
+}
+
+
+/* ============================================================
+   LOGIN BUTTON HOVER
+   ============================================================ */
+
+.etin-login-button:hover {
+
+    background:
+        rgba(80, 150, 110, 0.9);
+
+    box-shadow:
+        0 0 1.5rem
+        rgba(150, 255, 200, 0.5);
+
+}
+
+
+/* ============================================================
+   FINAL CERTIFICATE MESSAGE
+   ============================================================ */
+
+.etin-certificate-message {
+
+    display: none;
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    color:
+        #d8ffe9;
+
+    font-size:
+        clamp(
+            1.5rem,
+            3vw,
+            4rem
+        );
+
+    font-weight: 800;
+
+    text-align: center;
+
+    text-transform: uppercase;
+
+    letter-spacing:
+        0.08em;
+
+    text-shadow:
+        0 0 1rem
+        rgba(150, 255, 210, 0.8);
+
+    z-index: 20;
+
+}
+
+
+/* ============================================================
+   CLICK LAYER
+   ============================================================ */
+
+.scene-4-click-layer {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+}
+
+
+/*
+    The click layer becomes active
+    only when we are waiting for
+    the player's next click.
+*/
+
+.scene-4.waiting-for-click
+.scene-4-click-layer {
+
+    pointer-events: auto;
+
+    cursor: pointer;
+
+}
+
+
+/* ============================================================
+   LOGIN VISIBLE
+   ============================================================ */
+
+.scene-4.login-visible
+.etin-login-button {
+
+    display: block;
+
+}
+
+
+/* ============================================================
+   FINAL MESSAGE VISIBLE
+   ============================================================ */
+
+.scene-4.certificate-visible
+.etin-login {
+
+    display: none;
+
+}
+
+
+.scene-4.certificate-visible
+.etin-certificate-message {
+
+    display: block;
+
+}
+
+
+/* ============================================================
+   MOBILE / SMALL SCREEN SAFETY
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    .etin-login {
+
+        width: 60%;
+
+    }
 
 }
