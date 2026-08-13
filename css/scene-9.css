@@ -1,0 +1,233 @@
+/* ============================================================
+   SCENE 9 — CHARACTER SELECTION
+   ============================================================ */
+
+.scene-9 {
+
+    display: none;
+}
+
+
+.scene-9.active {
+
+    display: block;
+}
+
+
+/* ============================================================
+   BACKGROUND AND CONTENT
+   ============================================================ */
+
+.scene-9-background {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-image:
+        url("../assets/backgrounds/character-selection-bg.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    z-index: 0;
+}
+
+
+.scene-9-content,
+.scene-9-characters {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+
+.scene-9-content {
+
+    z-index: 1;
+}
+
+
+.scene-9-characters {
+
+    z-index: 2;
+}
+
+
+/* ============================================================
+   CHARACTER BASE
+   ============================================================ */
+
+.scene-9-character {
+
+    position: absolute;
+
+    height: auto;
+
+    padding: 0;
+
+    border: 0;
+
+    background: none;
+
+    transform:
+        translate(-50%, -50%);
+
+    text-align: center;
+}
+
+
+.scene-9-character-image {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+}
+
+
+/* ============================================================
+   RAHMAN — COMPLETED AND NON-INTERACTIVE
+   ============================================================ */
+
+.scene-9-character--rahman {
+
+    left: 30%;
+    top: 52%;
+
+    width: 60%;
+
+    cursor: default;
+
+    pointer-events: none;
+
+    filter:
+        saturate(0.58)
+        brightness(0.72);
+}
+
+
+.scene-9-completed-stamp {
+
+    position: absolute;
+
+    left: 50%;
+    top: 30%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-10deg);
+
+    padding:
+        clamp(0.6rem, 1vw, 1rem)
+        clamp(0.75rem, 1.4vw, 1.5rem);
+
+    border:
+        clamp(0.18rem, 0.3vw, 0.35rem)
+        solid
+        #8fe8ff;
+
+    border-radius: 0.35rem;
+
+    background-color: #075c91;
+
+    color: #ffffff;
+
+    font-family:
+        "Press Start 2P",
+        monospace;
+
+    font-size:
+        clamp(
+            0.78rem,
+            1.55vw,
+            1.8rem
+        );
+
+    line-height: 1;
+
+    letter-spacing: 0.08em;
+
+    text-shadow:
+        0 0.12rem 0
+        #063653;
+
+    box-shadow:
+        0 0 1.2rem
+        rgba(75, 196, 255, 0.62),
+
+        inset 0 0 0.8rem
+        rgba(220, 247, 255, 0.2);
+
+    opacity: 1;
+
+    z-index: 10;
+}
+
+
+/* ============================================================
+   RIPON — UNLOCKED AND SELECTABLE
+   ============================================================ */
+
+.scene-9-character--ripon {
+
+    left: 72.5%;
+    top: 52%;
+
+    width: 60%;
+
+    cursor: pointer;
+
+    filter:
+        drop-shadow(
+            0 0 1.5rem
+            rgba(255,255,255,0.4)
+        );
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+.scene-9-character--ripon:hover,
+.scene-9-character--ripon:focus-visible {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.03);
+
+    filter:
+        drop-shadow(
+            0 0 2rem
+            rgba(113, 225, 255, 0.72)
+        );
+
+    outline: none;
+}
+
+
+.scene-9-character--ripon.selected {
+
+    filter:
+        drop-shadow(
+            0 0 2.3rem
+            rgba(91, 255, 170, 0.85)
+        );
+}

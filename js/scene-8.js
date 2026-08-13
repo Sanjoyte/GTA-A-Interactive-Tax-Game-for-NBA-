@@ -174,8 +174,11 @@ scene8Next.addEventListener(
 
 
         console.log(
-            "Scene 8 NEXT clicked. The next scene is not available yet."
+            "Scene 8 NEXT clicked."
         );
+
+
+        openScene9();
 
     }
 );

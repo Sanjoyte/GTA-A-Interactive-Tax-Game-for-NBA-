@@ -133,6 +133,16 @@
         rel="stylesheet"
         href="css/scene-8.css"
     >
+
+
+    <!-- =====================================================
+         SCENE 9 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-9.css"
+    >
     
 </head>
 
@@ -1156,6 +1166,83 @@
 
 </section>
 
+
+<!-- =====================================================
+     SCENE 9 — CHARACTER SELECTION
+     ===================================================== -->
+
+<section
+    id="scene-9"
+    class="scene scene-9"
+>
+
+    <div
+        id="game-stage-scene-9"
+        class="game-stage"
+    >
+
+        <div
+            class="scene-9-background"
+        ></div>
+
+
+        <div
+            class="scene-9-content"
+        >
+
+            <div
+                class="scene-9-characters"
+            >
+
+                <!-- RAHMAN — COMPLETED -->
+
+                <div
+                    id="scene-9-rahman"
+                    class="scene-9-character scene-9-character--rahman completed"
+                    aria-label="Mr. Rahman - Completed"
+                >
+
+                    <img
+                        class="scene-9-character-image"
+                        src="assets/characters/rahman-static.png"
+                        alt="Mr. Rahman"
+                    >
+
+                    <div
+                        class="scene-9-completed-stamp"
+                        aria-hidden="true"
+                    >
+                        COMPLETED
+                    </div>
+
+                </div>
+
+
+                <!-- RIPON — SELECTABLE -->
+
+                <button
+                    id="scene-9-ripon"
+                    class="scene-9-character scene-9-character--ripon"
+                    type="button"
+                    aria-label="Select Mr. Ripon"
+                >
+
+                    <img
+                        class="scene-9-character-image"
+                        src="assets/characters/ripon-static.png"
+                        alt="Mr. Ripon"
+                    >
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
     </main>
 
 
@@ -1182,6 +1269,8 @@
     <script src="js/scene-7.js?v=2"></script>
 
     <script src="js/scene-8.js"></script>
+
+    <script src="js/scene-9.js"></script>
 </body>
 
 </html>
