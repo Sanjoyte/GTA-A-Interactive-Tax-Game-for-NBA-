@@ -82,5 +82,8 @@ scene9Ripon.addEventListener(
             "Mr. Ripon selected."
         );
 
+
+        openScene10();
+
     }
 );

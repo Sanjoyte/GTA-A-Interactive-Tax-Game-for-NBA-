@@ -1,0 +1,60 @@
+/* ============================================================
+   SCENE 12 — eTDS VERIFICATION COMPLETE
+   ============================================================ */
+
+.scene-12 {
+    display: none;
+}
+
+.scene-12.active {
+    display: block;
+}
+
+
+/* ============================================================
+   BACKGROUND — MATCHES SCENE 10
+   ============================================================ */
+
+.scene-12-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.scene-12-background-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(30, 10, 2, 0.2),
+            rgba(12, 6, 3, 0.42)
+        );
+    pointer-events: none;
+}
+
+.scene-12-content {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+
+/* Scene 10's shared eTDS panel classes provide the exact box styling. */
+.scene-12-message-panel {
+    display: block;
+}
+
+.scene-12-click-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    cursor: pointer;
+}

@@ -143,6 +143,46 @@
         rel="stylesheet"
         href="css/scene-9.css"
     >
+
+
+    <!-- =====================================================
+         SCENE 10 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-10.css"
+    >
+
+
+    <!-- =====================================================
+         SCENE 11 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-11.css"
+    >
+
+
+    <!-- =====================================================
+         SCENE 12 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-12.css"
+    >
+
+
+    <!-- =====================================================
+         SCENE 13 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-13.css"
+    >
     
 </head>
 
@@ -1243,6 +1283,406 @@
 
 </section>
 
+
+<!-- =====================================================
+     SCENE 10 — eTDS
+     ===================================================== -->
+
+<section
+    id="scene-10"
+    class="scene scene-10"
+>
+
+    <div
+        id="game-stage-scene-10"
+        class="game-stage"
+    >
+
+        <video
+            id="scene-10-background"
+            class="scene-10-background"
+            src="assets/backgrounds/etds-motion-bg.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+        ></video>
+
+        <div
+            class="scene-10-background-overlay"
+            aria-hidden="true"
+        ></div>
+
+
+        <div
+            class="scene-10-content"
+        >
+
+            <!-- SOURCE TAX QUESTION -->
+
+            <div
+                id="etds-question-panel"
+                class="etds-panel etds-question-panel"
+            >
+
+                <div class="etds-panel-title">
+                    Do you want to verify the taxpayer's source tax claim?
+                </div>
+
+                <div class="etds-options">
+
+                    <button
+                        id="etds-yes"
+                        class="etds-option"
+                        type="button"
+                    >
+                        YES
+                    </button>
+
+                    <button
+                        id="etds-no"
+                        class="etds-option"
+                        type="button"
+                    >
+                        NO
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- eTDS LOGIN -->
+
+            <div
+                id="etds-login-panel"
+                class="etds-panel etds-login-panel"
+            >
+
+                <div class="etds-login-title">
+                    eTDS Login
+                </div>
+
+                <label
+                    class="etds-field"
+                    for="etds-tin"
+                >
+                    <span class="etds-field-label">TIN Number</span>
+
+                    <input
+                        id="etds-tin"
+                        class="etds-input"
+                        type="text"
+                        inputmode="numeric"
+                        maxlength="14"
+                        placeholder="TIN Number"
+                        readonly
+                    >
+                </label>
+
+                <label
+                    class="etds-field"
+                    for="etds-password"
+                >
+                    <span class="etds-field-label">Password</span>
+
+                    <input
+                        id="etds-password"
+                        class="etds-input"
+                        type="password"
+                        placeholder="Password"
+                        readonly
+                    >
+                </label>
+
+                <button
+                    id="etds-login-button"
+                    class="etds-login-button"
+                    type="button"
+                    disabled
+                >
+                    LOGIN
+                </button>
+
+                <div
+                    id="etds-login-hint"
+                    class="etds-login-hint"
+                >
+                    CLICK TIN NUMBER AND PASSWORD TO FILL
+                </div>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div
+                id="etds-message-panel"
+                class="etds-panel etds-message-panel"
+            >
+
+                <div
+                    id="etds-message-text"
+                    class="etds-message-text"
+                ></div>
+
+                <div
+                    id="etds-message-hint"
+                    class="etds-message-hint"
+                ></div>
+
+            </div>
+
+
+            <!-- AUDIO STATUS -->
+
+            <div
+                id="etds-audio-status"
+                class="etds-audio-status"
+                aria-live="polite"
+            >
+                🔊 eTDS guideline playing...
+            </div>
+
+
+            <!-- INTERNAL BACK BUTTON -->
+
+            <button
+                id="scene-10-back"
+                class="scene-10-back"
+                type="button"
+            >
+                BACK
+            </button>
+
+
+            <div
+                id="scene-10-click-layer"
+                class="scene-10-click-layer"
+            ></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCENE 11 — eTDS RESULT VIDEO
+     ===================================================== -->
+
+<section
+    id="scene-11"
+    class="scene scene-11"
+>
+
+    <div
+        id="game-stage-scene-11"
+        class="game-stage"
+    >
+
+        <video
+            id="scene-11-video"
+            class="scene-11-video"
+            src="assets/video/welcome1.mp4"
+            preload="auto"
+            playsinline
+        ></video>
+
+
+        <button
+            id="scene-11-next"
+            class="scene-11-next disabled"
+            type="button"
+            disabled
+        >
+            NEXT
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCENE 12 — eTDS VERIFICATION COMPLETE
+     ===================================================== -->
+
+<section
+    id="scene-12"
+    class="scene scene-12"
+>
+
+    <div
+        id="game-stage-scene-12"
+        class="game-stage"
+    >
+
+        <video
+            id="scene-12-background"
+            class="scene-12-background"
+            src="assets/backgrounds/etds-motion-bg.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+        ></video>
+
+        <div
+            class="scene-12-background-overlay"
+            aria-hidden="true"
+        ></div>
+
+
+        <div
+            class="scene-12-content"
+        >
+
+            <div
+                class="etds-panel scene-12-message-panel"
+            >
+
+                <div
+                    class="etds-message-text"
+                >
+                    All the TDS claims have been verified and found correct.Moving to eAudit
+                </div>
+
+                <div
+                    id="scene-12-message-hint"
+                    class="etds-message-hint"
+                >
+                    CLICK TO CONTINUE
+                </div>
+
+            </div>
+
+
+            <button
+                id="scene-12-back"
+                class="scene-10-back scene-12-back"
+                type="button"
+            >
+                BACK
+            </button>
+
+
+            <div
+                id="scene-12-click-layer"
+                class="scene-12-click-layer"
+            ></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCENE 13 — eAUDIT CASE SELECTION
+     ===================================================== -->
+
+<section
+    id="scene-13"
+    class="scene scene-13"
+>
+
+    <div
+        id="game-stage-scene-13"
+        class="game-stage"
+    >
+
+        <video
+            id="scene-13-background"
+            class="scene-13-background"
+            src="assets/backgrounds/eaudit-motion-bg.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+        ></video>
+
+        <div
+            class="scene-13-background-overlay"
+            aria-hidden="true"
+        ></div>
+
+
+        <div
+            class="scene-13-content"
+        >
+
+            <!-- INTRODUCTORY MESSAGES -->
+
+            <div
+                id="eaudit-message-panel"
+                class="eaudit-panel eaudit-message-panel"
+            >
+
+                <div
+                    id="eaudit-message-text"
+                    class="eaudit-message-text"
+                ></div>
+
+                <button
+                    id="eaudit-message-continue"
+                    class="eaudit-continue"
+                    type="button"
+                >
+                    CLICK TO CONTINUE
+                </button>
+
+            </div>
+
+
+            <!-- CASE CARDS -->
+
+            <div
+                id="eaudit-cases-view"
+                class="eaudit-cases-view"
+            >
+
+                <div
+                    id="eaudit-instruction"
+                    class="eaudit-instruction"
+                >
+                    SELECT A CASE TO REVEAL ITS RISK FACTORS
+                </div>
+
+                <div
+                    id="eaudit-case-grid"
+                    class="eaudit-case-grid"
+                ></div>
+
+                <button
+                    id="eaudit-selection-continue"
+                    class="eaudit-continue eaudit-selection-continue"
+                    type="button"
+                >
+                    CLICK TO CONTINUE
+                </button>
+
+            </div>
+
+
+            <!-- INTERNAL BACK BUTTON -->
+
+            <button
+                id="scene-13-back"
+                class="scene-13-back"
+                type="button"
+            >
+                BACK
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
     </main>
 
 
@@ -1271,6 +1711,15 @@
     <script src="js/scene-8.js"></script>
 
     <script src="js/scene-9.js"></script>
+
+    <script src="js/scene-10.js"></script>
+
+    <script src="js/scene-11.js"></script>
+
+    <script src="js/scene-12.js"></script>
+
+    <script src="js/scene-13.js"></script>
+
 </body>
 
 </html>
