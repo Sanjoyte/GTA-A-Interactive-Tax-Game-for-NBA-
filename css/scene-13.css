@@ -78,7 +78,7 @@
 
 .eaudit-message-text {
     white-space: pre-line;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Orbitron", sans-serif;
     font-size: clamp(1.3rem, 2.55vw, 2.9rem);
     font-weight: 900;
     line-height: 1.4;
@@ -101,7 +101,7 @@
             #3b185d 100%
         );
     color: #ffffff;
-    font-family: "Press Start 2P", monospace;
+    font-family: "Orbitron", sans-serif;
     font-size: clamp(0.58rem, 0.86vw, 0.88rem);
     line-height: 1.2;
     letter-spacing: 0.08em;
@@ -146,7 +146,7 @@
     transform: translateX(-50%);
     width: 78%;
     color: #f4dcff;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Orbitron", sans-serif;
     font-size: clamp(1.6rem, 1.1vw, 1.25rem);
     line-height: 1.5;
     text-align: center;
@@ -275,7 +275,7 @@
 }
 
 .eaudit-risk-title {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Orbitron", sans-serif;
     font-size: clamp(0.72rem, 0.92vw, 1.04rem);
     font-weight: 900;
     line-height: 1.15;
@@ -290,7 +290,7 @@
 
 .eaudit-risk-reason,
 .eaudit-risk-tags {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Orbitron", sans-serif;
     font-size: clamp(0.54rem, 0.67vw, 0.76rem);
     font-weight: 700;
     line-height: 1.22;

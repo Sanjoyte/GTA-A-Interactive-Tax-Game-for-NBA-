@@ -205,7 +205,7 @@ serviceCards.forEach(
                 */
 
                 showServiceMessage(
-                    "eTIN required",
+                    "eTIN REQUIRED",
                     "CLICK TO CONTINUE"
                 );
 
@@ -313,7 +313,7 @@ scene3ClickLayer.addEventListener(
 
 
             showServiceMessage(
-                "Taking you to eTIN portal",
+                "TAKING YOU TO eTIN PORTAL",
                 "CLICK TO CONTINUE"
             );
 

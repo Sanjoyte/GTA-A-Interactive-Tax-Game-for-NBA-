@@ -2,45 +2,22 @@
    #SCENE 5 — eTIN VIDEO
    ============================================================ */
 
-
-/* ============================================================
-   ELEMENTS
-   ============================================================ */
-
 const scene5 =
     document.getElementById(
         "scene-5"
     );
-
 
 const scene5Video =
     document.getElementById(
         "scene-5-video"
     );
 
-
-const scene5Next =
+const scene5Skip =
     document.getElementById(
-        "scene-5-next"
+        "scene-5-skip"
     );
 
-
-/* ============================================================
-   SCENE 5 STATE
-   ============================================================ */
-
-let scene5VideoFinished = false;
-
-
-/* ============================================================
-   INITIAL STATE
-   ============================================================ */
-
-scene5VideoFinished = false;
-
-scene5Next.classList.add(
-    "disabled"
-);
+let scene5Transitioned = false;
 
 
 /* ============================================================
@@ -52,14 +29,6 @@ function openScene5() {
     console.log(
         "Opening Scene 5 — eTIN Video"
     );
-
-
-    /*
-        Hide all other scenes.
-
-        We explicitly hide them here so
-        Scene 5 does not overlap another scene.
-    */
 
     document
         .querySelectorAll(".scene")
@@ -73,47 +42,18 @@ function openScene5() {
             }
         );
 
-
-    /*
-        Show Scene 5.
-    */
-
     scene5.classList.add(
         "active"
     );
 
+    gameState.currentScene =
+        "scene-5";
 
-    /*
-        Reset video state.
-    */
-
-    scene5VideoFinished = false;
-
-
-    scene5Next.classList.add(
-        "disabled"
-    );
-
-
-    /*
-        Start from the beginning.
-    */
-
+    scene5Transitioned = false;
     scene5Video.currentTime = 0;
-
-
-    /*
-        Play the video.
-    */
 
     const playPromise =
         scene5Video.play();
-
-
-    /*
-        Some browsers return a Promise
-        from video.play().
-    */
 
     if (
         playPromise !== undefined
@@ -136,31 +76,39 @@ function openScene5() {
 
 
 /* ============================================================
-   VIDEO FINISHED
+   MOVE TO SCENE 6
+   ============================================================ */
+
+function finishScene5(reason) {
+
+    if (scene5Transitioned) {
+
+        return;
+
+    }
+
+    scene5Transitioned = true;
+    scene5Video.pause();
+
+    console.log(
+        `Scene 5 ${reason}. Opening Scene 6.`
+    );
+
+    openScene6();
+
+}
+
+
+/* ============================================================
+   VIDEO FINISHED — CONTINUE AUTOMATICALLY
    ============================================================ */
 
 scene5Video.addEventListener(
     "ended",
     () => {
 
-        console.log(
-            "Scene 5 video finished."
-        );
-
-
-        /*
-            Video is now complete.
-        */
-
-        scene5VideoFinished = true;
-
-
-        /*
-            Enable NEXT button.
-        */
-
-        scene5Next.classList.remove(
-            "disabled"
+        finishScene5(
+            "video finished"
         );
 
     }
@@ -168,72 +116,18 @@ scene5Video.addEventListener(
 
 
 /* ============================================================
-   NEXT BUTTON
+   SKIP VIDEO
    ============================================================ */
 
-scene5Next.addEventListener(
+scene5Skip.addEventListener(
     "click",
-    () => {
+    (event) => {
 
-        /*
-            Do nothing until the video
-            has completely finished.
-        */
+        event.stopPropagation();
 
-        if (
-            !scene5VideoFinished
-        ) {
-
-            return;
-
-        }
-
-
-        console.log(
-            "Scene 5 NEXT clicked."
+        finishScene5(
+            "video skipped"
         );
-
-
-        /*
-            Move to Scene 6.
-        */
-
-        openScene6();
 
     }
 );
-
-
-/* ============================================================
-   OPEN SCENE 6
-   ============================================================ */
-
-function openScene6() {
-
-    console.log(
-        "Opening Scene 6"
-    );
-
-
-    /*
-        Hide Scene 5.
-    */
-
-    scene5.classList.remove(
-        "active"
-    );
-
-
-    /*
-        FUTURE:
-
-        Scene 6 will be activated here.
-
-        Example:
-
-        document
-            .getElementById("scene-6")
-            .classList.add("active");
-    */
-
-}

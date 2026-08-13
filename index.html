@@ -25,7 +25,7 @@
 
     <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap"
     >
 
 
@@ -702,56 +702,62 @@
             id="etin-login"
             class="etin-login"
         >
+            <div class="etin-login-title">
+                eTIN Login
+            </div>
 
-            <div class="etin-frame-core">
+            <!-- USER ID -->
 
-                <!-- USER ID -->
+            <label
+                class="etin-field"
+                for="etin-user-id"
+            >
+                <span class="etin-field-label">User ID</span>
 
-                <label
-                    class="etin-field etin-field--user"
-                    for="etin-user-id"
+                <input
+                    id="etin-user-id"
+                    class="etin-input"
+                    type="text"
+                    placeholder="User ID"
+                    readonly
                 >
-                    <span class="etin-field-label">User ID</span>
-
-                    <input
-                        id="etin-user-id"
-                        class="etin-input"
-                        type="text"
-                        placeholder="User ID"
-                        readonly
-                    >
-                </label>
+            </label>
 
 
-                <!-- PASSWORD -->
+            <!-- PASSWORD -->
 
-                <label
-                    class="etin-field etin-field--password"
-                    for="etin-password"
+            <label
+                class="etin-field"
+                for="etin-password"
+            >
+                <span class="etin-field-label">Password</span>
+
+                <input
+                    id="etin-password"
+                    class="etin-input"
+                    type="password"
+                    placeholder="Password"
+                    readonly
                 >
-                    <span class="etin-field-label">Password</span>
-
-                    <input
-                        id="etin-password"
-                        class="etin-input"
-                        type="text"
-                        placeholder="Password"
-                        readonly
-                    >
-                </label>
+            </label>
 
 
-                <!-- LOGIN BUTTON -->
+            <!-- LOGIN BUTTON -->
 
-                <button
-                    id="etin-login-button"
-                    class="etin-login-button"
-                    type="button"
-                    disabled
-                >
-                    LOGIN
-                </button>
+            <button
+                id="etin-login-button"
+                class="etin-login-button"
+                type="button"
+                disabled
+            >
+                LOGIN
+            </button>
 
+            <div
+                id="etin-login-hint"
+                class="etin-login-hint"
+            >
+                CLICK USER ID AND PASSWORD TO FILL
             </div>
 
         </div>
@@ -765,7 +771,13 @@
             id="etin-certificate-message"
             class="etin-certificate-message"
         >
-            PRINT YOUR eTIN CERTIFICATE
+            <div class="etin-certificate-title">
+                PRINT YOUR eTIN CERTIFICATE
+            </div>
+
+            <div class="etin-certificate-continue">
+                CLICK TO CONTINUE
+            </div>
         </div>
 
 
@@ -838,15 +850,15 @@
 
 
         <!-- =============================================
-             NEXT BUTTON
+             SKIP BUTTON
              ============================================= -->
 
         <button
-            id="scene-5-next"
-            class="scene-5-next"
+            id="scene-5-skip"
+            class="scene-4-back scene-5-skip"
             type="button"
         >
-            NEXT
+            SKIP
         </button>
 
     </div>
@@ -959,7 +971,7 @@
 
             <button
                 id="scene-6-back"
-                class="scene-6-back"
+                class="scene-4-back scene-6-back"
                 type="button"
             >
                 BACK

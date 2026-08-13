@@ -122,9 +122,7 @@
 .service-level {
 
     font-family:
-        "Arial Narrow",
-        "Segoe UI",
-        Arial,
+        "Orbitron",
         sans-serif;
 
     font-size:
@@ -159,7 +157,7 @@
     margin-top:
         12rem;
 
-    font-family: 'Orbitron';
+    font-family: "Orbitron", sans-serif;
 
 
     font-size:
@@ -208,9 +206,7 @@
         0.45rem;
 
     font-family:
-        "Arial Narrow",
-        "Segoe UI",
-        Arial,
+        "Orbitron",
         sans-serif;
 
     font-size:
@@ -344,9 +340,7 @@
     cursor: pointer;
 
     font-family:
-        "Arial Narrow",
-        "Segoe UI",
-        Arial,
+        "Orbitron",
         sans-serif;
 
     transition:
@@ -760,9 +754,7 @@
 .service-message-text {
 
     font-family:
-        "Arial Narrow",
-        "Segoe UI",
-        Arial,
+        "Orbitron",
         sans-serif;
 
     font-size:
@@ -807,9 +799,7 @@
         1rem;
 
     font-family:
-        "Arial Narrow",
-        "Segoe UI",
-        Arial,
+        "Orbitron",
         sans-serif;
 
     font-size:
