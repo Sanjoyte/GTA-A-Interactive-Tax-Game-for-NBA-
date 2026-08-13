@@ -770,7 +770,12 @@ ereturnDocumentCards.forEach(
                                 .querySelectorAll(
                                     ".ereturn-calculation-line.visible"
                                 )
-                                .length === 4;
+                                .length ===
+                            ereturnCalculationLines
+                                .querySelectorAll(
+                                    ".ereturn-calculation-line"
+                                )
+                                .length;
 
                         if (
                             allPagesSelected &&
