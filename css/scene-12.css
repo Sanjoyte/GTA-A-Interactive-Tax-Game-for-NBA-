@@ -52,6 +52,10 @@
     display: block;
 }
 
+.scene-12-message-panel .etds-message-text {
+    text-transform: none;
+}
+
 .scene-12-click-layer {
     position: absolute;
     inset: 0;

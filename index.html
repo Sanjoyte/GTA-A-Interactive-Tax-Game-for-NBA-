@@ -1095,65 +1095,84 @@
                 </div>
 
                 <div
-                    id="ereturn-document-grid"
-                    class="ereturn-document-grid"
+                    class="ereturn-workspace"
                 >
-
-                    <button
-                        class="ereturn-document-card"
-                        type="button"
-                        data-document="income"
-                    >
-                        <span class="ereturn-page-label">Page 1</span>
-                        <span class="ereturn-page-title">Income Details</span>
-                        <span>Income from Employment = 18,10,000 BDT</span>
-                        <span>Income from Rent = 6,00,000 BDT</span>
-                        <span>Income from Other Sources (Honorarium) = 2,00,000 BDT</span>
-                        <span>Total Income = 26,10,000 BDT</span>
-                    </button>
-
-                    <button
-                        class="ereturn-document-card"
-                        type="button"
-                        data-document="expenditure"
-                    >
-                        <span class="ereturn-page-label">Page 2</span>
-                        <span class="ereturn-page-title">Expenditure Details</span>
-                        <span>Personal expense = 3,00,000 BDT</span>
-                        <span>Accomodation = 4,71,192 BDT</span>
-                        <span>Education = 75,000 BDT</span>
-                        <span>Festival expense = 50,000 BDT</span>
-                        <span>Total = 8,96,192 BDT</span>
-                    </button>
-
-                    <button
-                        class="ereturn-document-card"
-                        type="button"
-                        data-document="assets"
-                    >
-                        <span class="ereturn-page-label">Page 3</span>
-                        <span class="ereturn-page-title">Asset &amp; Liabilities</span>
-                        <span>Non-Agri Land = 67,00,000 BDT</span>
-                        <span>Car = 60,00,000 BDT</span>
-                        <span>Jewelry = 2,50,000 BDT</span>
-                        <span>Furniture &amp; Devices = 1,20,000 BDT</span>
-                        <span>Bank &amp; Cash in Hand = 40,78,000 BDT</span>
-                        <span>Institutional Liabilities = 3,12,000 BDT</span>
-                    </button>
-
-                </div>
-
-                <div
-                    id="ereturn-calculation-card"
-                    class="ereturn-calculation-card"
-                >
-                    <div class="ereturn-page-label">Page 4</div>
-                    <div class="ereturn-page-title">Tax Calculation</div>
 
                     <div
-                        id="ereturn-calculation-lines"
-                        class="ereturn-calculation-lines"
-                    ></div>
+                        id="ereturn-document-grid"
+                        class="ereturn-document-grid"
+                    >
+
+                        <button
+                            class="ereturn-document-card"
+                            type="button"
+                            data-document="income"
+                        >
+                            <span class="ereturn-page-label">Page 1</span>
+                            <span class="ereturn-page-title">Income Details</span>
+                        </button>
+
+                        <button
+                            class="ereturn-document-card"
+                            type="button"
+                            data-document="expenditure"
+                        >
+                            <span class="ereturn-page-label">Page 2</span>
+                            <span class="ereturn-page-title">Expenditure Details</span>
+                        </button>
+
+                        <button
+                            class="ereturn-document-card"
+                            type="button"
+                            data-document="assets"
+                        >
+                            <span class="ereturn-page-label">Page 3</span>
+                            <span class="ereturn-page-title">Asset &amp; Liabilities</span>
+                        </button>
+
+                    </div>
+
+                    <div
+                        id="ereturn-calculation-card"
+                        class="ereturn-calculation-card"
+                    >
+                        <div class="ereturn-summary-title">Summary</div>
+
+                        <div
+                            id="ereturn-calculation-lines"
+                            class="ereturn-calculation-lines"
+                            aria-live="polite"
+                        >
+                            <div
+                                class="ereturn-calculation-line"
+                                data-summary-source="income"
+                            >
+                                Tax Payable = 2,83,000 BDT
+                            </div>
+
+                            <div
+                                class="ereturn-calculation-line"
+                                data-summary-source="expenditure"
+                            >
+                                Rebate = 50,000 BDT
+                            </div>
+
+                            <div
+                                class="ereturn-calculation-line"
+                                data-summary-source="assets"
+                            >
+                                Tax credit = 10,000 BDT
+                            </div>
+
+                            <div
+                                class="ereturn-calculation-line ereturn-calculation-line--total"
+                                data-summary-source="assets"
+                            >
+                                Final tax liability = 2,23,000 BDT
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -1161,8 +1180,9 @@
                     id="ereturn-action-button"
                     class="ereturn-action-button"
                     type="button"
+                    disabled
                 >
-                    Calculate Return
+                    Submit Return
                 </button>
 
             </div>
@@ -1301,7 +1321,7 @@
 
                     <img
                         class="scene-9-character-image"
-                        src="assets/characters/ripon-static.png"
+                        src="assets/characters/ripon-hover.gif"
                         alt="Mr. Ripon"
                     >
 
@@ -1510,19 +1530,18 @@
         <video
             id="scene-11-video"
             class="scene-11-video"
-            src="assets/video/welcome1.mp4"
+            src="assets/video/etds.mp4"
             preload="auto"
             playsinline
         ></video>
 
 
         <button
-            id="scene-11-next"
-            class="scene-11-next disabled"
+            id="scene-11-skip"
+            class="scene-10-back scene-11-skip"
             type="button"
-            disabled
         >
-            NEXT
+            SKIP
         </button>
 
     </div>
@@ -1571,7 +1590,7 @@
                 <div
                     class="etds-message-text"
                 >
-                    All the TDS claims have been verified and found correct.Moving to eAudit
+                    MOVING TO eAudit
                 </div>
 
                 <div
@@ -1651,13 +1670,14 @@
                     class="eaudit-message-text"
                 ></div>
 
-                <button
+                <div
                     id="eaudit-message-continue"
                     class="eaudit-continue"
-                    type="button"
+                    role="button"
+                    tabindex="0"
                 >
                     CLICK TO CONTINUE
-                </button>
+                </div>
 
             </div>
 
@@ -1681,13 +1701,14 @@
                     class="eaudit-case-grid"
                 ></div>
 
-                <button
+                <div
                     id="eaudit-selection-continue"
                     class="eaudit-continue eaudit-selection-continue"
-                    type="button"
+                    role="button"
+                    tabindex="0"
                 >
                     CLICK TO CONTINUE
-                </button>
+                </div>
 
             </div>
 

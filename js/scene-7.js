@@ -101,25 +101,8 @@ const selectedReturnDocuments =
     new Set();
 
 
-const taxCalculationLines = [
-
-    "Tax Payable = 4,42,500 BDT",
-
-    "Rebate = 50,000 BDT",
-
-    "Tax credit = 10,000 BDT",
-
-    "Final tax liability = 3,82,500 BDT"
-
-];
-
-
 let scene7Step =
     "login";
-
-
-let calculationRevealTimers =
-    [];
 
 
 let ereturnTinFilled = false;
@@ -135,6 +118,9 @@ let ereturnPasswordStarted = false;
 
 
 let ereturnTypingSession = 0;
+
+
+let ereturnSummarySession = 0;
 
 
 /* ============================================================
@@ -228,6 +214,7 @@ function openScene7() {
 function resetScene7() {
 
     ereturnTypingSession += 1;
+    ereturnSummarySession += 1;
 
     scene7Step =
         "login";
@@ -236,29 +223,12 @@ function resetScene7() {
     hideEreturnAudioStatus();
 
 
-    calculationRevealTimers.forEach(
-        (timer) => {
-
-            clearTimeout(
-                timer
-            );
-
-        }
-    );
-
-
-    calculationRevealTimers =
-        [];
-
-
     selectedReturnDocuments.clear();
 
 
     scene7.classList.remove(
         "login-ready",
         "dashboard-visible",
-        "documents-ready",
-        "calculation-visible",
         "submit-ready"
     );
 
@@ -300,12 +270,26 @@ function resetScene7() {
     );
 
 
-    ereturnCalculationLines.textContent =
-        "";
+    ereturnCalculationLines
+        .querySelectorAll(
+            ".ereturn-calculation-line"
+        )
+        .forEach(
+            (line) => {
+
+                line.classList.remove(
+                    "visible"
+                );
+
+            }
+        );
 
 
     ereturnActionButton.textContent =
-        "Calculate Return";
+        "Submit Return";
+
+    ereturnActionButton.disabled =
+        true;
 
 }
 
@@ -450,8 +434,6 @@ function showEreturnLogin() {
 
     scene7.classList.remove(
         "dashboard-visible",
-        "documents-ready",
-        "calculation-visible",
         "submit-ready"
     );
 
@@ -461,6 +443,75 @@ function showEreturnLogin() {
 
     ereturnDashboard.style.display =
         "";
+
+}
+
+
+function undoLastEreturnPageSelection() {
+
+    const selectedDocuments =
+        Array.from(
+            selectedReturnDocuments
+        );
+
+    const documentToUndo =
+        selectedDocuments[
+            selectedDocuments.length - 1
+        ];
+
+    if (!documentToUndo) {
+
+        return false;
+
+    }
+
+    ereturnSummarySession += 1;
+
+    selectedReturnDocuments.delete(
+        documentToUndo
+    );
+
+    ereturnDocumentCards.forEach(
+        (card) => {
+
+            card.classList.toggle(
+                "selected",
+                selectedReturnDocuments.has(
+                    card.dataset.document
+                )
+            );
+
+        }
+    );
+
+    ereturnCalculationLines
+        .querySelectorAll(
+            ".ereturn-calculation-line"
+        )
+        .forEach(
+            (line) => {
+
+                line.classList.toggle(
+                    "visible",
+                    selectedReturnDocuments.has(
+                        line.dataset.summarySource
+                    )
+                );
+
+            }
+        );
+
+    scene7Step =
+        "documents";
+
+    scene7.classList.remove(
+        "submit-ready"
+    );
+
+    ereturnActionButton.disabled =
+        true;
+
+    return true;
 
 }
 
@@ -543,38 +594,17 @@ scene7BackButton.addEventListener(
 
 
         if (
-            scene7Step === "calculation" ||
+            scene7Step === "documents" ||
             scene7Step === "submit"
         ) {
 
-            calculationRevealTimers.forEach(
-                (timer) => clearTimeout(timer)
-            );
+            if (
+                undoLastEreturnPageSelection()
+            ) {
 
-            calculationRevealTimers = [];
+                return;
 
-            scene7Step = "documents";
-
-            scene7.classList.remove(
-                "calculation-visible",
-                "submit-ready"
-            );
-
-            scene7.classList.add(
-                "documents-ready"
-            );
-
-            ereturnCalculationLines.textContent = "";
-            ereturnActionButton.textContent = "Calculate Return";
-
-            return;
-
-        }
-
-
-        if (
-            scene7Step === "documents"
-        ) {
+            }
 
             showEreturnLogin();
 
@@ -658,53 +688,116 @@ ereturnDocumentCards.forEach(
                 }
 
 
-                card.classList.toggle(
+                if (
+                    selectedReturnDocuments.has(
+                        card.dataset.document
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                selectedReturnDocuments.add(
+                    card.dataset.document
+                );
+
+                const summarySession =
+                    ereturnSummarySession;
+
+                card.classList.add(
                     "selected"
                 );
 
 
-                if (
-                    card.classList.contains(
-                        "selected"
+                ereturnCalculationLines
+                    .querySelectorAll(
+                        `[data-summary-source="${card.dataset.document}"]`
                     )
-                ) {
+                    .forEach(
+                        (line, index) => {
 
-                    selectedReturnDocuments.add(
-                        card.dataset.document
+                            window.setTimeout(
+                                () => {
+
+                                    if (
+                                        summarySession === ereturnSummarySession &&
+                                        selectedReturnDocuments.has(
+                                            card.dataset.document
+                                        )
+                                    ) {
+
+                                        line.classList.add(
+                                            "visible"
+                                        );
+
+                                    }
+
+                                },
+                                180 * index
+                            );
+
+                        }
                     );
 
-                } else {
 
-                    selectedReturnDocuments.delete(
-                        card.dataset.document
-                    );
+                const sourceLineCount =
+                    ereturnCalculationLines
+                        .querySelectorAll(
+                            `[data-summary-source="${card.dataset.document}"]`
+                        )
+                        .length;
 
-                }
 
+                window.setTimeout(
+                    () => {
 
-                if (
-                    selectedReturnDocuments.size ===
-                    ereturnDocumentCards.length
-                ) {
+                        if (
+                            summarySession !== ereturnSummarySession
+                        ) {
 
-                    scene7.classList.add(
-                        "documents-ready"
-                    );
+                            return;
 
-                } else {
+                        }
 
-                    scene7.classList.remove(
-                        "documents-ready"
-                    );
+                        const allPagesSelected =
+                            selectedReturnDocuments.size ===
+                            ereturnDocumentCards.length;
 
-                }
+                        const allSummaryLinesVisible =
+                            ereturnCalculationLines
+                                .querySelectorAll(
+                                    ".ereturn-calculation-line.visible"
+                                )
+                                .length === 4;
+
+                        if (
+                            allPagesSelected &&
+                            allSummaryLinesVisible
+                        ) {
+
+                            scene7Step =
+                                "submit";
+
+                            scene7.classList.add(
+                                "submit-ready"
+                            );
+
+                            ereturnActionButton.disabled =
+                                false;
+
+                        }
+
+                    },
+                    180 * Math.max(0, sourceLineCount - 1) + 30
+                );
 
             }
         );
 
     }
 );
-
 
 /* ============================================================
    ACTION BUTTON
@@ -715,19 +808,8 @@ ereturnActionButton.addEventListener(
     () => {
 
         if (
-            scene7Step === "documents" &&
-            selectedReturnDocuments.size === ereturnDocumentCards.length
-        ) {
-
-            showTaxCalculation();
-
-            return;
-
-        }
-
-
-        if (
-            scene7Step === "submit"
+            scene7Step === "submit" &&
+            !ereturnActionButton.disabled
         ) {
 
             openScene8();
@@ -736,92 +818,3 @@ ereturnActionButton.addEventListener(
 
     }
 );
-
-
-/* ============================================================
-   SHOW TAX CALCULATION
-   ============================================================ */
-
-function showTaxCalculation() {
-
-    scene7Step =
-        "calculation";
-
-
-    scene7.classList.remove(
-        "documents-ready"
-    );
-
-
-    scene7.classList.add(
-        "calculation-visible"
-    );
-
-
-    ereturnActionButton.textContent =
-        "Submit Return";
-
-
-    ereturnCalculationLines.textContent =
-        "";
-
-
-    taxCalculationLines.forEach(
-        (line, index) => {
-
-            const lineElement =
-                document.createElement(
-                    "div"
-                );
-
-
-            lineElement.className =
-                "ereturn-calculation-line";
-
-
-            lineElement.textContent =
-                line;
-
-
-            ereturnCalculationLines.appendChild(
-                lineElement
-            );
-
-
-            const timer =
-                setTimeout(
-                    () => {
-
-                        lineElement.classList.add(
-                            "visible"
-                        );
-
-
-                        if (
-                            index ===
-                            taxCalculationLines.length - 1
-                        ) {
-
-                            scene7Step =
-                                "submit";
-
-
-                            scene7.classList.add(
-                                "submit-ready"
-                            );
-
-                        }
-
-                    },
-                    450 * (index + 1)
-                );
-
-
-            calculationRevealTimers.push(
-                timer
-            );
-
-        }
-    );
-
-}

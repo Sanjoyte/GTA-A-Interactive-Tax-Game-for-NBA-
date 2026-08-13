@@ -87,30 +87,29 @@
     text-shadow: 0 0 0.9rem rgba(198, 119, 255, 0.78);
 }
 
+.eaudit-fact-detail {
+    display: block;
+    margin-top: clamp(0.65rem, 1.4vh, 1rem);
+    font-size: clamp(0.82rem, 1.55vw, 1.7rem);
+    line-height: 1.55;
+}
+
 .eaudit-continue {
     margin-top: clamp(1.5rem, 3vh, 2.4rem);
-    padding: 0.75rem 1.2rem;
-    border: 1px solid #d9a4ff;
-    border-radius: 0.24rem;
-    background-color: #5d2588;
-    background-image:
-        linear-gradient(
-            180deg,
-            #8d43bc 0%,
-            #61288e 52%,
-            #3b185d 100%
-        );
     color: #ffffff;
     font-family: "Orbitron", sans-serif;
     font-size: clamp(0.58rem, 0.86vw, 0.88rem);
+    font-weight: 800;
     line-height: 1.2;
-    letter-spacing: 0.08em;
-    text-shadow: 0 0.1rem 0 #29103f;
-    box-shadow:
-        0 0 1rem rgba(180, 88, 255, 0.42),
-        inset 0 0.1rem 0 rgba(250, 235, 255, 0.25);
+    letter-spacing: 0.14em;
+    text-shadow: 0 0 0.75rem rgba(209, 139, 255, 0.9);
     cursor: pointer;
     animation: eauditContinuePulse 1.15s steps(2, start) infinite;
+}
+
+.eaudit-continue:focus-visible {
+    outline: 0.1rem solid #d9a4ff;
+    outline-offset: 0.4rem;
 }
 
 @keyframes eauditContinuePulse {
@@ -403,7 +402,6 @@
         inset 0 0.12rem 0 rgba(247, 229, 255, 0.28);
     cursor: pointer;
     opacity: 1;
-    animation: eauditContinuePulse 1.15s steps(2, start) infinite;
     transition:
         transform 0.2s ease,
         filter 0.2s ease,

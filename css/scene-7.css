@@ -310,7 +310,7 @@
     border:
         0.12rem solid
         rgba(164, 225, 255, 0.9);
-
+    animation: eauditContinuePulse 1.15s steps(2, start) infinite;
     border-radius:
         0.25rem;
 
@@ -590,400 +590,312 @@
    ============================================================ */
 
 .ereturn-dashboard {
-
     position: absolute;
-
     left: 50%;
-    top: 53%;
-
-    transform:
-        translate(-50%, -50%);
-
-    width: 82%;
-    height: 74%;
-
+    top: 52%;
+    transform: translate(-50%, -50%);
+    width: 78%;
+    height: 70%;
     display: none;
-
     flex-direction: column;
-
     align-items: center;
-
     z-index: 20;
-
 }
-
 
 .scene-7.dashboard-visible
 .ereturn-dashboard {
-
     display: flex;
-
 }
-
 
 .ereturn-dashboard-title {
-
-    margin-bottom:
-        1.4%;
-
-    font-family:
-        "Orbitron",
-        sans-serif;
-
-    font-size:
-        clamp(
-            1.6rem,
-            3vw,
-            3.8rem
-        );
-
+    margin-bottom: 1.2%;
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(1.15rem, 2vw, 2.3rem);
     font-weight: 900;
-
-    letter-spacing: 0;
-
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-
-    color:
-        #d7f3ff;
-
+    color: #d7f3ff;
     text-shadow:
-        0 0 0.8rem
-        rgba(95, 186, 255, 0.86),
-
-        0 0 1.8rem
-        rgba(56, 132, 255, 0.42);
-
+        0 0 0.8rem rgba(95, 186, 255, 0.86),
+        0 0 1.8rem rgba(56, 132, 255, 0.42);
 }
 
 
 /* ============================================================
-   DOCUMENT GRID
+   DOCUMENTS + SUMMARY HUD
    ============================================================ */
 
-.ereturn-document-grid {
-
+.ereturn-workspace {
     width: 100%;
-    height: 72%;
-
+    flex: 1;
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap:
-        1.5%;
-
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    gap: 3%;
+    min-height: 0;
+    padding: 2.2%;
+    border: 0.12rem solid rgba(105, 190, 255, 0.72);
+    border-radius: 0.45rem;
+    background-color: #081b3b;
+    background-image:
+        linear-gradient(
+            145deg,
+            rgba(17, 54, 108, 0.98),
+            rgba(7, 27, 61, 0.98) 58%,
+            rgba(4, 18, 43, 0.98)
+        );
+    box-shadow:
+        0 0 1.7rem rgba(67, 157, 255, 0.3),
+        inset 0 0 2.2rem rgba(79, 165, 255, 0.08);
 }
 
-
-.scene-7.calculation-visible
 .ereturn-document-grid {
-
-    display: none;
-
+    display: grid;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    gap: 4%;
+    min-height: 0;
 }
 
 
 /* ============================================================
-   DOCUMENT CARD
+   PAGE CONTROLS
    ============================================================ */
-
-.ereturn-document-card,
-.ereturn-calculation-card {
-
-    position: relative;
-
-    overflow: hidden;
-
-    border:
-        0.12rem solid
-        rgba(215, 228, 240, 0.96);
-
-    border-radius:
-        0.18rem;
-
-    background:
-        #fff;
-
-    color:
-        #172232;
-
-    box-shadow:
-        0 0.8rem 1.7rem
-        rgba(0, 8, 24, 0.36);
-
-}
-
 
 .ereturn-document-card {
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: stretch;
-
-    gap:
-        clamp(
-            0.26rem,
-            0.58vh,
-            0.52rem
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: clamp(0.75rem, 1.6vw, 1.5rem);
+    min-height: 0;
+    padding: 5% 6%;
+    border: 0.12rem solid rgba(103, 178, 238, 0.72);
+    border-radius: 0.35rem;
+    background-color: #0c2a57;
+    background-image:
+        linear-gradient(
+            135deg,
+            #123d78 0%,
+            #0a2856 58%,
+            #071b3b 100%
         );
-
-    padding:
-        7%
-        6%;
-
+    color: #e8f7ff;
+    box-shadow:
+        0 0.55rem 1.1rem rgba(0, 8, 24, 0.34),
+        inset 0 0 1.1rem rgba(77, 169, 255, 0.07);
     text-align: left;
-
-    font-family:
-        "Orbitron",
-        sans-serif;
-
-    font-size:
-        clamp(
-            0.62rem,
-            0.9vw,
-            1.08rem
-        );
-
-    line-height: 1.24;
-
+    font-family: "Orbitron", sans-serif;
     cursor: pointer;
-
     transition:
         transform 0.2s ease,
         border-color 0.2s ease,
+        filter 0.2s ease,
         box-shadow 0.2s ease;
-
 }
-
 
 .ereturn-document-card:hover {
-
-    transform:
-        translateY(-0.35rem);
-
-    border-color:
-        #73d6ff;
-
+    transform: translateX(0.3rem);
+    border-color: #8fd9ff;
+    filter: brightness(1.08);
     box-shadow:
-        0 1rem 1.9rem
-        rgba(0, 8, 24, 0.42),
-
-        0 0 1.4rem
-        rgba(93, 192, 255, 0.38);
-
+        0 0.7rem 1.25rem rgba(0, 8, 24, 0.4),
+        0 0 1.25rem rgba(93, 192, 255, 0.42);
 }
-
 
 .ereturn-document-card.selected {
-
-    border-color:
-        #1f9ae0;
-
+    border-color: #67d8ff;
+    background-color: #13538a;
+    background-image:
+        linear-gradient(
+            135deg,
+            #1876ad 0%,
+            #104d85 58%,
+            #0a315f 100%
+        );
     box-shadow:
-        0 1rem 1.9rem
-        rgba(0, 8, 24, 0.42),
-
-        0 0 0 0.22rem
-        rgba(65, 180, 255, 0.55);
-
+        0 0 0 0.18rem rgba(80, 202, 255, 0.38),
+        0 0 1.5rem rgba(64, 186, 255, 0.58);
 }
-
 
 .ereturn-document-card.selected::after {
-
-    content: "SELECTED";
-
+    content: "✓";
     position: absolute;
-
-    right: 5%;
-    top: 4%;
-
-    padding:
-        0.22rem
-        0.42rem;
-
-    border-radius:
-        0.18rem;
-
-    background:
-        #1f9ae0;
-
-    color:
-        #fff;
-
-    font-size:
-        clamp(
-            0.5rem,
-            0.66vw,
-            0.72rem
-        );
-
+    right: 4%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: clamp(1.5rem, 2.2vw, 2.1rem);
+    aspect-ratio: 1;
+    border: 0.1rem solid #b9efff;
+    border-radius: 50%;
+    background-color: #0878b8;
+    color: #ffffff;
+    font-size: clamp(0.72rem, 1vw, 1rem);
     font-weight: 900;
-
-    letter-spacing:
-        0.08em;
-
 }
-
 
 .ereturn-page-label {
-
-    display: block;
-
-    margin-bottom:
-        0.2rem;
-
-    color:
-        #47728f;
-
-    font-size:
-        clamp(
-            0.58rem,
-            0.78vw,
-            0.92rem
-        );
-
+    display: grid;
+    place-items: center;
+    min-width: clamp(4.4rem, 5.8vw, 6rem);
+    height: 100%;
+    border-right: 1px solid rgba(126, 206, 255, 0.36);
+    color: #94dcff;
+    font-family: "Press Start 2P", monospace;
+    font-size: clamp(0.48rem, 0.68vw, 0.7rem);
     font-weight: 900;
-
-    letter-spacing:
-        0.1em;
-
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-
 }
-
 
 .ereturn-page-title {
-
     display: block;
-
-    margin-bottom:
-        0.55rem;
-
-    color:
-        #10243b;
-
-    font-size:
-        clamp(
-            0.88rem,
-            1.18vw,
-            1.45rem
-        );
-
+    padding-right: 2.4rem;
+    color: #effaff;
+    font-size: clamp(0.82rem, 1.15vw, 1.35rem);
     font-weight: 900;
-
+    line-height: 1.3;
 }
 
 
 /* ============================================================
-   ACTION BUTTON
-   ============================================================ */
-
-.ereturn-action-button {
-
-    display: none;
-
-    margin-top:
-        1.6%;
-
-    min-width:
-        24%;
-
-}
-
-
-.scene-7.documents-ready
-.ereturn-action-button,
-.scene-7.submit-ready
-.ereturn-action-button {
-
-    display: block;
-
-}
-
-
-/* ============================================================
-   CALCULATION CARD
+   SUMMARY PANEL
    ============================================================ */
 
 .ereturn-calculation-card {
-
-    width: 46%;
-    min-height: 62%;
-
-    display: none;
-
-    padding:
-        3.4%
-        3.8%;
-
-    font-family:
-        "Orbitron",
-        sans-serif;
-
-    font-size:
-        clamp(
-            0.95rem,
-            1.35vw,
-            1.65rem
+    position: relative;
+    min-height: 0;
+    padding: 6% 7%;
+    border: 0.12rem solid rgba(115, 198, 255, 0.78);
+    border-radius: 0.42rem;
+    background-color: #091f42;
+    background-image:
+        linear-gradient(
+            155deg,
+            #123b73 0%,
+            #0a2853 52%,
+            #061832 100%
         );
-
-    line-height: 1.45;
-
+    color: #e9f8ff;
+    box-shadow:
+        0 0 1.4rem rgba(61, 167, 255, 0.26),
+        inset 0 0 1.8rem rgba(82, 179, 255, 0.08);
+    overflow: hidden;
 }
 
-
-.scene-7.calculation-visible
-.ereturn-calculation-card {
-
-    display: block;
-
+.ereturn-calculation-card::before,
+.ereturn-calculation-card::after {
+    content: "";
+    position: absolute;
+    width: 22%;
+    height: 0.14rem;
+    background: #75cfff;
+    box-shadow: 0 0 0.65rem rgba(86, 191, 255, 0.82);
 }
 
+.ereturn-calculation-card::before {
+    left: 0;
+    top: 0;
+}
+
+.ereturn-calculation-card::after {
+    right: 0;
+    bottom: 0;
+}
+
+.ereturn-summary-title {
+    padding-bottom: 4%;
+    border-bottom: 0.1rem solid rgba(116, 199, 255, 0.38);
+    color: #d8f2ff;
+    font-family: "Press Start 2P", monospace;
+    font-size: clamp(0.9rem, 1.5vw, 1.55rem);
+    line-height: 1.3;
+    text-align: center;
+    text-shadow: 0 0 0.8rem rgba(83, 183, 255, 0.72);
+}
 
 .ereturn-calculation-lines {
-
     display: flex;
-
     flex-direction: column;
-
-    gap:
-        clamp(
-            0.75rem,
-            1.25vh,
-            1.2rem
-        );
-
-    margin-top:
-        6%;
-
+    gap: clamp(0.75rem, 1.7vh, 1.35rem);
+    margin-top: 8%;
 }
 
-
 .ereturn-calculation-line {
-
+    visibility: hidden;
     opacity: 0;
-
-    transform:
-        translateY(0.7rem);
-
+    transform: translateX(0.8rem);
+    padding: clamp(0.65rem, 1.2vh, 1rem) 4%;
+    border-left: 0.18rem solid #52baff;
+    background-color: #0a2a58;
+    background-image: linear-gradient(90deg, #103d78, #09254f);
+    color: #eaf8ff;
+    font-family: "Orbitron", sans-serif;
+    font-size: clamp(0.75rem, 1.05vw, 1.15rem);
+    font-weight: 700;
+    line-height: 1.35;
+    box-shadow: inset 0 0 0.9rem rgba(70, 164, 255, 0.08);
     transition:
         opacity 0.35s ease,
         transform 0.35s ease;
+}
 
+.ereturn-calculation-line.visible {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.ereturn-calculation-line--total {
+    border-left-color: #a3e8ff;
+    background-image: linear-gradient(90deg, #14568d, #0a315e);
+    color: #ffffff;
+    font-weight: 900;
 }
 
 
-.ereturn-calculation-line.visible {
+/* ============================================================
+   SUBMIT RETURN
+   ============================================================ */
 
+.ereturn-action-button {
+    display: block;
+    min-width: clamp(13rem, 22vw, 19rem);
+    min-height: 0;
+    margin-top: 1.4%;
+    padding: 0.85rem 1.8rem;
+    border: 0.12rem solid #9edcff;
+    background-color: #15538f;
+    background-image:
+        linear-gradient(
+            180deg,
+            #3c8ed0 0%,
+            #2464a3 52%,
+            #123d70 100%
+        );
+    color: #ffffff;
+    box-shadow:
+        0 0 1rem rgba(72, 170, 255, 0.36),
+        inset 0 0.12rem 0 rgba(230, 247, 255, 0.28);
+}
+
+.ereturn-action-button:disabled {
+    opacity: 0.42;
+    cursor: default;
+    pointer-events: none;
+    filter: saturate(0.4);
+}
+
+.scene-7.submit-ready .ereturn-action-button {
     opacity: 1;
+    animation: ereturnSubmitPulse 1.15s steps(2, start) infinite;
+}
 
-    transform:
-        translateY(0);
-
+@keyframes ereturnSubmitPulse {
+    50% {
+        filter: brightness(0.72);
+    }
 }
 
 
@@ -1001,27 +913,17 @@
 
 
     .ereturn-dashboard {
-
         width: 90%;
         height: 78%;
-
     }
 
-
-    .ereturn-document-grid {
-
-        grid-template-columns:
-            1fr;
-
-        overflow-y: auto;
-
+    .ereturn-workspace {
+        grid-template-columns: 1fr 1.08fr;
+        gap: 2%;
     }
 
-
-    .ereturn-calculation-card {
-
-        width: 86%;
-
+    .ereturn-page-label {
+        min-width: 3.8rem;
     }
 
 }

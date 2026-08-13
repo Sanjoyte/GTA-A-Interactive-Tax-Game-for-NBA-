@@ -306,7 +306,7 @@ scene6No.addEventListener(
         */
 
         scene6ResponseText.textContent =
-            "Oh, c'mon dude, you must submit your return!";
+            "Sorry, be a good citizen!";
 
 
         scene6Response.classList.add(

@@ -164,7 +164,15 @@ function resetEauditCards() {
 function showEauditFact() {
     scene13Step = "fact";
     scene13.classList.remove("cases-visible");
-    eauditMessageText.textContent = "Did you know?\n49,54,469 eReturns have been filed in the previous year.";
+
+    const factTitle = document.createElement("span");
+    factTitle.textContent = "Did you know?";
+
+    const factDetail = document.createElement("span");
+    factDetail.className = "eaudit-fact-detail";
+    factDetail.textContent = "49,54,469 eReturns have been filed in the previous year.";
+
+    eauditMessageText.replaceChildren(factTitle, factDetail);
     eauditMessageContinue.style.display = "inline-block";
 }
 
@@ -286,7 +294,7 @@ function openScene13() {
 }
 
 
-eauditMessageContinue.addEventListener("click", () => {
+function continueEauditMessage() {
     if (scene13Step === "fact") {
         showEauditInvitation();
         return;
@@ -295,10 +303,10 @@ eauditMessageContinue.addEventListener("click", () => {
     if (scene13Step === "invitation") {
         showEauditCases();
     }
-});
+}
 
 
-eauditSelectionContinue.addEventListener("click", () => {
+function continueEauditSelection() {
     if (scene13Step !== "selecting" || selectedAuditCases.size < 2) {
         return;
     }
@@ -307,6 +315,38 @@ eauditSelectionContinue.addEventListener("click", () => {
     scene13.classList.add("selection-complete");
     scene13.classList.remove("selection-ready");
     eauditInstruction.textContent = `${selectedAuditCases.size} FILES READY FOR AUDIT`;
+}
+
+
+scene13.addEventListener("click", (event) => {
+    if (event.target.closest("#scene-13-back")) {
+        return;
+    }
+
+    if (scene13Step === "fact" || scene13Step === "invitation") {
+        continueEauditMessage();
+        return;
+    }
+
+    if (scene13Step === "selecting" && selectedAuditCases.size >= 2) {
+        continueEauditSelection();
+    }
+}, true);
+
+
+eauditMessageContinue.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        continueEauditMessage();
+    }
+});
+
+
+eauditSelectionContinue.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        continueEauditSelection();
+    }
 });
 
 

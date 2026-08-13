@@ -4,10 +4,23 @@
 
 const scene11 = document.getElementById("scene-11");
 const scene11Video = document.getElementById("scene-11-video");
-const scene11Next = document.getElementById("scene-11-next");
+const scene11Skip = document.getElementById("scene-11-skip");
 
-let scene11VideoFinished = false;
-let scene11NextPressed = false;
+let scene11TransitionStarted = false;
+
+
+function completeScene11() {
+    if (
+        scene11TransitionStarted ||
+        !scene11.classList.contains("active")
+    ) {
+        return;
+    }
+
+    scene11TransitionStarted = true;
+    scene11Video.pause();
+    openScene12();
+}
 
 
 function openScene11() {
@@ -32,10 +45,7 @@ function openScene11() {
     scene11.classList.add("active");
     gameState.currentScene = "scene-11";
 
-    scene11VideoFinished = false;
-    scene11NextPressed = false;
-    scene11Next.disabled = true;
-    scene11Next.classList.add("disabled");
+    scene11TransitionStarted = false;
 
     scene11Video.currentTime = 0;
 
@@ -51,25 +61,14 @@ function openScene11() {
 
 scene11Video.addEventListener("ended", () => {
     console.log("Scene 11 video finished.");
-
-    scene11VideoFinished = true;
-    scene11Next.disabled = false;
-    scene11Next.classList.remove("disabled");
+    completeScene11();
 });
 
 
-scene11Next.addEventListener("click", () => {
-    if (!scene11VideoFinished || scene11NextPressed) {
-        return;
-    }
-
-    scene11NextPressed = true;
-    scene11Next.disabled = true;
-    scene11Next.classList.add("disabled");
-
-    console.log("Scene 11 NEXT clicked.");
-
-    openScene12();
+scene11Skip.addEventListener("click", (event) => {
+    event.stopPropagation();
+    console.log("Scene 11 SKIP clicked.");
+    completeScene11();
 });
 
 
