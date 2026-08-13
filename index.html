@@ -703,7 +703,7 @@
             class="etin-login"
         >
             <div class="etin-login-title">
-                eTIN Login
+                eTIN LOGIN
             </div>
 
             <!-- USER ID -->
@@ -752,13 +752,6 @@
             >
                 LOGIN
             </button>
-
-            <div
-                id="etin-login-hint"
-                class="etin-login-hint"
-            >
-                CLICK USER ID AND PASSWORD TO FILL
-            </div>
 
         </div>
 
@@ -925,7 +918,8 @@
 
                         <button
                             id="scene-6-yes"
-                            class="scene-6-option"
+                            class="etin-login-button scene-6-option"
+                            type="button"
                         >
                             YES
                         </button>
@@ -933,7 +927,8 @@
 
                         <button
                             id="scene-6-no"
-                            class="scene-6-option"
+                            class="etin-login-button scene-6-option"
+                            type="button"
                         >
                             NO
                         </button>
@@ -1039,26 +1034,40 @@
                 <div
                     class="ereturn-login-title"
                 >
-                    eReturn Login
+                    eRETURN LOGIN
                 </div>
 
-                <input
-                    id="ereturn-tin"
-                    class="ereturn-input"
-                    type="text"
-                    inputmode="numeric"
-                    maxlength="14"
-                    placeholder="TIN Number"
-                    readonly
+                <label
+                    class="ereturn-field"
+                    for="ereturn-tin"
                 >
+                    <span class="ereturn-field-label">TIN Number</span>
 
-                <input
-                    id="ereturn-password"
-                    class="ereturn-input"
-                    type="password"
-                    placeholder="Password"
-                    readonly
+                    <input
+                        id="ereturn-tin"
+                        class="ereturn-input"
+                        type="text"
+                        inputmode="numeric"
+                        maxlength="14"
+                        placeholder="TIN Number"
+                        readonly
+                    >
+                </label>
+
+                <label
+                    class="ereturn-field"
+                    for="ereturn-password"
                 >
+                    <span class="ereturn-field-label">Password</span>
+
+                    <input
+                        id="ereturn-password"
+                        class="ereturn-input"
+                        type="password"
+                        placeholder="Password"
+                        readonly
+                    >
+                </label>
 
                 <button
                     id="ereturn-login-button"
@@ -1068,13 +1077,6 @@
                 >
                     LOGIN
                 </button>
-
-                <div
-                    id="ereturn-login-hint"
-                    class="ereturn-login-hint"
-                >
-                    CLICK TIN NUMBER AND PASSWORD TO FILL
-                </div>
 
             </div>
 
@@ -1433,13 +1435,6 @@
                 >
                     LOGIN
                 </button>
-
-                <div
-                    id="etds-login-hint"
-                    class="etds-login-hint"
-                >
-                    CLICK TIN NUMBER AND PASSWORD TO FILL
-                </div>
 
             </div>
 

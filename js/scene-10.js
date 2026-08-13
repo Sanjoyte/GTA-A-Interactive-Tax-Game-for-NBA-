@@ -12,7 +12,6 @@ const etdsNo = document.getElementById("etds-no");
 const etdsTin = document.getElementById("etds-tin");
 const etdsPassword = document.getElementById("etds-password");
 const etdsLoginButton = document.getElementById("etds-login-button");
-const etdsLoginHint = document.getElementById("etds-login-hint");
 const etdsMessageText = document.getElementById("etds-message-text");
 const etdsMessageHint = document.getElementById("etds-message-hint");
 const etdsAudioStatus = document.getElementById("etds-audio-status");
@@ -67,9 +66,6 @@ function typeEtdsValue(input, value, onComplete) {
 function updateEtdsLoginState() {
     const loginReady = etdsTinDone && etdsPasswordDone;
     etdsLoginButton.disabled = !loginReady;
-    etdsLoginHint.textContent = loginReady
-        ? "READY TO LOGIN"
-        : "CLICK TIN NUMBER AND PASSWORD TO FILL";
 }
 
 

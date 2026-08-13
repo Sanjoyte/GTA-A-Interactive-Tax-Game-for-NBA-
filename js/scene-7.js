@@ -37,12 +37,6 @@ const ereturnLoginButton =
     );
 
 
-const ereturnLoginHint =
-    document.getElementById(
-        "ereturn-login-hint"
-    );
-
-
 const ereturnAudioStatus =
     document.getElementById(
         "ereturn-audio-status"
@@ -132,6 +126,15 @@ let ereturnTinFilled = false;
 
 
 let ereturnPasswordFilled = false;
+
+
+let ereturnTinStarted = false;
+
+
+let ereturnPasswordStarted = false;
+
+
+let ereturnTypingSession = 0;
 
 
 /* ============================================================
@@ -224,6 +227,8 @@ function openScene7() {
 
 function resetScene7() {
 
+    ereturnTypingSession += 1;
+
     scene7Step =
         "login";
 
@@ -276,12 +281,12 @@ function resetScene7() {
 
     ereturnPasswordFilled = false;
 
+    ereturnTinStarted = false;
+
+    ereturnPasswordStarted = false;
+
     ereturnLoginButton.disabled =
         true;
-
-
-    ereturnLoginHint.textContent =
-        "CLICK TIN NUMBER AND PASSWORD TO FILL";
 
 
     ereturnDocumentCards.forEach(
@@ -380,10 +385,59 @@ function updateEreturnLoginState() {
         !isReady;
 
 
-    ereturnLoginHint.textContent =
-        isReady
-            ? "READY TO LOGIN"
-            : "CLICK TIN NUMBER AND PASSWORD TO FILL";
+}
+
+
+function typeEreturnValue(
+    input,
+    value,
+    onComplete
+) {
+
+    const typingSession =
+        ereturnTypingSession;
+
+    let characterIndex = 0;
+
+    input.value = "";
+
+    function typeNextCharacter() {
+
+        if (
+            typingSession !== ereturnTypingSession
+        ) {
+
+            return;
+
+        }
+
+        input.value =
+            value.slice(
+                0,
+                characterIndex + 1
+            );
+
+        characterIndex += 1;
+
+        if (
+            characterIndex < value.length
+        ) {
+
+            window.setTimeout(
+                typeNextCharacter,
+                70
+            );
+
+            return;
+
+        }
+
+        onComplete();
+        updateEreturnLoginState();
+
+    }
+
+    typeNextCharacter();
 
 }
 
@@ -421,6 +475,7 @@ ereturnTin.addEventListener(
 
         if (
             scene7Step !== "login" ||
+            ereturnTinStarted ||
             ereturnTinFilled
         ) {
 
@@ -429,12 +484,17 @@ ereturnTin.addEventListener(
         }
 
 
-        ereturnTin.value =
-            createRandomTinNumber();
+        ereturnTinStarted = true;
 
-        ereturnTinFilled = true;
+        typeEreturnValue(
+            ereturnTin,
+            createRandomTinNumber(),
+            () => {
 
-        updateEreturnLoginState();
+                ereturnTinFilled = true;
+
+            }
+        );
 
     }
 );
@@ -446,6 +506,7 @@ ereturnPassword.addEventListener(
 
         if (
             scene7Step !== "login" ||
+            ereturnPasswordStarted ||
             ereturnPasswordFilled
         ) {
 
@@ -454,12 +515,17 @@ ereturnPassword.addEventListener(
         }
 
 
-        ereturnPassword.value =
-            "password";
+        ereturnPasswordStarted = true;
 
-        ereturnPasswordFilled = true;
+        typeEreturnValue(
+            ereturnPassword,
+            "password",
+            () => {
 
-        updateEreturnLoginState();
+                ereturnPasswordFilled = true;
+
+            }
+        );
 
     }
 );
@@ -519,13 +585,16 @@ scene7BackButton.addEventListener(
 
         if (
             scene7Step === "login" &&
-            (ereturnTinFilled || ereturnPasswordFilled)
+            (ereturnTinStarted || ereturnPasswordStarted)
         ) {
 
             ereturnTin.value = "";
             ereturnPassword.value = "";
             ereturnTinFilled = false;
             ereturnPasswordFilled = false;
+            ereturnTinStarted = false;
+            ereturnPasswordStarted = false;
+            ereturnTypingSession += 1;
 
             updateEreturnLoginState();
 

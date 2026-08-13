@@ -91,12 +91,12 @@
     position: absolute;
 
     left: 50%;
-    top: 53%;
+    top: 51%;
 
     transform:
         translate(-50%, -50%);
 
-    width: 32%;
+    width: min(38%, 35rem);
 
     display: flex;
 
@@ -104,40 +104,32 @@
 
     align-items: center;
 
-    gap:
-        clamp(
-            0.55rem,
-            1.1vh,
-            1rem
-        );
+    gap: clamp(0.85rem, 1.5vh, 1.3rem);
 
-    padding:
-        2.2%
-        2.5%;
+    padding: clamp(1.6rem, 2.7vw, 3rem);
 
-    background-color: #171346;
+    background-color: #0a1d42;
 
     background-image:
         linear-gradient(
             145deg,
-            #21185b 0%,
-            #121743 52%,
-            #0a1736 100%
+            #12366f 0%,
+            #0b2450 55%,
+            #06152f 100%
         );
 
     border:
         0.12rem solid
-        rgba(126, 220, 255, 0.88);
+        #7ec8ff;
+
+    border-radius: 0.28rem;
 
     box-shadow:
         0 0 1.8rem
-        rgba(61, 192, 255, 0.38),
+        rgba(73, 164, 255, 0.42),
 
         inset 0 0 2rem
-        rgba(112, 93, 255, 0.14);
-
-    backdrop-filter:
-        blur(0.25rem);
+        rgba(83, 168, 255, 0.12);
 
     z-index: 10;
 
@@ -154,26 +146,20 @@
 
 .ereturn-login-title {
 
-    margin-bottom:
-        2%;
+    margin-bottom: 0.4rem;
 
     font-family:
-        "Orbitron",
-        sans-serif;
+        "Press Start 2P",
+        monospace;
 
     font-size:
         clamp(
-            1.2rem,
-            2.2vw,
-            2.8rem
+            1rem,
+            1.7vw,
+            1.8rem
         );
 
-    font-weight: 900;
-
-    letter-spacing:
-        0.08em;
-
-    text-transform: uppercase;
+    text-transform: none;
 
     color:
         #ccecff;
@@ -182,6 +168,24 @@
         0 0 0.8rem
         rgba(90, 184, 255, 0.74);
 
+}
+
+.ereturn-field {
+    position: relative;
+    width: 100%;
+    margin-top: 0.65rem;
+}
+
+.ereturn-field-label {
+    position: absolute;
+    left: 4%;
+    top: -0.55rem;
+    z-index: 2;
+    padding: 0 0.35rem;
+    background-color: #0b2450;
+    color: #c9eaff;
+    font-family: "Press Start 2P", monospace;
+    font-size: clamp(0.48rem, 0.7vw, 0.68rem);
 }
 
 
@@ -195,9 +199,9 @@
 
     height:
         clamp(
-            2.8rem,
-            5.6vh,
-            5.2rem
+            3rem,
+            5.5vh,
+            4.8rem
         );
 
     padding:
@@ -206,22 +210,24 @@
 
     border:
         0.12rem solid
-        rgba(148, 217, 255, 0.76);
+        #679fdf;
 
     border-radius:
         0.25rem;
 
-    background-color: #0b1233;
+    background-color: #07162f;
 
     background-image:
         linear-gradient(
             90deg,
-            #0b1233,
-            #111544
+            #07162f,
+            #0c2550
         );
 
     color:
         #e7f7ff;
+
+    font-family: "Orbitron", sans-serif;
 
     font-size:
         clamp(
@@ -246,6 +252,22 @@
     color:
         rgba(221, 241, 255, 0.72);
 
+}
+
+#ereturn-tin {
+    font-weight: 900;
+}
+
+#ereturn-tin::placeholder {
+    font-weight: 900;
+}
+
+#ereturn-password {
+    font-weight: 900;
+}
+
+#ereturn-password::placeholder {
+    font-weight: 900;
 }
 
 
@@ -327,36 +349,50 @@
 
 
 .ereturn-login-button {
-
     display: block;
-
-    width: 48%;
-
-    background-color: #244ca0;
+    width: auto;
+    min-width: clamp(8rem, 12vw, 13rem);
+    min-height: 0;
+    margin-top: 0.5rem;
+    padding: 0.9rem 2rem;
+    border: 0.12rem solid #9ed8ff;
+    border-radius: 0.25rem;
+    background-color: #174d8b;
 
     background-image:
         linear-gradient(
             180deg,
-            #4279d4 0%,
-            #2855aa 52%,
-            #183671 100%
+            #428bd4 0%,
+            #2563a9 52%,
+            #123c70 100%
         );
-
+    color: #ffffff;
+    font-family: "Press Start 2P", monospace;
+    font-size: clamp(0.72rem, 1.05vw, 1.1rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-shadow: 0 0.12rem 0 #062b52;
+    box-shadow:
+        0 0 1rem rgba(76, 169, 255, 0.38),
+        inset 0 0.12rem 0 rgba(230, 247, 255, 0.28);
 }
 
 
-.ereturn-login-button:hover,
+.ereturn-login-button:not(:disabled):hover,
+.ereturn-login-button:not(:disabled):focus-visible,
 .ereturn-action-button:hover {
 
     transform:
         translateY(-0.16rem);
 
-    background:
-        rgba(48, 123, 184, 0.98);
+    filter: brightness(1.12);
 
     box-shadow:
         0 0 1.35rem
-        rgba(117, 204, 255, 0.42);
+        rgba(117, 204, 255, 0.62);
+
+    outline: none;
 
 }
 
@@ -368,34 +404,6 @@
     cursor: default;
 
     pointer-events: none;
-
-}
-
-
-.ereturn-login-hint {
-
-    margin-top:
-        1%;
-
-    min-height:
-        1.2em;
-
-    font-size:
-        clamp(
-            0.66rem,
-            0.9vw,
-            1rem
-        );
-
-    font-weight: 800;
-
-    letter-spacing:
-        0.18em;
-
-    color:
-        rgba(178, 230, 255, 0.82);
-
-    text-align: center;
 
 }
 
@@ -499,13 +507,13 @@
     background-color: rgba(18, 77, 132, 0.96);
 
 
-    /* background-image:
+    background-image:
         linear-gradient(
             180deg,
             #526fd1 0%,
             #314da8 52%,
             #202d70 100%
-        ); */
+        );
 
     color: #ffffff;
 

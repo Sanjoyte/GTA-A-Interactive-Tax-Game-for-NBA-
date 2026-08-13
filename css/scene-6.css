@@ -181,7 +181,7 @@
     letter-spacing:
         0.06em;
 
-    text-transform: uppercase;
+    text-transform: None;
 
     color:
         rgba(210,255,230,0.95);
@@ -214,83 +214,6 @@
         );
 
     margin-top: 3rem;
-}
-
-
-/* ============================================================
-   OPTION BUTTON
-   ============================================================ */
-
-.scene-6-option {
-
-    min-width:
-        clamp(
-            8rem,
-            12vw,
-            14rem
-        );
-
-    padding:
-        0.9rem
-        2.5rem;
-
-    font-family:
-        "Press Start 2P",
-        monospace;
-
-    font-size:
-        clamp(
-            1rem,
-            1.5vw,
-            1.6rem
-        );
-
-    font-weight: 800;
-
-    letter-spacing:
-        0.12em;
-
-    color:
-        #d8ffe9;
-
-    background:
-        rgba(8, 48, 37, 0.95);
-
-    border:
-        0.12rem solid
-        rgba(170,255,210,0.8);
-
-    border-radius:
-        0.2rem;
-
-    box-shadow:
-        0 0 1rem
-        rgba(100,255,180,0.15);
-
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-/* ============================================================
-   OPTION HOVER
-   ============================================================ */
-
-.scene-6-option:hover {
-
-    transform:
-        translateY(-0.25rem);
-
-    background:
-        rgba(70, 130, 100, 0.9);
-
-    box-shadow:
-        0 0 1.5rem
-        rgba(120,255,190,0.4);
 }
 
 
@@ -373,7 +296,7 @@
     letter-spacing:
         0.07em;
 
-    text-transform: uppercase;
+    text-transform: None;
 
     color:
         rgba(215,255,230,0.98);
@@ -509,15 +432,5 @@
 
     }
 
-
-    .scene-6-option {
-
-        min-width: 7rem;
-
-        padding:
-            0.8rem
-            1.5rem;
-
-    }
 
 }

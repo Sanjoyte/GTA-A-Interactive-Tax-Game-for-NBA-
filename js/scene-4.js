@@ -49,12 +49,6 @@ document.getElementById(
 );
 
 
-const etinLoginHint =
-document.getElementById(
-    "etin-login-hint"
-);
-
-
 const etinAudioStatus =
 document.getElementById(
     "etin-audio-status"
@@ -108,11 +102,6 @@ function setEtinLoginEnabled(isEnabled) {
 
     etinLoginButton.style.opacity =
         isEnabled ? "1" : "0.4";
-
-    etinLoginHint.textContent =
-        isEnabled
-            ? "READY TO LOGIN"
-            : "CLICK USER ID AND PASSWORD TO FILL";
 
 }
 
