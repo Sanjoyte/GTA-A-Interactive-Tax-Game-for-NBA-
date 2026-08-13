@@ -49,6 +49,18 @@ const scene6ClickLayer =
     );
 
 
+const scene6BackgroundVideo =
+    document.getElementById(
+        "scene-6-background"
+    );
+
+
+const scene6BackButton =
+    document.getElementById(
+        "scene-6-back"
+    );
+
+
 /* ============================================================
    SCENE 6 STATE
    ============================================================ */
@@ -62,6 +74,31 @@ const scene6ClickLayer =
 */
 
 let scene6Step = 0;
+
+
+/* ============================================================
+   RESET TO QUESTION
+   ============================================================ */
+
+function resetScene6Question() {
+
+    scene6Step = 0;
+
+    scene6Question.style.display =
+        "flex";
+
+    scene6Response.classList.remove(
+        "active"
+    );
+
+    scene6ResponseText.textContent =
+        "";
+
+    scene6.classList.remove(
+        "message-active"
+    );
+
+}
 
 
 /* ============================================================
@@ -101,44 +138,44 @@ function openScene6() {
         Reset state.
     */
 
-    scene6Step = 0;
+    resetScene6Question();
 
 
-    /*
-        Show question.
-    */
+    scene6BackgroundVideo.currentTime = 0;
 
-    scene6Question.style.display =
-        "flex";
+    scene6BackgroundVideo.play()
+        .catch((error) => {
 
+            console.error(
+                "Could not play Scene 6 background video:",
+                error
+            );
 
-    /*
-        Hide response.
-    */
-
-    scene6Response.classList.remove(
-        "active"
-    );
-
-
-    /*
-        Clear response.
-    */
-
-    scene6ResponseText.textContent =
-        "";
-
-
-    /*
-        Disable full-screen
-        click progression.
-    */
-
-    scene6.classList.remove(
-        "message-active"
-    );
+        });
 
 }
+
+
+/* ============================================================
+   INTERNAL BACK BUTTON
+   ============================================================ */
+
+scene6BackButton.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
+
+        if (
+            scene6Step === 1
+        ) {
+
+            resetScene6Question();
+
+        }
+
+    }
+);
 
 
 /* ============================================================
@@ -317,6 +354,9 @@ scene6ClickLayer.addEventListener(
         );
 
 
+        scene6BackgroundVideo.pause();
+
+
         /*
             Open Scene 7.
         */
@@ -325,4 +365,3 @@ scene6ClickLayer.addEventListener(
 
     }
 );
-

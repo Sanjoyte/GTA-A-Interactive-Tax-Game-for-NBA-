@@ -310,6 +310,12 @@
 
     z-index: 50;
 
+    font-family:
+        "Press Start 2P",
+        Arial,
+        Helvetica,
+        sans-serif;
+
     font-size:
         clamp(
             1rem,

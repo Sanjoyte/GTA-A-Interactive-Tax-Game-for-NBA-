@@ -95,7 +95,7 @@
 
     <link
         rel="stylesheet"
-        href="css/scene-4.css"
+        href="css/scene-4.css?v=2"
     >
     <!-- =====================================================
          SCENE 5 CSS
@@ -111,7 +111,7 @@
 
     <link
         rel="stylesheet"
-        href="css/scene-6.css"
+        href="css/scene-6.css?v=2"
     >
 
 
@@ -145,10 +145,16 @@
                 id="game-stage-scene-0"
                 class="game-stage"
             >
+                <video
+                            id="scene-0-video"
+                            class="scene-0-video"
+                            src="assets/backgrounds/welcome-motion-bg.mp4"
+                            autoplay
+                            loop
+                            muted
+                            playsinline
+                        ></video>
 
-                <div
-                    class="scene-0-background"
-                ></div>
 
                 <div
                     class="scene-0-content"
@@ -173,10 +179,19 @@
                         <div
                             class="welcome-hint"
                         >
-                            CLICK TO BEGIN
+                            CLICK START TO BEGIN
                         </div>
 
                     </div>
+
+
+                    <button
+                        id="scene-0-start"
+                        class="scene-0-start"
+                        type="button"
+                    >
+                        START
+                    </button>
 
                 </div>
 
@@ -583,12 +598,22 @@
     class="scene scene-4"
 >
     <div
-                id="game-stage"
-                class="game-stage"
-            >
-    <div
+        id="game-stage-scene-4"
+        class="game-stage"
+    >
+    <video
         id="scene-4-background"
         class="scene-4-background"
+        src="assets/backgrounds/etin-motion-bg.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+    ></video>
+
+    <div
+        class="scene-4-background-overlay"
+        aria-hidden="true"
     ></div>
 
 
@@ -606,37 +631,56 @@
             class="etin-login"
         >
 
-            <!-- EMAIL -->
+            <div class="etin-frame-core">
 
-            <input
-                id="etin-email"
-                class="etin-input"
-                type="text"
-                placeholder="Email"
-                readonly
-            >
+                <!-- USER ID -->
 
+                <label
+                    class="etin-field etin-field--user"
+                    for="etin-user-id"
+                >
+                    <span class="etin-field-label">User ID</span>
 
-            <!-- PASSWORD -->
-
-            <input
-                id="etin-password"
-                class="etin-input"
-                type="text"
-                placeholder="Password"
-                readonly
-            >
+                    <input
+                        id="etin-user-id"
+                        class="etin-input"
+                        type="text"
+                        placeholder="User ID"
+                        readonly
+                    >
+                </label>
 
 
-            <!-- LOGIN BUTTON -->
+                <!-- PASSWORD -->
 
-            <button
-                id="etin-login-button"
-                class="etin-login-button"
-                type="button"
-            >
-                LOGIN
-            </button>
+                <label
+                    class="etin-field etin-field--password"
+                    for="etin-password"
+                >
+                    <span class="etin-field-label">Password</span>
+
+                    <input
+                        id="etin-password"
+                        class="etin-input"
+                        type="text"
+                        placeholder="Password"
+                        readonly
+                    >
+                </label>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    id="etin-login-button"
+                    class="etin-login-button"
+                    type="button"
+                    disabled
+                >
+                    LOGIN
+                </button>
+
+            </div>
 
         </div>
 
@@ -654,6 +698,32 @@
 
 
         <!-- =============================================
+             AUDIO STATUS
+             ============================================= -->
+
+        <div
+            id="etin-audio-status"
+            class="etin-audio-status"
+            aria-live="polite"
+        >
+            🔊 eTIN guideline playing...
+        </div>
+
+
+        <!-- =============================================
+             SCENE 4 INTERNAL BACK BUTTON
+             ============================================= -->
+
+        <button
+            id="scene-4-back"
+            class="scene-4-back"
+            type="button"
+        >
+            BACK
+        </button>
+
+
+        <!-- =============================================
              CLICK LAYER
              ============================================= -->
 
@@ -661,6 +731,8 @@
             id="scene-4-click-layer"
             class="scene-4-click-layer"
         ></div>
+
+    </div>
 
     </div>
 
@@ -725,8 +797,19 @@
 
         <!-- BACKGROUND -->
 
-        <div
+        <video
+            id="scene-6-background"
             class="scene-6-background"
+            src="assets/backgrounds/etin-motion-bg.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+        ></video>
+
+        <div
+            class="scene-6-background-overlay"
+            aria-hidden="true"
         ></div>
 
 
@@ -798,6 +881,17 @@
                 </div>
 
             </div>
+
+
+            <!-- SCENE 6 INTERNAL BACK BUTTON -->
+
+            <button
+                id="scene-6-back"
+                class="scene-6-back"
+                type="button"
+            >
+                BACK
+            </button>
 
 
             <!-- CLICK LAYER -->
@@ -997,11 +1091,11 @@
 
     <script src="js/scene-3.js"></script>
 
-    <script src="js/scene-4.js"></script>
+    <script src="js/scene-4.js?v=2"></script>
 
     <script src="js/scene-5.js"></script>
 
-    <script src="js/scene-6.js"></script>
+    <script src="js/scene-6.js?v=2"></script>
 
     <script src="js/scene-7.js"></script>
 </body>

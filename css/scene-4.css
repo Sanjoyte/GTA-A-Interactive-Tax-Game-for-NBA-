@@ -1,37 +1,18 @@
 /* ============================================================
-   #SCENE 4 — eTIN PORTAL
-   ============================================================ */
-
-
-/* ============================================================
-   SCENE
+   #SCENE 4 - eTIN PORTAL
    ============================================================ */
 
 .scene-4 {
-
     position: absolute;
-
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     overflow: hidden;
-
     display: none;
-
 }
 
-
-/*
-    Scene 4 becomes visible when
-    JavaScript adds .active
-*/
-
 .scene-4.active {
-
     display: block;
-
 }
 
 
@@ -40,25 +21,35 @@
    ============================================================ */
 
 .scene-4-background {
-
     position: absolute;
-
     inset: 0;
-
     width: 100%;
     height: 100%;
-
-    background-image:
-        url("../assets/backgrounds/etin-bg.png");
-
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
+    object-fit: cover;
     z-index: 0;
+    pointer-events: none;
+}
 
+.scene-4-background-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(
+            rgba(0, 18, 12, 0.26),
+            rgba(0, 10, 8, 0.48)
+        ),
+        linear-gradient(
+            rgba(74, 222, 128, 0.08) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(74, 222, 128, 0.06) 1px,
+            transparent 1px
+        );
+    background-size: 28px 28px;
+    pointer-events: none;
 }
 
 
@@ -67,51 +58,230 @@
    ============================================================ */
 
 .scene-4-content {
-
     position: absolute;
-
     inset: 0;
-
     width: 100%;
     height: 100%;
-
-    z-index: 1;
-
+    z-index: 2;
 }
 
 
 /* ============================================================
-   LOGIN FORM
+   INTERNAL BACK BUTTON
+   ============================================================ */
+
+.scene-4-back {
+    position: absolute;
+    right: 4%;
+    bottom: 13.5%;
+    z-index: 40;
+    min-width: clamp(7.5rem, 11vw, 11.5rem);
+    padding:
+        clamp(0.78rem, 1.05vw, 1.1rem)
+        clamp(1.45rem, 2.25vw, 2.5rem);
+    border: 0.12rem solid #6fffd4;
+    border-radius: 6px;
+
+    /* Both layers are fully opaque, so the video never shows through. */
+    background-color: #075b46;
+    background-image:
+        linear-gradient(
+            180deg,
+            #299b68 0%,
+            #087052 52%,
+            #034437 100%
+        );
+
+    color: #ffffff;
+    font-family: "Press Start 2P", Arial, Helvetica, sans-serif;
+    font-size: clamp(0.68rem, 1vw, 1rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-shadow:
+        0 0.12rem 0 #022c22,
+        0 0 0.5rem rgba(0, 255, 204, 0.9);
+    box-shadow:
+        0 0 1rem rgba(0, 255, 204, 0.42),
+        inset 0 0.12rem 0 rgba(220, 255, 239, 0.28);
+    cursor: pointer;
+    opacity: 1;
+    transition:
+        transform 180ms ease,
+        filter 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.scene-4-back:hover,
+.scene-4-back:focus-visible {
+    transform: translateY(-0.12rem);
+    filter: brightness(1.12);
+    box-shadow:
+        0 0 1.4rem rgba(0, 255, 204, 0.66),
+        inset 0 0.12rem 0 rgba(220, 255, 239, 0.34);
+    outline: none;
+}
+
+.scene-4-back:active {
+    transform: translateY(0.08rem) scale(0.98);
+}
+
+
+/* ============================================================
+   LOGIN HUD FRAME
    ============================================================ */
 
 .etin-login {
+    --etin-neon: #00ffcc;
+    --etin-green: #62bd7d;
+    --etin-light: #d8ffe9;
 
     position: absolute;
-
-    /*
-        Change these values to position
-        the login form over your artwork.
-    */
-
     left: 50%;
-
-    top: 52%;
-
-    transform:
-        translate(-50%, -50%);
-
-    width: 30%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 1.2%;
-
+    top: 51%;
+    transform: translate(-50%, -50%);
+    width: min(62vw, 620px);
+    aspect-ratio: 1.72;
     z-index: 10;
+    isolation: isolate;
+    pointer-events: auto;
+}
 
+.etin-login::before,
+.etin-login::after,
+.etin-frame-core::before,
+.etin-frame-core::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+
+.etin-login::before {
+    inset: 0;
+    z-index: 0;
+    clip-path: polygon(
+        7% 0,
+        93% 0,
+        100% 10%,
+        100% 86%,
+        92% 100%,
+        8% 100%,
+        0 86%,
+        0 10%
+    );
+    background:
+        rgba(74, 124, 74, 0.911);
+        /* rgba(9, 49, 40, 0.78); */
+    box-shadow:
+        0 0 12px rgba(147, 192, 183, 0.36),
+        0 0 24px rgba(97, 34, 197, 0.18);
+}
+
+.etin-login::after {
+    inset: 2px;
+    z-index: 1;
+    clip-path: polygon(
+        7% 0,
+        93% 0,
+        100% 10%,
+        100% 86%,
+        92% 100%,
+        8% 100%,
+        0 86%,
+        0 10%
+    );
+    background:
+        linear-gradient(
+            180deg,
+            rgba(1, 36, 29, 0.84),
+            rgba(2, 20, 18, 0.82)
+        );
+    box-shadow:
+        inset 0 0 0 1px rgba(74, 222, 128, 0.42),
+        inset 0 0 24px rgba(34, 197, 94, 0.18),
+        inset 0 0 18px rgba(0, 255, 204, 0.18);
+}
+
+.etin-frame-core {
+    position: absolute;
+    inset: 9% 10%;
+    z-index: 2;
+    display: grid;
+    grid-template-rows: 25% 25% 1fr 25%;
+    align-items: center;
+    gap: 5%;
+}
+
+.etin-frame-core::before {
+    inset: 7% 0 24%;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(74, 222, 128, 0.28),
+            transparent
+        );
+    border-top: 1px solid rgba(74, 222, 128, 0.22);
+    border-bottom: 1px solid rgba(74, 222, 128, 0.22);
+    opacity: 0.48;
+}
+
+.etin-frame-core::after {
+    left: 50%;
+    bottom: -1%;
+    width: 34%;
+    height: 2px;
+    transform: translateX(-50%);
+    background: #00ffcc;
+    box-shadow:
+        0 0 10px #00ffcc,
+        0 0 18px rgba(74, 222, 128, 0.72);
+}
+
+.etin-field {
+    position: relative;
+    display: grid;
+    align-items: center;
+    min-width: 0;
+    height: 100%;
+    padding: 0 5%;
+    border: 1px solid rgba(74, 222, 128, 0.62);
+    border-radius: 7px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5, 56, 43, 0.82),
+            rgba(4, 35, 30, 0.82)
+        );
+    box-shadow:
+        inset 0 0 14px rgba(0, 255, 204, 0.18),
+        0 0 10px rgba(34, 197, 94, 0.22);
+}
+
+.etin-field--user {
+    grid-row: 1;
+    transform: translateY(clamp(0.45rem, 1vw, 0.9rem));
+}
+
+.etin-field--password {
+    grid-row: 2;
+    transform: translateY(clamp(.9rem, 2vw, 1.8rem));
+}
+
+.etin-field-label {
+    position: absolute;
+    left: 5%;
+    top: -0.86rem;
+    padding: 0;
+    background: transparent;
+    color: #c7ffec;
+    font-family: "Press Start 2P", Arial, Helvetica, sans-serif;
+    font-size: clamp(0.44rem, 0.76vw, 0.66rem);
+    line-height: 1;
+    text-shadow:
+        0 0 5px rgba(199, 255, 236, 0.82),
+        0 0 12px rgba(92, 221, 157, 0.58),
+        0 0 20px rgba(8, 42, 34, 0.9);
 }
 
 
@@ -120,73 +290,39 @@
    ============================================================ */
 
 .etin-input {
-
     width: 100%;
-
-    /*
-        Responsive height.
-
-        Uses viewport height instead
-        of fixed pixels.
-    */
-
-    height: clamp(
-        3rem,
-        6vh,
-        6rem
-    );
-
-    padding:
-        0 1.5%;
-
+    min-width: 0;
+    height: 100%;
+    padding: 0;
     box-sizing: border-box;
-
-    border:
-        0.15rem
-        solid
-        rgba(150, 255, 210, 0.7);
-
-    border-radius:
-        0.4rem;
-
-    background:
-        rgba(0, 20, 15, 0.82);
-
-    color:
-        #d8ffe9;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size:
-        clamp(
-            1rem,
-            1.5vw,
-            2rem
-        );
-
+    border: 0;
+    background: transparent;
+    color: #d8ffe9;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(0.95rem, 1.8vw, 1.55rem);
+    font-weight: 700;
     outline: none;
-
     text-align: left;
-
-    box-shadow:
-        0 0 1rem
-        rgba(100, 255, 180, 0.2);
-
+    text-shadow: 0 0 8px rgba(0, 255, 85, 0.54);
+    pointer-events: auto;
+    cursor: text;
 }
 
-
-/* ============================================================
-   PLACEHOLDER
-   ============================================================ */
-
 .etin-input::placeholder {
+    color: rgba(216, 255, 233, 0.692);
+}
 
-    color:
-        rgba(220, 255, 235, 0.7);
+.etin-input:focus {
+    text-shadow:
+        0 0 8px rgba(0, 255, 136, 0.84),
+        0 0 16px rgba(74, 222, 128, 0.34);
+}
 
+.etin-field:focus-within {
+    border-color: rgba(0, 255, 204, 0.94);
+    box-shadow:
+        inset 0 0 16px rgba(0, 255, 204, 0.24),
+        0 0 16px rgba(0, 255, 204, 0.34);
 }
 
 
@@ -195,68 +331,80 @@
    ============================================================ */
 
 .etin-login-button {
-
-    display: none;
-
-    margin-top: 2%;
-
-    width: 45%;
-
-    min-height:
-        clamp(
-            3rem,
-            5vh,
-            5rem
-        );
-
-    border:
-        0.15rem
-        solid
-        rgba(150, 255, 210, 0.8);
-
-    border-radius:
-        0.4rem;
-
+    grid-row: 4;
+    justify-self: center;
+    display: block;
+    width: 44%;
+    min-width: 150px;
+    height: 76%;
+    border: 1px solid rgba(0, 255, 179, 0.795);
+    border-radius: 6px;
     background:
-        rgba(30, 80, 60, 0.85);
-
-    color:
-        #d8ffe9;
-
-    font-size:
-        clamp(
-            1rem,
-            1.5vw,
-            2rem
+        linear-gradient(
+            180deg,
+            rgba(77, 175, 113, 0.72),
+            rgba(2, 64, 48, 0.94)
         );
-
+    color: #d8ffe9;
+    font-family: "Press Start 2P", Arial, Helvetica, sans-serif;
+    font-size: clamp(0.74rem, 1.12vw, 1.05rem);
     font-weight: 800;
-
-    letter-spacing:
-        0.12em;
-
+    letter-spacing: 0;
     cursor: pointer;
-
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.9);
     box-shadow:
-        0 0 1rem
-        rgba(100, 255, 180, 0.25);
+        0 0 12px rgba(0, 255, 204, 0.32),
+        inset 0 0 14px rgba(216, 255, 233, 0.12);
+    transition:
+        opacity 180ms ease,
+        filter 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
+}
 
+.etin-login-button:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    filter: saturate(0.55);
+}
+
+.etin-login-button:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow:
+        0 0 18px rgba(0, 255, 204, 0.52),
+        0 0 28px rgba(74, 222, 128, 0.32),
+        inset 0 0 14px rgba(216, 255, 233, 0.16);
 }
 
 
 /* ============================================================
-   LOGIN BUTTON HOVER
+   AUDIO STATUS
    ============================================================ */
 
-.etin-login-button:hover {
-
-    background:
-        rgba(80, 150, 110, 0.9);
-
+.etin-audio-status {
+    display: none;
+    position: fixed;
+    left: 50%;
+    bottom: 4%;
+    transform: translateX(-50%);
+    padding: 0.7rem 1rem;
+    border: 1px solid rgba(0, 255, 204, 0.56);
+    border-radius: 6px;
+    background: rgba(1, 24, 19, 0.78);
+    color: #d8ffe9;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(0.82rem, 1.15vw, 1rem);
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.72);
     box-shadow:
-        0 0 1.5rem
-        rgba(150, 255, 200, 0.5);
+        0 0 12px rgba(0, 255, 204, 0.22),
+        inset 0 0 12px rgba(34, 197, 94, 0.14);
+    z-index: 30;
+    pointer-events: none;
+}
 
+.etin-audio-status.is-visible {
+    display: block;
 }
 
 
@@ -265,43 +413,36 @@
    ============================================================ */
 
 .etin-certificate-message {
-
     display: none;
-
     position: absolute;
-
     left: 50%;
-
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    color:
-        #d8ffe9;
-
-    font-size:
-        clamp(
-            1.5rem,
-            3vw,
-            4rem
-        );
-
-    font-weight: 800;
-
+    top: 48%;
+    transform: translate(-50%, -50%);
+    width: min(65%, 58rem);
+    padding: 3rem 4rem;
+    background: rgba(9, 49, 40, 0.78);
+    border: 0.12rem solid rgba(150, 255, 205, 0.65);
+    color: rgba(210, 255, 230, 0.95);
+    font-family:
+        "Cy Grotesk V3",
+        "Cy Grotesk",
+        "Arial Narrow",
+        sans-serif;
+    font-size: clamp(1.35rem, 2.85vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.3;
     text-align: center;
-
-    text-transform: uppercase;
-
-    letter-spacing:
-        0.08em;
-
+    text-transform: None;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
     text-shadow:
-        0 0 1rem
-        rgba(150, 255, 210, 0.8);
-
+        0 0 0.8rem rgba(120, 255, 190, 0.5);
+    box-shadow:
+        0 0 2rem rgba(100, 255, 180, 0.18),
+        inset 0 0 2rem rgba(100, 255, 180, 0.05);
+    backdrop-filter: blur(0.5rem);
     z-index: 20;
-
+    pointer-events: none;
 }
 
 
@@ -310,46 +451,18 @@
    ============================================================ */
 
 .scene-4-click-layer {
-
     position: absolute;
-
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     z-index: 5;
-
     pointer-events: none;
-
 }
-
-
-/*
-    The click layer becomes active
-    only when we are waiting for
-    the player's next click.
-*/
 
 .scene-4.waiting-for-click
 .scene-4-click-layer {
-
     pointer-events: auto;
-
     cursor: pointer;
-
-}
-
-
-/* ============================================================
-   LOGIN VISIBLE
-   ============================================================ */
-
-.scene-4.login-visible
-.etin-login-button {
-
-    display: block;
-
 }
 
 
@@ -359,17 +472,12 @@
 
 .scene-4.certificate-visible
 .etin-login {
-
     display: none;
-
 }
-
 
 .scene-4.certificate-visible
 .etin-certificate-message {
-
     display: block;
-
 }
 
 
@@ -378,11 +486,23 @@
    ============================================================ */
 
 @media (max-width: 700px) {
-
     .etin-login {
-
-        width: 60%;
-
+        width: min(88vw, 430px);
     }
 
+    .etin-frame-core {
+        inset: 12% 11%;
+        gap: 4%;
+    }
+
+    .etin-login-button {
+        width: 58%;
+        min-width: 128px;
+    }
+
+    .etin-certificate-message {
+        width: min(88vw, 34rem);
+        padding: 1.8rem 1.2rem;
+        font-size: clamp(0.78rem, 3.6vw, 1.35rem);
+    }
 }

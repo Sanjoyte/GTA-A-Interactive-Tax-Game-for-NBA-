@@ -1,5 +1,5 @@
 /* ============================================================
-   #SCENE 4 — eTIN PORTAL
+   #SCENE 4 - eTIN PORTAL
    ============================================================ */
 
 
@@ -19,9 +19,21 @@ document.getElementById(
 );
 
 
-const etinEmail =
+const scene4BackgroundVideo =
 document.getElementById(
-    "etin-email"
+    "scene-4-background"
+);
+
+
+const scene4BackButton =
+document.getElementById(
+    "scene-4-back"
+);
+
+
+const etinUserId =
+document.getElementById(
+    "etin-user-id"
 );
 
 
@@ -34,6 +46,12 @@ document.getElementById(
 const etinLoginButton =
 document.getElementById(
     "etin-login-button"
+);
+
+
+const etinAudioStatus =
+document.getElementById(
+    "etin-audio-status"
 );
 
 
@@ -53,25 +71,169 @@ etinAudio.preload = "auto";
    SCENE 4 STATE
    ============================================================ */
 
-/*
+const ETIN_USER_ID_VALUE =
+    "tariquerahman";
 
-    0 = audio playing
 
-    1 = waiting for first click
-        ↓
-        automatically fill login information
+const ETIN_PASSWORD_VALUE =
+    "****";
 
-    2 = login button visible
-        ↓
-        user must click LOGIN
 
-    3 = certificate message
+let scene4Step = 1;
 
-    4 = move to Scene 5
+let isUserIdStarted = false;
+let isPasswordStarted = false;
+let isUserIdDone = false;
+let isPasswordDone = false;
+let scene4TypingSession = 0;
 
-*/
 
-let scene4Step = 0;
+/* ============================================================
+   HELPERS
+   ============================================================ */
+
+function setEtinLoginEnabled(isEnabled) {
+
+    etinLoginButton.disabled =
+        !isEnabled;
+
+    etinLoginButton.style.pointerEvents =
+        isEnabled ? "auto" : "none";
+
+    etinLoginButton.style.opacity =
+        isEnabled ? "1" : "0.4";
+
+}
+
+
+function updateEtinLoginState() {
+
+    if (
+        isUserIdDone &&
+        isPasswordDone
+    ) {
+
+        scene4Step = 2;
+
+        setEtinLoginEnabled(
+            true
+        );
+
+    }
+
+}
+
+
+function resetEtinForm() {
+
+    scene4TypingSession += 1;
+    scene4Step = 1;
+    isUserIdStarted = false;
+    isPasswordStarted = false;
+    isUserIdDone = false;
+    isPasswordDone = false;
+
+    scene4.classList.remove(
+        "waiting-for-click"
+    );
+
+    scene4.classList.remove(
+        "certificate-visible"
+    );
+
+    etinUserId.value = "";
+    etinPassword.value = "";
+
+    setEtinLoginEnabled(
+        false
+    );
+
+}
+
+
+function showEtinAudioStatus() {
+
+    if (!etinAudioStatus) {
+
+        return;
+
+    }
+
+    etinAudioStatus.classList.add(
+        "is-visible"
+    );
+
+}
+
+
+function hideEtinAudioStatus() {
+
+    if (!etinAudioStatus) {
+
+        return;
+
+    }
+
+    etinAudioStatus.classList.remove(
+        "is-visible"
+    );
+
+}
+
+
+function typeIntoInput(
+    input,
+    value,
+    onComplete
+) {
+
+    let characterIndex = 0;
+    const typingSession =
+        scene4TypingSession;
+
+    input.value = "";
+
+    const typeNextCharacter =
+    function () {
+
+        if (
+            typingSession !== scene4TypingSession
+        ) {
+
+            return;
+
+        }
+
+        input.value =
+            value.slice(
+                0,
+                characterIndex + 1
+            );
+
+        characterIndex += 1;
+
+        if (
+            characterIndex < value.length
+        ) {
+
+            window.setTimeout(
+                typeNextCharacter,
+                70
+            );
+
+            return;
+
+        }
+
+        onComplete();
+
+        updateEtinLoginState();
+
+    };
+
+    typeNextCharacter();
+
+}
 
 
 /* ============================================================
@@ -81,13 +243,9 @@ let scene4Step = 0;
 function openScene4() {
 
     console.log(
-        "Opening Scene 4 — eTIN Portal"
+        "Opening Scene 4 - eTIN Portal"
     );
 
-
-    /* ---------------------------------------------
-       Hide Scene 3
-       --------------------------------------------- */
 
     const scene3 =
     document.getElementById(
@@ -104,42 +262,39 @@ function openScene4() {
     }
 
 
-    /* ---------------------------------------------
-       Show Scene 4
-       --------------------------------------------- */
-
     scene4.classList.add(
         "active"
     );
 
 
-    /* ---------------------------------------------
-       Reset Scene 4
-       --------------------------------------------- */
+    resetEtinForm();
 
-    scene4Step = 0;
-
-    scene4.classList.remove(
-        "waiting-for-click"
-    );
-
-    scene4.classList.remove(
-        "login-visible"
-    );
-
-    scene4.classList.remove(
-        "certificate-visible"
-    );
+    hideEtinAudioStatus();
 
 
-    etinEmail.value = "";
+    scene4BackgroundVideo.currentTime = 0;
 
-    etinPassword.value = "";
+    scene4BackgroundVideo.play()
+        .catch((error) => {
+
+            console.error(
+                "Could not play Scene 4 background video:",
+                error
+            );
+
+        });
 
 
-    /* ---------------------------------------------
-       Play audio
-       --------------------------------------------- */
+    etinAudio.onended =
+    function () {
+
+        console.log(
+            "eTIN audio finished."
+        );
+
+        hideEtinAudioStatus();
+
+    };
 
     etinAudio.currentTime = 0;
 
@@ -150,6 +305,8 @@ function openScene4() {
                 "eTIN audio started."
             );
 
+            showEtinAudioStatus();
+
         })
         .catch((error) => {
 
@@ -158,104 +315,144 @@ function openScene4() {
                 error
             );
 
+            hideEtinAudioStatus();
+
         });
-
-
-    /* ---------------------------------------------
-       Wait until audio completely finishes
-       --------------------------------------------- */
-
-    etinAudio.onended =
-    function () {
-
-        console.log(
-            "eTIN audio finished."
-        );
-
-
-        scene4Step = 1;
-
-
-        scene4.classList.add(
-            "waiting-for-click"
-        );
-
-
-        console.log(
-            "Waiting for click to fill login."
-        );
-
-    };
 
 }
 
 
 /* ============================================================
-   CLICK AFTER AUDIO
+   TYPEWRITER INPUTS
+   ============================================================ */
+
+etinUserId.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
+
+        if (
+            isUserIdStarted ||
+            isUserIdDone
+        ) {
+
+            return;
+
+        }
+
+        isUserIdStarted = true;
+
+        typeIntoInput(
+            etinUserId,
+            ETIN_USER_ID_VALUE,
+            () => {
+
+                isUserIdDone = true;
+
+            }
+        );
+
+    }
+);
+
+
+/* ============================================================
+   INTERNAL BACK BUTTON
+   ============================================================ */
+
+scene4BackButton.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
+
+        if (
+            scene4Step === 3
+        ) {
+
+            scene4Step = 2;
+
+            scene4.classList.remove(
+                "waiting-for-click"
+            );
+
+            scene4.classList.remove(
+                "certificate-visible"
+            );
+
+            setEtinLoginEnabled(
+                true
+            );
+
+            return;
+
+        }
+
+        if (
+            scene4Step === 2 ||
+            isUserIdStarted ||
+            isPasswordStarted
+        ) {
+
+            resetEtinForm();
+
+        }
+
+    }
+);
+
+
+etinPassword.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
+
+        if (
+            isPasswordStarted ||
+            isPasswordDone
+        ) {
+
+            return;
+
+        }
+
+        isPasswordStarted = true;
+
+        typeIntoInput(
+            etinPassword,
+            ETIN_PASSWORD_VALUE,
+            () => {
+
+                isPasswordDone = true;
+
+            }
+        );
+
+    }
+);
+
+
+/* ============================================================
+   CLICK AFTER CERTIFICATE
    ============================================================ */
 
 scene4ClickLayer.addEventListener(
     "click",
     () => {
 
-        /* -----------------------------------------
-           STEP 1
-           
-           Fill email and password
-           ----------------------------------------- */
-
         if (
-            scene4Step === 1
+            scene4Step !== 3
         ) {
-
-            etinEmail.value =
-                "tariquerahman@gmail.com";
-
-
-            etinPassword.value =
-                "****";
-
-
-            scene4Step = 2;
-
-
-            scene4.classList.remove(
-                "waiting-for-click"
-            );
-
-
-            scene4.classList.add(
-                "login-visible"
-            );
-
-
-            console.log(
-                "eTIN login information displayed."
-            );
-
 
             return;
 
         }
 
+        scene4Step = 4;
 
-        /* -----------------------------------------
-           STEP 3
-           
-           Move to Scene 5
-           ----------------------------------------- */
-
-        if (
-            scene4Step === 3
-        ) {
-
-            scene4Step = 4;
-
-
-            openScene5();
-
-
-        }
+        openScene5();
 
     }
 );
@@ -269,21 +466,11 @@ etinLoginButton.addEventListener(
     "click",
     (event) => {
 
-        /*
-            Prevent this click from
-            reaching the full-screen
-            click layer.
-        */
-
         event.stopPropagation();
 
-
-        /*
-            Only allow login at step 2.
-        */
-
         if (
-            scene4Step !== 2
+            scene4Step !== 2 ||
+            etinLoginButton.disabled
         ) {
 
             return;
@@ -296,27 +483,11 @@ etinLoginButton.addEventListener(
         );
 
 
-        /*
-            Show certificate message.
-        */
-
         scene4Step = 3;
-
-
-        scene4.classList.remove(
-            "login-visible"
-        );
-
 
         scene4.classList.add(
             "certificate-visible"
         );
-
-
-        /*
-            Enable full-screen
-            click for next scene.
-        */
 
         scene4.classList.add(
             "waiting-for-click"
@@ -346,10 +517,10 @@ function openScene5() {
         "active"
     );
 
+    scene4BackgroundVideo.pause();
 
-    /*
-        Scene 5 will be implemented later.
-    */
+    hideEtinAudioStatus();
+
 
     const scene5 =
     document.getElementById(

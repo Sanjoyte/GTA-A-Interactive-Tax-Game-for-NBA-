@@ -7,9 +7,9 @@
    ELEMENTS
    ============================================================ */
 
-const scene0 =
+const scene0Start =
     document.getElementById(
-        "scene-0"
+        "scene-0-start"
     );
 
 
@@ -17,7 +17,7 @@ const scene0 =
    START FROM WELCOME
    ============================================================ */
 
-scene0.addEventListener(
+scene0Start.addEventListener(
     "click",
     () => {
 
