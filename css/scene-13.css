@@ -83,7 +83,7 @@
     font-weight: 900;
     line-height: 1.4;
     letter-spacing: 0.04em;
-    text-transform: uppercase;
+    text-transform: None;
     text-shadow: 0 0 0.9rem rgba(198, 119, 255, 0.78);
 }
 
@@ -95,7 +95,14 @@
 }
 
 .eaudit-continue {
+    display: inline-block;
     margin-top: clamp(1.5rem, 3vh, 2.4rem);
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    appearance: none;
+    background: none;
+    box-shadow: none;
     color: #ffffff;
     font-family: "Orbitron", sans-serif;
     font-size: clamp(0.58rem, 0.86vw, 0.88rem);
@@ -104,6 +111,7 @@
     letter-spacing: 0.14em;
     text-shadow: 0 0 0.75rem rgba(209, 139, 255, 0.9);
     cursor: pointer;
+    user-select: none;
     animation: eauditContinuePulse 1.15s steps(2, start) infinite;
 }
 
