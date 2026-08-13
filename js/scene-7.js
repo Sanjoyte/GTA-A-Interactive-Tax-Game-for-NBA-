@@ -43,6 +43,24 @@ const ereturnLoginHint =
     );
 
 
+const ereturnAudioStatus =
+    document.getElementById(
+        "ereturn-audio-status"
+    );
+
+
+const scene7BackgroundVideo =
+    document.getElementById(
+        "scene-7-background"
+    );
+
+
+const scene7BackButton =
+    document.getElementById(
+        "scene-7-back"
+    );
+
+
 const ereturnDashboard =
     document.getElementById(
         "ereturn-dashboard"
@@ -103,11 +121,17 @@ const taxCalculationLines = [
 
 
 let scene7Step =
-    "voice";
+    "login";
 
 
 let calculationRevealTimers =
     [];
+
+
+let ereturnTinFilled = false;
+
+
+let ereturnPasswordFilled = false;
 
 
 /* ============================================================
@@ -146,6 +170,22 @@ function openScene7() {
     resetScene7();
 
 
+    scene7BackgroundVideo.currentTime = 0;
+
+
+    scene7BackgroundVideo.play()
+        .catch(
+            (error) => {
+
+                console.log(
+                    "Could not play Scene 7 background video:",
+                    error
+                );
+
+            }
+        );
+
+
     ereturnAudio.currentTime =
         0;
 
@@ -158,6 +198,9 @@ function openScene7() {
                     "eReturn audio started."
                 );
 
+
+                showEreturnAudioStatus();
+
             }
         )
         .catch(
@@ -168,7 +211,7 @@ function openScene7() {
                     error
                 );
 
-                unlockEreturnLogin();
+                hideEreturnAudioStatus();
 
             }
         );
@@ -183,7 +226,10 @@ function openScene7() {
 function resetScene7() {
 
     scene7Step =
-        "voice";
+        "login";
+
+
+    hideEreturnAudioStatus();
 
 
     calculationRevealTimers.forEach(
@@ -227,18 +273,16 @@ function resetScene7() {
         "";
 
 
-    ereturnTin.disabled =
-        true;
+    ereturnTinFilled = false;
 
-    ereturnPassword.disabled =
-        true;
+    ereturnPasswordFilled = false;
 
     ereturnLoginButton.disabled =
         true;
 
 
     ereturnLoginHint.textContent =
-        "LISTENING TO eRETURN GUIDE";
+        "CLICK TIN NUMBER AND PASSWORD TO FILL";
 
 
     ereturnDocumentCards.forEach(
@@ -274,50 +318,222 @@ ereturnAudio.addEventListener(
             "eReturn audio finished."
         );
 
-        unlockEreturnLogin();
+        hideEreturnAudioStatus();
 
     }
 );
 
 
 /* ============================================================
-   UNLOCK LOGIN
+   LOGIN HELPERS
    ============================================================ */
 
-function unlockEreturnLogin() {
+function showEreturnAudioStatus() {
 
-    if (
-        scene7Step !== "voice"
+    ereturnAudioStatus.classList.add(
+        "is-visible"
+    );
+
+}
+
+
+function hideEreturnAudioStatus() {
+
+    ereturnAudioStatus.classList.remove(
+        "is-visible"
+    );
+
+}
+
+
+function createRandomTinNumber() {
+
+    let tinNumber = "";
+
+    for (
+        let digitIndex = 0;
+        digitIndex < 14;
+        digitIndex += 1
     ) {
 
-        return;
+        const minimumDigit =
+            digitIndex === 0 ? 1 : 0;
+
+        tinNumber += Math.floor(
+            Math.random() * (10 - minimumDigit)
+        ) + minimumDigit;
 
     }
 
+    return tinNumber;
+
+}
+
+
+function updateEreturnLoginState() {
+
+    const isReady =
+        ereturnTinFilled &&
+        ereturnPasswordFilled;
+
+
+    ereturnLoginButton.disabled =
+        !isReady;
+
+
+    ereturnLoginHint.textContent =
+        isReady
+            ? "READY TO LOGIN"
+            : "CLICK TIN NUMBER AND PASSWORD TO FILL";
+
+}
+
+
+function showEreturnLogin() {
 
     scene7Step =
         "login";
 
 
-    scene7.classList.add(
-        "login-ready"
+    scene7.classList.remove(
+        "dashboard-visible",
+        "documents-ready",
+        "calculation-visible",
+        "submit-ready"
     );
 
 
-    ereturnTin.disabled =
-        false;
+    ereturnLoginPanel.style.display =
+        "";
 
-    ereturnPassword.disabled =
-        false;
-
-    ereturnLoginButton.disabled =
-        false;
-
-
-    ereturnLoginHint.textContent =
-        "ENTER TIN AND PASSWORD";
+    ereturnDashboard.style.display =
+        "";
 
 }
+
+
+/* ============================================================
+   CLICK-TO-FILL LOGIN FIELDS
+   ============================================================ */
+
+ereturnTin.addEventListener(
+    "click",
+    () => {
+
+        if (
+            scene7Step !== "login" ||
+            ereturnTinFilled
+        ) {
+
+            return;
+
+        }
+
+
+        ereturnTin.value =
+            createRandomTinNumber();
+
+        ereturnTinFilled = true;
+
+        updateEreturnLoginState();
+
+    }
+);
+
+
+ereturnPassword.addEventListener(
+    "click",
+    () => {
+
+        if (
+            scene7Step !== "login" ||
+            ereturnPasswordFilled
+        ) {
+
+            return;
+
+        }
+
+
+        ereturnPassword.value =
+            "password";
+
+        ereturnPasswordFilled = true;
+
+        updateEreturnLoginState();
+
+    }
+);
+
+
+/* ============================================================
+   INTERNAL BACK BUTTON
+   ============================================================ */
+
+scene7BackButton.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
+
+
+        if (
+            scene7Step === "calculation" ||
+            scene7Step === "submit"
+        ) {
+
+            calculationRevealTimers.forEach(
+                (timer) => clearTimeout(timer)
+            );
+
+            calculationRevealTimers = [];
+
+            scene7Step = "documents";
+
+            scene7.classList.remove(
+                "calculation-visible",
+                "submit-ready"
+            );
+
+            scene7.classList.add(
+                "documents-ready"
+            );
+
+            ereturnCalculationLines.textContent = "";
+            ereturnActionButton.textContent = "Calculate Return";
+
+            return;
+
+        }
+
+
+        if (
+            scene7Step === "documents"
+        ) {
+
+            showEreturnLogin();
+
+            return;
+
+        }
+
+
+        if (
+            scene7Step === "login" &&
+            (ereturnTinFilled || ereturnPasswordFilled)
+        ) {
+
+            ereturnTin.value = "";
+            ereturnPassword.value = "";
+            ereturnTinFilled = false;
+            ereturnPasswordFilled = false;
+
+            updateEreturnLoginState();
+
+        }
+
+    }
+);
 
 
 /* ============================================================
@@ -574,6 +790,13 @@ function openScene8() {
     scene7.classList.remove(
         "active"
     );
+
+
+    scene7BackgroundVideo.pause();
+
+    ereturnAudio.pause();
+
+    hideEreturnAudioStatus();
 
 
     scene8.classList.add(

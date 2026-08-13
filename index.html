@@ -121,7 +121,7 @@
 
     <link
         rel="stylesheet"
-        href="css/scene-7.css"
+        href="css/scene-7.css?v=2"
     >
     
 </head>
@@ -923,8 +923,19 @@
 
         <!-- BACKGROUND -->
 
-        <div
+        <video
+            id="scene-7-background"
             class="scene-7-background"
+            src="assets/backgrounds/ereturn-motion-bg.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+        ></video>
+
+        <div
+            class="scene-7-background-overlay"
+            aria-hidden="true"
         ></div>
 
 
@@ -951,8 +962,10 @@
                     id="ereturn-tin"
                     class="ereturn-input"
                     type="text"
-                    placeholder="TIN"
-                    disabled
+                    inputmode="numeric"
+                    maxlength="14"
+                    placeholder="TIN Number"
+                    readonly
                 >
 
                 <input
@@ -960,7 +973,7 @@
                     class="ereturn-input"
                     type="password"
                     placeholder="Password"
-                    disabled
+                    readonly
                 >
 
                 <button
@@ -976,7 +989,7 @@
                     id="ereturn-login-hint"
                     class="ereturn-login-hint"
                 >
-                    LISTENING TO eRETURN GUIDE
+                    CLICK TIN NUMBER AND PASSWORD TO FILL
                 </div>
 
             </div>
@@ -1068,6 +1081,28 @@
 
             </div>
 
+
+            <!-- AUDIO STATUS -->
+
+            <div
+                id="ereturn-audio-status"
+                class="ereturn-audio-status"
+                aria-live="polite"
+            >
+                🔊 eReturn guideline playing...
+            </div>
+
+
+            <!-- SCENE 7 INTERNAL BACK BUTTON -->
+
+            <button
+                id="scene-7-back"
+                class="scene-7-back"
+                type="button"
+            >
+                BACK
+            </button>
+
         </div>
 
     </div>
@@ -1097,7 +1132,7 @@
 
     <script src="js/scene-6.js?v=2"></script>
 
-    <script src="js/scene-7.js"></script>
+    <script src="js/scene-7.js?v=2"></script>
 </body>
 
 </html>
