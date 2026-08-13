@@ -218,7 +218,6 @@ function openScene7() {
 
 }
 
-
 /* ============================================================
    RESET SCENE 7
    ============================================================ */
@@ -755,56 +754,5 @@ function showTaxCalculation() {
 
         }
     );
-
-}
-
-
-/* ============================================================
-   OPEN SCENE 8
-   ============================================================ */
-
-function openScene8() {
-
-    console.log(
-        "Moving to Scene 8."
-    );
-
-
-    const scene8 =
-        document.getElementById(
-            "scene-8"
-        );
-
-
-    if (!scene8) {
-
-        console.log(
-            "Scene 8 is not available yet."
-        );
-
-        return;
-
-    }
-
-
-    scene7.classList.remove(
-        "active"
-    );
-
-
-    scene7BackgroundVideo.pause();
-
-    ereturnAudio.pause();
-
-    hideEreturnAudioStatus();
-
-
-    scene8.classList.add(
-        "active"
-    );
-
-
-    gameState.currentScene =
-        "scene-8";
 
 }
