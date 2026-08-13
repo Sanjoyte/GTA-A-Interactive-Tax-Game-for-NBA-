@@ -64,14 +64,9 @@
     width: 100%;
     height: 100%;
 
-    background-image:
-        url("../assets/backgrounds/service-selection-bg.png");
+    object-fit: cover;
 
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
+    pointer-events: none;
 
     z-index: 0;
 
@@ -162,18 +157,15 @@
 .service-title {
 
     margin-top:
-        0.35rem;
+        12rem;
 
-    font-family:
-        "Arial Narrow",
-        "Segoe UI",
-        Arial,
-        sans-serif;
+    font-family: 'Orbitron';
+
 
     font-size:
         clamp(
             1.4rem,
-            2.5vw,
+            5vw,
             3rem
         );
 
@@ -787,7 +779,7 @@
         0.1em;
 
     text-transform:
-        uppercase;
+        none;
 
     color:
         #d7fbff;
@@ -840,6 +832,43 @@
 
     text-transform:
         uppercase;
+
+    animation:
+        scene3ContinuePulse
+        1.1s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes scene3ContinuePulse {
+
+    0%,
+    100% {
+        color:
+            rgba(
+                190,
+                235,
+                245,
+                0.62
+            );
+
+        text-shadow:
+            0 0 0.25rem
+            rgba(90, 230, 255, 0.25);
+    }
+
+    50% {
+        color: #ffffff;
+
+        text-shadow:
+            0 0 0.75rem
+            rgba(110, 235, 255, 0.95),
+
+            0 0 1.35rem
+            rgba(50, 180, 255, 0.65);
+    }
 
 }
 

@@ -105,7 +105,7 @@
         );
 
     color: #ffffff;
-
+    animation: eauditContinuePulse 1.15s steps(2, start) infinite;
     font-family:
         "Press Start 2P",
         monospace;
@@ -259,11 +259,8 @@
 
 .welcome-kicker {
 
-    font-family:
-        "Cy Grotesk V3",
-        "Cy Grotesk",
-        "Arial Narrow",
-        sans-serif;
+    /* Declare the custom font family */
+    font-family: 'Orbitron', sans-serif;
 
     font-size:
         clamp(

@@ -34,14 +34,9 @@
     width: 100%;
     height: 100%;
 
-    background-image:
-        url("../assets/backgrounds/character-selection-bg.png");
+    object-fit: cover;
 
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
+    pointer-events: none;
 
     z-index: 0;
 

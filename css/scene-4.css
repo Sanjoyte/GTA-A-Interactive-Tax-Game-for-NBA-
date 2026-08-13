@@ -428,7 +428,7 @@
         "Cy Grotesk",
         "Arial Narrow",
         sans-serif;
-    font-size: clamp(1.35rem, 2.85vw, 3.2rem);
+    font-size: clamp(1.25rem, 2vw, 3.2rem);
     font-weight: 700;
     line-height: 1.3;
     text-align: center;

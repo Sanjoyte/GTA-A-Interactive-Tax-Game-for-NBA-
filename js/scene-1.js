@@ -19,6 +19,12 @@ const scene1Video =
     );
 
 
+const scene1Skip =
+    document.getElementById(
+        "scene-1-skip"
+    );
+
+
 /* ============================================================
    OPEN SCENE 1
    ============================================================ */
@@ -89,6 +95,28 @@ scene1Video.addEventListener(
 
         console.log(
             "Opening video finished."
+        );
+
+        openScene2();
+
+    }
+);
+
+
+/* ============================================================
+   SKIP OPENING VIDEO
+   ============================================================ */
+
+scene1Skip.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
+
+        scene1Video.pause();
+
+        console.log(
+            "Opening video skipped."
         );
 
         openScene2();

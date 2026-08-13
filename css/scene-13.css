@@ -146,8 +146,8 @@
     transform: translateX(-50%);
     width: 78%;
     color: #f4dcff;
-    font-family: "Press Start 2P", monospace;
-    font-size: clamp(0.7rem, 1.1vw, 1.25rem);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(1.6rem, 1.1vw, 1.25rem);
     line-height: 1.5;
     text-align: center;
     text-shadow:
@@ -158,13 +158,13 @@
 .eaudit-case-grid {
     position: absolute;
     left: 50%;
-    top: 54%;
+    top: 47.5%;
     transform: translate(-50%, -50%);
-    width: 92%;
-    height: 58%;
+    width: 91%;
+    height: 52%;
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 1.1%;
+    gap: 1.45%;
     perspective: 1400px;
 }
 
@@ -309,14 +309,14 @@
    ============================================================ */
 
 .scene-13.card-revealing .eaudit-case:not(.focused) {
-    transform: scale(0.86);
+    transform: scale(0.82);
     filter: grayscale(0.72) brightness(0.52);
     opacity: 0.7;
     pointer-events: none;
 }
 
 .scene-13.card-revealing .eaudit-case.focused {
-    transform: scale(1.18);
+    transform: scale(1.1);
     z-index: 30;
     pointer-events: none;
 }
@@ -375,7 +375,7 @@
 .scene-13-back {
     position: absolute;
     right: 4%;
-    bottom: 6%;
+    bottom: 14%;
     z-index: 50;
     min-width: clamp(7.5rem, 11vw, 11.5rem);
     padding:
@@ -403,6 +403,7 @@
         inset 0 0.12rem 0 rgba(247, 229, 255, 0.28);
     cursor: pointer;
     opacity: 1;
+    animation: eauditContinuePulse 1.15s steps(2, start) infinite;
     transition:
         transform 0.2s ease,
         filter 0.2s ease,
@@ -425,8 +426,9 @@
 
 @media (max-width: 900px) {
     .eaudit-case-grid {
-        width: 96%;
-        gap: 0.55%;
+        width: 90%;
+        height: 50%;
+        gap: 0.8%;
     }
 
     .eaudit-case-risk {

@@ -72,11 +72,11 @@ etinAudio.preload = "auto";
    ============================================================ */
 
 const ETIN_USER_ID_VALUE =
-    "tariquerahman";
+    "user1234";
 
 
 const ETIN_PASSWORD_VALUE =
-    "****";
+    "********";
 
 
 let scene4Step = 1;
