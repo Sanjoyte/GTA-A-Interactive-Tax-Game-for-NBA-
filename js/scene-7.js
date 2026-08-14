@@ -55,6 +55,12 @@ const scene7BackButton =
     );
 
 
+const scene7WelcomeClickLayer =
+    document.getElementById(
+        "scene-7-welcome-click-layer"
+    );
+
+
 const ereturnDashboard =
     document.getElementById(
         "ereturn-dashboard"
@@ -220,7 +226,7 @@ const selectedReturnDocuments =
 
 
 let scene7Step =
-    "login";
+    "welcome";
 
 
 let ereturnTinFilled = false;
@@ -491,7 +497,7 @@ function resetScene7() {
     ereturnSummarySession += 1;
 
     scene7Step =
-        "login";
+        "welcome";
 
 
     hideEreturnAudioStatus();
@@ -506,6 +512,11 @@ function resetScene7() {
         "login-ready",
         "dashboard-visible",
         "submit-ready"
+    );
+
+
+    scene7.classList.add(
+        "welcome-visible"
     );
 
 
@@ -594,6 +605,18 @@ function hideEreturnAudioStatus() {
     ereturnAudioStatus.classList.remove(
         "is-visible"
     );
+
+}
+
+
+function stopEreturnAudio() {
+
+    ereturnAudio.pause();
+
+    ereturnAudio.currentTime =
+        0;
+
+    hideEreturnAudioStatus();
 
 }
 
@@ -697,6 +720,11 @@ function showEreturnLogin() {
 
 
     scene7.classList.remove(
+        "welcome-visible"
+    );
+
+
+    scene7.classList.remove(
         "dashboard-visible",
         "submit-ready"
     );
@@ -709,6 +737,29 @@ function showEreturnLogin() {
         "";
 
 }
+
+
+/* ============================================================
+   WELCOME — CLICK TO CONTINUE
+   ============================================================ */
+
+scene7WelcomeClickLayer.addEventListener(
+    "click",
+    () => {
+
+        if (scene7Step !== "welcome") {
+
+            return;
+
+        }
+
+
+        stopEreturnAudio();
+
+        showEreturnLogin();
+
+    }
+);
 
 
 function undoLastEreturnPageSelection() {

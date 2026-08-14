@@ -121,7 +121,7 @@
 
     <link
         rel="stylesheet"
-        href="css/scene-7.css?v=6"
+        href="css/scene-7.css?v=8"
     >
 
 
@@ -131,7 +131,7 @@
 
     <link
         rel="stylesheet"
-        href="css/scene-8.css?v=2"
+        href="css/scene-8.css?v=3"
     >
 
 
@@ -1167,12 +1167,48 @@
             aria-hidden="true"
         ></div>
 
+        <div
+            id="scene-7-progress"
+            class="etin-progress scene-7-progress"
+            role="progressbar"
+            aria-label="Journey progress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="25"
+        >
+            <div class="etin-progress-dial">
+                <span class="etin-progress-tick tick-1"></span>
+                <span class="etin-progress-tick tick-2"></span>
+                <span class="etin-progress-tick tick-3"></span>
+                <span class="etin-progress-tick tick-4"></span>
+                <span class="etin-progress-tick tick-5"></span>
+                <span class="etin-progress-needle"></span>
+                <span class="etin-progress-hub"></span>
+                <span class="etin-progress-value">25%</span>
+            </div>
+        </div>
+
 
         <!-- CONTENT -->
 
         <div
             class="scene-7-content"
         >
+
+            <!-- eRETURN WELCOME -->
+
+            <div
+                id="ereturn-welcome-message"
+                class="ereturn-welcome-message"
+            >
+                <div class="ereturn-welcome-title">
+                    WELCOME TO eRETURN PORTAL
+                </div>
+
+                <div class="ereturn-welcome-continue">
+                    CLICK TO CONTINUE
+                </div>
+            </div>
 
             <!-- LOGIN -->
 
@@ -1307,6 +1343,14 @@
                 BACK
             </button>
 
+
+            <!-- WELCOME CLICK LAYER -->
+
+            <div
+                id="scene-7-welcome-click-layer"
+                class="scene-7-welcome-click-layer"
+            ></div>
+
         </div>
 
     </div>
@@ -1335,6 +1379,27 @@
             preload="auto"
             playsinline
         ></video>
+
+        <div
+            id="scene-8-progress"
+            class="etin-progress scene-8-progress"
+            role="progressbar"
+            aria-label="Journey progress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="50"
+        >
+            <div class="etin-progress-dial">
+                <span class="etin-progress-tick tick-1"></span>
+                <span class="etin-progress-tick tick-2"></span>
+                <span class="etin-progress-tick tick-3"></span>
+                <span class="etin-progress-tick tick-4"></span>
+                <span class="etin-progress-tick tick-5"></span>
+                <span class="etin-progress-needle"></span>
+                <span class="etin-progress-hub"></span>
+                <span class="etin-progress-value">50%</span>
+            </div>
+        </div>
 
 
         <button
@@ -1909,7 +1974,7 @@
 
     <script src="js/scene-6.js?v=3"></script>
 
-    <script src="js/scene-7.js?v=4"></script>
+    <script src="js/scene-7.js?v=5"></script>
 
     <script src="js/scene-8.js?v=2"></script>
 

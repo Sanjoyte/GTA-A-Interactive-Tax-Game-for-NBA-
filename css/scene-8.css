@@ -38,6 +38,11 @@
     z-index: 1;
 }
 
+.scene-8-progress {
+    --progress-angle: -90deg;
+    z-index: 11;
+}
+
 
 /* Scene 7's opaque button design is shared through .scene-7-back. */
 .scene-8-skip {
