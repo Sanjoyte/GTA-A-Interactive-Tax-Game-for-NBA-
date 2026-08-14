@@ -77,6 +77,13 @@ function openScene2() {
     );
 
 
+    if (typeof startJourneyLoopAudio === "function") {
+
+        startJourneyLoopAudio();
+
+    }
+
+
     document
         .querySelectorAll(".scene")
         .forEach(

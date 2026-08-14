@@ -91,6 +91,10 @@ scene15Video.addEventListener("ended", () => {
     scene15PauseMonitor = null;
     scene15.classList.remove("awaiting-resume");
     scene15.classList.add("video-finished");
+
+    if (typeof stopJourneyLoopAudio === "function") {
+        stopJourneyLoopAudio();
+    }
 });
 
 

@@ -36,6 +36,13 @@ function openScene1() {
     );
 
 
+    if (typeof stopScene0LoopAudio === "function") {
+
+        stopScene0LoopAudio();
+
+    }
+
+
     document
         .querySelectorAll(".scene")
         .forEach(
