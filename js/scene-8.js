@@ -15,14 +15,31 @@ const scene8Video =
     );
 
 
-const scene8Next =
+const scene8Skip =
     document.getElementById(
-        "scene-8-next"
+        "scene-8-skip"
     );
 
 
-let scene8VideoFinished = false;
-let scene8NextPressed = false;
+let scene8TransitionStarted = false;
+
+
+function completeScene8() {
+
+    if (
+        scene8TransitionStarted ||
+        !scene8.classList.contains("active")
+    ) {
+
+        return;
+
+    }
+
+    scene8TransitionStarted = true;
+    scene8Video.pause();
+    openScene9();
+
+}
 
 
 /* ============================================================
@@ -85,14 +102,7 @@ function openScene8() {
         "scene-8";
 
 
-    scene8VideoFinished = false;
-    scene8NextPressed = false;
-
-    scene8Next.disabled = true;
-
-    scene8Next.classList.add(
-        "disabled"
-    );
+    scene8TransitionStarted = false;
 
 
     scene8Video.currentTime = 0;
@@ -135,50 +145,28 @@ scene8Video.addEventListener(
         );
 
 
-        scene8VideoFinished = true;
-
-        scene8Next.disabled = false;
-
-        scene8Next.classList.remove(
-            "disabled"
-        );
+        completeScene8();
 
     }
 );
 
 
 /* ============================================================
-   NEXT BUTTON
+   SKIP BUTTON
    ============================================================ */
 
-scene8Next.addEventListener(
+scene8Skip.addEventListener(
     "click",
-    () => {
+    (event) => {
 
-        if (
-            !scene8VideoFinished ||
-            scene8NextPressed
-        ) {
-
-            return;
-
-        }
-
-
-        scene8NextPressed = true;
-        scene8Next.disabled = true;
-
-        scene8Next.classList.add(
-            "disabled"
-        );
+        event.stopPropagation();
 
 
         console.log(
-            "Scene 8 NEXT clicked."
+            "Scene 8 SKIP clicked."
         );
 
-
-        openScene9();
+        completeScene8();
 
     }
 );
