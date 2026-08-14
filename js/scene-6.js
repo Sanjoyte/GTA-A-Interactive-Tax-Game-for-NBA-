@@ -56,9 +56,21 @@ const scene6BackgroundVideo =
 
 
 const scene6BackButton =
-    document.getElementById(
-        "scene-6-back"
-    );
+document.getElementById(
+    "scene-6-back"
+);
+
+
+const scene6Progress =
+document.getElementById(
+    "scene-6-progress"
+);
+
+
+const scene6ProgressValue =
+document.getElementById(
+    "scene-6-progress-value"
+);
 
 
 /* ============================================================
@@ -74,6 +86,30 @@ const scene6BackButton =
 */
 
 let scene6Step = 0;
+
+
+function setScene6Progress(value) {
+
+    const safeValue =
+        Math.max(0, Math.min(100, value));
+
+    const angle =
+        -180 + (safeValue * 1.8);
+
+    scene6Progress.style.setProperty(
+        "--progress-angle",
+        `${angle}deg`
+    );
+
+    scene6Progress.setAttribute(
+        "aria-valuenow",
+        String(safeValue)
+    );
+
+    scene6ProgressValue.textContent =
+        `${safeValue}%`;
+
+}
 
 
 /* ============================================================
@@ -97,6 +133,8 @@ function resetScene6Question() {
     scene6.classList.remove(
         "message-active"
     );
+
+    setScene6Progress(0);
 
 }
 
@@ -233,6 +271,9 @@ scene6Yes.addEventListener(
 
         scene6ResponseText.textContent =
             "PROCEEDING TO eRETURN";
+
+
+        setScene6Progress(25);
 
 
         scene6Response.classList.add(

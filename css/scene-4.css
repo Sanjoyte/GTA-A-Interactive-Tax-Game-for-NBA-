@@ -132,13 +132,13 @@
    ============================================================ */
 
 .etin-login {
+    display: none;
     position: absolute;
     left: 50%;
     top: 51%;
     transform: translate(-50%, -50%);
     width: min(38%, 35rem);
     padding: clamp(1.6rem, 2.7vw, 3rem);
-    display: flex;
     flex-direction: column;
     gap: clamp(0.85rem, 1.5vh, 1.3rem);
     align-items: center;
@@ -159,6 +159,11 @@
     text-align: center;
     z-index: 10;
     pointer-events: auto;
+}
+
+.scene-4.login-visible
+#etin-login {
+    display: flex;
 }
 
 .etin-login-title {
@@ -267,6 +272,151 @@
     filter: saturate(0.45);
 }
 
+
+/* ============================================================
+   NEW eTIN REGISTRATION
+   ============================================================ */
+
+.etin-registration {
+    width: min(67%, 67rem);
+    top: 50%;
+    padding:
+        clamp(1.35rem, 2.1vw, 2.35rem)
+        clamp(1.6rem, 2.6vw, 3rem);
+    gap: clamp(0.7rem, 1.2vh, 1.05rem);
+}
+
+.scene-4.registration-visible
+.etin-registration {
+    display: flex;
+}
+
+.etin-registration-title {
+    margin-bottom: clamp(0.45rem, 1vh, 0.8rem);
+    font-size: clamp(0.9rem, 1.45vw, 1.55rem);
+}
+
+.etin-registration-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(1.15rem, 2.4vw, 2.7rem);
+    row-gap: clamp(0.55rem, 1vh, 0.9rem);
+}
+
+.etin-registration-input {
+    height: clamp(2.7rem, 5vh, 4.1rem);
+    font-size: clamp(0.78rem, 1.08vw, 1.18rem);
+}
+
+
+/* ============================================================
+   RPM-STYLE PORTAL PROGRESS
+   ============================================================ */
+
+.etin-progress {
+    --progress-angle: -180deg;
+    position: absolute;
+    left: clamp(1rem, 2.7vw, 3rem);
+    top: clamp(1rem, 3.2vh, 2.5rem);
+    width: clamp(8.2rem, 13vw, 13.5rem);
+    z-index: 25;
+    color: #d8ffe9;
+    font-family: "Orbitron", sans-serif;
+    text-align: center;
+    pointer-events: none;
+    filter: drop-shadow(0 0 0.7rem rgba(79, 255, 166, 0.28));
+}
+
+.etin-progress-dial {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.75 / 1;
+    overflow: hidden;
+    border: 0.12rem solid rgba(146, 232, 189, 0.78);
+    border-bottom: 0;
+    border-radius: 50% 50% 0 0 / 92% 92% 0 0;
+    background:
+        radial-gradient(circle at 50% 100%, transparent 0 12%, #071c16 13% 18%, transparent 19%),
+        conic-gradient(
+            from 245deg at 50% 100%,
+            #35d47e 0deg 52deg,
+            #b8e94e 52deg 91deg,
+            #ffd24b 91deg 139deg,
+            #ff6b4a 139deg 230deg,
+            transparent 230deg 360deg
+        );
+    box-shadow:
+        inset 0 0 1.4rem rgba(74, 222, 128, 0.28),
+        0 0 1rem rgba(74, 222, 128, 0.24);
+}
+
+.etin-progress-dial::after {
+    content: "";
+    position: absolute;
+    inset: 0.45rem;
+    border-radius: inherit;
+    background: radial-gradient(circle at 50% 100%, #102f24 0 18%, #071c16 19% 68%, transparent 69%);
+}
+
+.etin-progress-needle {
+    position: absolute;
+    left: 50%;
+    bottom: 0.55rem;
+    width: 39%;
+    height: 0.16rem;
+    z-index: 4;
+    border-radius: 999px;
+    background: #ffffff;
+    box-shadow: 0 0 0.5rem #6fffd4;
+    transform-origin: left center;
+    transform: rotate(var(--progress-angle));
+    transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.25, 1.2);
+}
+
+.etin-progress-hub {
+    position: absolute;
+    left: 50%;
+    bottom: 0.18rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    z-index: 5;
+    transform: translateX(-50%);
+    border: 0.12rem solid #bfffe0;
+    border-radius: 50%;
+    background: #176344;
+    box-shadow: 0 0 0.6rem #56eea0;
+}
+
+.etin-progress-value {
+    position: absolute;
+    left: 50%;
+    bottom: 16%;
+    z-index: 6;
+    transform: translateX(-50%);
+    color: #e8fff3;
+    font-size: clamp(0.55rem, 0.78vw, 0.82rem);
+    font-weight: 800;
+    text-shadow: 0 0 0.45rem #48dd91;
+}
+
+.etin-progress-tick {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 42%;
+    height: 0.12rem;
+    z-index: 3;
+    transform-origin: left center;
+    background: linear-gradient(90deg, transparent 0 82%, #dfffee 83% 100%);
+}
+
+.tick-1 { transform: rotate(-180deg); }
+.tick-2 { transform: rotate(-135deg); }
+.tick-3 { transform: rotate(-90deg); }
+.tick-4 { transform: rotate(-45deg); }
+.tick-5 { transform: rotate(0deg); }
+
 /* ============================================================
    AUDIO STATUS
    ============================================================ */
@@ -333,6 +483,15 @@
     pointer-events: none;
 }
 
+.etin-welcome-message {
+    display: none;
+}
+
+.scene-4.welcome-visible
+.etin-welcome-message {
+    display: block;
+}
+
 .etin-certificate-continue {
     margin-top: clamp(1rem, 2vh, 1.6rem);
     color: rgba(194, 255, 222, 0.82);
@@ -390,7 +549,7 @@
 }
 
 .scene-4.certificate-visible
-.etin-certificate-message {
+#etin-certificate-message {
     display: block;
 }
 
@@ -413,5 +572,21 @@
         width: min(88vw, 34rem);
         padding: 1.8rem 1.2rem;
         font-size: clamp(0.78rem, 3.6vw, 1.35rem);
+    }
+
+    .etin-registration {
+        width: min(84vw, 35rem);
+        max-height: 82vh;
+        overflow-y: auto;
+        padding: 1.25rem;
+    }
+
+    .etin-registration-grid {
+        grid-template-columns: 1fr;
+        row-gap: 0.4rem;
+    }
+
+    .etin-progress {
+        width: clamp(6.5rem, 24vw, 8.5rem);
     }
 }
