@@ -9,53 +9,48 @@ const eauditMessageText = document.getElementById("eaudit-message-text");
 const eauditMessageContinue = document.getElementById("eaudit-message-continue");
 const eauditInstruction = document.getElementById("eaudit-instruction");
 const eauditCaseGrid = document.getElementById("eaudit-case-grid");
-const eauditSelectionContinue = document.getElementById("eaudit-selection-continue");
+const eauditSelectionSubmit = document.getElementById("eaudit-selection-submit");
 
 const eauditCaseData = [
     {
         number: 1,
-        title: "Turnover Increased, Reported Income Decreased",
+        title: "Material Turnover–Income Variance",
         level: "High",
         percentage: 92,
-        reasonLabel: "Why selected",
-        reason: "Third-party data indicates that sales have increased nearly threefold, yet the income declared in the return is lower than the previous year.",
-        tags: "Data Inconsistency | High Risk Score"
+        reason: "Third-party information indicates an approximately threefold increase in sales, while declared income is lower than in the preceding assessment year.",
+        indicators: "Third-Party Data Variance | Material Income Discrepancy"
     },
     {
         number: 2,
-        title: "Complete Data Consistency",
+        title: "Reconciled Source Data and Consistent Disclosures",
         level: "Low",
         percentage: 14,
-        reasonLabel: "Why not selected",
-        reason: "Tax deducted at source fully reconciles with eTDS data. Growth in assets and income is consistent and proportionate.",
-        tags: "Full Reconciliation | Low Risk Score"
+        reason: "Tax deducted at source is fully reconciled with eTDS records, and the reported growth in assets is proportionate to declared income.",
+        indicators: "Full Data Reconciliation | Consistent Financial Profile"
     },
     {
         number: 3,
-        title: "Large Refund Claim",
+        title: "Material Refund Claim with Incomplete Evidence",
         level: "High",
         percentage: 87,
-        reasonLabel: "Why selected",
-        reason: "A substantial refund has been claimed, but the supporting documents are incomplete or inadequate.",
-        tags: "Refund Risk | Documentary Deficiency"
+        reason: "A material refund has been claimed; however, the supporting documentation is incomplete and does not sufficiently substantiate the claim.",
+        indicators: "Refund Exposure | Supporting-Evidence Deficiency"
     },
     {
         number: 4,
-        title: "Small Business – Consistent Filing History",
+        title: "Consistent Filing and Transaction Profile",
         level: "Low",
         percentage: 11,
-        reasonLabel: "Why not selected",
-        reason: "The taxpayer has filed returns regularly for several consecutive years. Transaction patterns show no unusual or abnormal activity.",
-        tags: "Consistent Compliance | Low Risk Score"
+        reason: "Returns have been filed consistently over successive assessment years, with no material anomalies identified in the reported transaction pattern.",
+        indicators: "Sustained Filing Compliance | No Material Anomaly"
     },
     {
         number: 5,
-        title: "Tax Official’s Own File",
+        title: "System-Identified Multi-Parameter Risk Exposure",
         level: "High",
         percentage: 81,
-        reasonLabel: "Why selected",
-        reason: "The system has no knowledge of the identity of the taxpayer. Selection is driven purely by risk factors. This file triggered two risk parameters.",
-        tags: "Impartial / System-Driven Selection | Risk Factor Hit × 2"
+        reason: "The automated assessment is identity-neutral. This return has been flagged solely because two independent risk parameters exceeded their thresholds.",
+        indicators: "System-Driven Assessment | Two Risk Parameters Triggered"
     }
 ];
 
@@ -72,7 +67,8 @@ const selectedAuditCases = new Set();
 
 
 function getRiskColor(percentage) {
-    const hue = Math.max(2, Math.round(34 - percentage * 0.32));
+    const normalizedRisk = Math.max(0, Math.min(1, percentage / 100));
+    const hue = Math.round(34 - normalizedRisk * 32);
     return `hsl(${hue} 82% 42%)`;
 }
 
@@ -110,29 +106,51 @@ function buildEauditCards() {
 
         const caseLabel = document.createElement("span");
         caseLabel.className = "eaudit-risk-case-label";
-        caseLabel.textContent = `Case ${caseData.number}`;
+        caseLabel.textContent = `Automated Risk Assessment • Case ${caseData.number}`;
 
         const title = document.createElement("span");
         title.className = "eaudit-risk-title";
         title.textContent = caseData.title;
 
+        const metrics = document.createElement("span");
+        metrics.className = "eaudit-risk-metrics";
+
         const level = document.createElement("span");
-        level.className = "eaudit-risk-level";
-        level.textContent = `Risk Level: ${caseData.level}`;
+        level.className = "eaudit-risk-level eaudit-risk-metric";
+
+        const levelLabel = document.createElement("span");
+        levelLabel.className = "eaudit-risk-metric-label";
+        levelLabel.textContent = "Risk Level";
+
+        const levelValue = document.createElement("span");
+        levelValue.className = "eaudit-risk-metric-value";
+        levelValue.textContent = caseData.level;
+
+        level.append(levelLabel, levelValue);
 
         const percentage = document.createElement("span");
-        percentage.className = "eaudit-risk-percentage";
-        percentage.textContent = `Risk Percentage: ${caseData.percentage}%`;
+        percentage.className = "eaudit-risk-percentage eaudit-risk-metric";
+
+        const percentageLabel = document.createElement("span");
+        percentageLabel.className = "eaudit-risk-metric-label";
+        percentageLabel.textContent = "Risk Percentage";
+
+        const percentageValue = document.createElement("span");
+        percentageValue.className = "eaudit-risk-metric-value eaudit-risk-percentage-value";
+        percentageValue.textContent = `${caseData.percentage}%`;
+
+        percentage.append(percentageLabel, percentageValue);
+        metrics.append(level, percentage);
 
         const reason = document.createElement("span");
         reason.className = "eaudit-risk-reason";
-        reason.textContent = `${caseData.reasonLabel}: ${caseData.reason}`;
+        reason.textContent = `Assessment Basis: ${caseData.reason}`;
 
         const tags = document.createElement("span");
         tags.className = "eaudit-risk-tags";
-        tags.textContent = `Tags: ${caseData.tags}`;
+        tags.textContent = `Risk Indicators: ${caseData.indicators}`;
 
-        risk.append(caseLabel, title, level, percentage, reason, tags);
+        risk.append(caseLabel, title, metrics, reason, tags);
         inner.append(front, risk);
         card.append(inner);
 
@@ -188,7 +206,7 @@ function showEauditInvitation() {
 function showEauditCases() {
     scene13Step = "revealing";
     scene13.classList.add("cases-visible");
-    eauditInstruction.textContent = "SELECT A CASE TO REVEAL ITS RISK FACTORS";
+    eauditInstruction.textContent = "SELECT A CASE TO REVIEW ITS AUTOMATED RISK ASSESSMENT";
     resetEauditCards();
 }
 
@@ -201,7 +219,9 @@ function finishEauditCaseReveal(index) {
     const card = eauditCaseGrid.querySelector(`[data-case-index="${index}"]`);
     card.classList.remove("focused");
     card.classList.add("settled");
-    card.setAttribute("aria-label", `Case ${index + 1} risk factors revealed`);
+    card.setAttribute("aria-label", `Case ${index + 1} risk assessment revealed`);
+
+    eauditCaseAudios[index].onended = null;
 
     activeCaseIndex = null;
     revealedCaseCount += 1;
@@ -209,8 +229,24 @@ function finishEauditCaseReveal(index) {
 
     if (revealedCaseCount === eauditCaseData.length) {
         scene13Step = "selecting";
-        eauditInstruction.textContent = "SELECT ANY 2 FILES FOR AUDIT";
+        eauditInstruction.textContent = "SELECT 2 TO 5 FILES FOR AUDIT";
+        eauditCaseGrid.querySelectorAll(".eaudit-case").forEach((caseCard) => {
+            caseCard.setAttribute("aria-pressed", "false");
+        });
+    } else {
+        eauditInstruction.textContent = "SELECT ANOTHER CASE TO REVIEW ITS RISK ASSESSMENT";
     }
+}
+
+
+function closeActiveEauditCaseReveal() {
+    if (activeCaseIndex === null) {
+        return;
+    }
+
+    const closingCaseIndex = activeCaseIndex;
+    stopEauditCaseAudio();
+    finishEauditCaseReveal(closingCaseIndex);
 }
 
 
@@ -228,6 +264,7 @@ function revealEauditCase(index) {
     activeCaseIndex = index;
     card.classList.add("revealed", "focused");
     scene13.classList.add("card-revealing");
+    eauditInstruction.textContent = `CASE ${index + 1} RISK ASSESSMENT — CLICK ANYWHERE TO CLOSE`;
 
     const audio = eauditCaseAudios[index];
     audio.currentTime = 0;
@@ -246,15 +283,17 @@ function toggleEauditCaseSelection(index) {
     if (selectedAuditCases.has(index)) {
         selectedAuditCases.delete(index);
         card.classList.remove("audit-selected");
+        card.setAttribute("aria-pressed", "false");
     } else {
         selectedAuditCases.add(index);
         card.classList.add("audit-selected");
+        card.setAttribute("aria-pressed", "true");
     }
 
     scene13.classList.toggle("selection-ready", selectedAuditCases.size >= 2);
     eauditInstruction.textContent = selectedAuditCases.size >= 2
-        ? `${selectedAuditCases.size} FILES SELECTED FOR AUDIT`
-        : "SELECT ANY 2 FILES FOR AUDIT";
+        ? `${selectedAuditCases.size} FILES SELECTED — REVIEW AND SUBMIT`
+        : "SELECT 2 TO 5 FILES FOR AUDIT";
 }
 
 
@@ -323,30 +362,22 @@ scene13.addEventListener("click", (event) => {
         return;
     }
 
-    if (scene13Step === "fact" || scene13Step === "invitation") {
-        continueEauditMessage();
+    if (scene13Step === "revealing" && activeCaseIndex !== null) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeActiveEauditCaseReveal();
         return;
     }
 
-    if (scene13Step === "selecting" && selectedAuditCases.size >= 2) {
-        continueEauditSelection();
+    if (scene13Step === "fact" || scene13Step === "invitation") {
+        continueEauditMessage();
     }
 }, true);
 
 
-eauditMessageContinue.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        continueEauditMessage();
-    }
-});
-
-
-eauditSelectionContinue.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        continueEauditSelection();
-    }
+eauditSelectionSubmit.addEventListener("click", (event) => {
+    event.stopPropagation();
+    continueEauditSelection();
 });
 
 
@@ -370,9 +401,10 @@ scene13Back.addEventListener("click", (event) => {
         selectedAuditCases.clear();
         eauditCaseGrid.querySelectorAll(".audit-selected").forEach((card) => {
             card.classList.remove("audit-selected");
+            card.setAttribute("aria-pressed", "false");
         });
         scene13.classList.remove("selection-ready");
-        eauditInstruction.textContent = "SELECT ANY 2 FILES FOR AUDIT";
+        eauditInstruction.textContent = "SELECT 2 TO 5 FILES FOR AUDIT";
         return;
     }
 
