@@ -232,7 +232,7 @@ scene6Yes.addEventListener(
         */
 
         scene6ResponseText.textContent =
-            "Proceeding to eReturn";
+            "PROCEEDING TO eRETURN";
 
 
         scene6Response.classList.add(
@@ -306,7 +306,7 @@ scene6No.addEventListener(
         */
 
         scene6ResponseText.textContent =
-            "Sorry, be a good citizen!";
+            "SORRY, BE A GOOD CITIZEN AND SUBMIT YOUR RETURN!";
 
 
         scene6Response.classList.add(

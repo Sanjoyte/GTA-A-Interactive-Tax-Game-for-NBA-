@@ -165,7 +165,7 @@ etdsNo.addEventListener("click", (event) => {
     }
 
     etdsNo.disabled = true;
-    showEtdsMessage("Wrong move!", "USE BACK TO TRY AGAIN", "wrong", false);
+    showEtdsMessage("WRONG MOVE!", "USE BACK TO TRY AGAIN", "wrong", false);
 });
 
 
@@ -203,7 +203,7 @@ etdsLoginButton.addEventListener("click", (event) => {
     }
 
     showEtdsMessage(
-        "10,000 taka was deducted from him in the previous year.",
+        "10,000 TAKA WAS DEDUCTED FROM HIM IN THE PREVIOUS YEAR.",
         "CLICK TO CONTINUE",
         "deduction",
         true

@@ -79,6 +79,38 @@ const ereturnActionButton =
     );
 
 
+const ereturnSummaryRounds = [
+    [
+        "Income from Employment = 11,72,000 BDT",
+        "Income from Rent = 6,00,000 BDT",
+        "Income from Other Sources (Honorarium) = 2,00,000 BDT",
+        "Total Income = 19,72,000"
+    ],
+    [
+        "Personal expense = 3,00,000 BDT",
+        "Accomodation = 4,71,192 BDT",
+        "Education = 75,000 BDT",
+        "Festival expense = 50,000 BDT",
+        "Total = 8,96,192 BDT"
+    ],
+    [
+        "Non-Agri Land = 67,00,000 BDT",
+        "Car = 60,00,000 BDT",
+        "Jewelry = 2,50,000 BDT",
+        "Furniture & Devices = 1,20,000 BDT",
+        "Bank & Cash in Hand = 40,78,000 BDT",
+        "Institutional Liabilities = 3,12,000 BDT",
+        "Net Wealth = BDT 1,68,36,000"
+    ],
+    [
+        "Tax Payable = 2,83,000 BDT",
+        "Rebate = 50,000 BDT",
+        "Tax credit = 10,000 BDT",
+        "Final tax liability = 2,23,000 BDT"
+    ]
+];
+
+
 /* ============================================================
    AUDIO
    ============================================================ */
@@ -121,6 +153,116 @@ let ereturnTypingSession = 0;
 
 
 let ereturnSummarySession = 0;
+
+
+let ereturnSummaryRoundIndex = 0;
+
+
+function getEreturnSummarySource(lineIndex) {
+
+    const sourceCards =
+        Array.from(
+            ereturnDocumentCards
+        );
+
+    const sourceIndex =
+        Math.min(
+            lineIndex,
+            sourceCards.length - 1
+        );
+
+    return sourceCards[sourceIndex]
+        .dataset.document;
+
+}
+
+
+function renderEreturnSummaryRound() {
+
+    const summaryLines =
+        ereturnSummaryRounds[
+            ereturnSummaryRoundIndex
+        ];
+
+    const lineElements =
+        summaryLines.map(
+            (lineText, lineIndex) => {
+
+                const line =
+                    document.createElement(
+                        "div"
+                    );
+
+                line.className =
+                    "ereturn-calculation-line";
+
+                if (
+                    lineIndex === summaryLines.length - 1
+                ) {
+
+                    line.classList.add(
+                        "ereturn-calculation-line--total"
+                    );
+
+                }
+
+                line.dataset.summarySource =
+                    getEreturnSummarySource(
+                        lineIndex
+                    );
+
+                line.textContent =
+                    lineText;
+
+                return line;
+
+            }
+        );
+
+    ereturnCalculationLines.replaceChildren(
+        ...lineElements
+    );
+
+    ereturnCalculationLines.classList.toggle(
+        "ereturn-calculation-lines--dense",
+        summaryLines.length > 5
+    );
+
+    ereturnActionButton.textContent =
+        ereturnSummaryRoundIndex ===
+        ereturnSummaryRounds.length - 1
+            ? "Submit Return"
+            : "Next";
+
+}
+
+
+function resetEreturnSummarySelection() {
+
+    ereturnSummarySession += 1;
+    selectedReturnDocuments.clear();
+
+    ereturnDocumentCards.forEach(
+        (card) => {
+
+            card.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+    scene7Step =
+        "documents";
+
+    scene7.classList.remove(
+        "submit-ready"
+    );
+
+    ereturnActionButton.disabled =
+        true;
+
+}
 
 
 /* ============================================================
@@ -225,6 +367,8 @@ function resetScene7() {
 
     selectedReturnDocuments.clear();
 
+    ereturnSummaryRoundIndex = 0;
+
 
     scene7.classList.remove(
         "login-ready",
@@ -270,23 +414,7 @@ function resetScene7() {
     );
 
 
-    ereturnCalculationLines
-        .querySelectorAll(
-            ".ereturn-calculation-line"
-        )
-        .forEach(
-            (line) => {
-
-                line.classList.remove(
-                    "visible"
-                );
-
-            }
-        );
-
-
-    ereturnActionButton.textContent =
-        "Submit Return";
+    renderEreturnSummaryRound();
 
     ereturnActionButton.disabled =
         true;
@@ -595,7 +723,7 @@ scene7BackButton.addEventListener(
 
         if (
             scene7Step === "documents" ||
-            scene7Step === "submit"
+            scene7Step === "action-ready"
         ) {
 
             if (
@@ -783,7 +911,7 @@ ereturnDocumentCards.forEach(
                         ) {
 
                             scene7Step =
-                                "submit";
+                                "action-ready";
 
                             scene7.classList.add(
                                 "submit-ready"
@@ -813,11 +941,23 @@ ereturnActionButton.addEventListener(
     () => {
 
         if (
-            scene7Step === "submit" &&
+            scene7Step === "action-ready" &&
             !ereturnActionButton.disabled
         ) {
 
-            openScene8();
+            if (
+                ereturnSummaryRoundIndex ===
+                ereturnSummaryRounds.length - 1
+            ) {
+
+                openScene8();
+                return;
+
+            }
+
+            ereturnSummaryRoundIndex += 1;
+            resetEreturnSummarySelection();
+            renderEreturnSummaryRound();
 
         }
 

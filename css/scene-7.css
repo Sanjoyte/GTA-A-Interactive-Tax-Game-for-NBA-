@@ -822,6 +822,17 @@
     margin-top: 8%;
 }
 
+.ereturn-calculation-lines--dense {
+    gap: clamp(0.35rem, 0.75vh, 0.65rem);
+    margin-top: 4%;
+}
+
+.ereturn-calculation-lines--dense .ereturn-calculation-line {
+    padding: clamp(0.4rem, 0.72vh, 0.62rem) 3.5%;
+    font-size: clamp(0.62rem, 0.82vw, 0.9rem);
+    line-height: 1.22;
+}
+
 .ereturn-calculation-line {
     visibility: hidden;
     opacity: 0;

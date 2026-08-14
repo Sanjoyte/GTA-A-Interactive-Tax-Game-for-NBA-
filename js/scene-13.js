@@ -166,11 +166,11 @@ function showEauditFact() {
     scene13.classList.remove("cases-visible");
 
     const factTitle = document.createElement("span");
-    factTitle.textContent = "Did you know?";
+    factTitle.textContent = "DID YOU KNOW?";
 
     const factDetail = document.createElement("span");
     factDetail.className = "eaudit-fact-detail";
-    factDetail.textContent = "49,54,469 eReturns have been filed in the previous year.";
+    factDetail.textContent = "49,54,469 eRETURNS HAVE BEEN FILED IN THE PREVIOUS YEAR.";
 
     eauditMessageText.replaceChildren(factTitle, factDetail);
     eauditMessageContinue.style.display = "inline-block";
@@ -180,7 +180,7 @@ function showEauditFact() {
 function showEauditInvitation() {
     scene13Step = "invitation";
     scene13.classList.remove("cases-visible");
-    eauditMessageText.textContent = "Let’s select some returns for audit!";
+    eauditMessageText.textContent = "LET'S SELECT SOME RETURNS FOR AUDIT!";
     eauditMessageContinue.style.display = "inline-block";
 }
 
