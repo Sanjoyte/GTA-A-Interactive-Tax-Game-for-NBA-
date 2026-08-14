@@ -6,6 +6,7 @@ const scene10 = document.getElementById("scene-10");
 const scene10BackgroundVideo = document.getElementById("scene-10-background");
 const scene10Back = document.getElementById("scene-10-back");
 const scene10ClickLayer = document.getElementById("scene-10-click-layer");
+const scene10WelcomeClickLayer = document.getElementById("scene-10-welcome-click-layer");
 const etdsQuestionPanel = document.getElementById("etds-question-panel");
 const etdsYes = document.getElementById("etds-yes");
 const etdsNo = document.getElementById("etds-no");
@@ -19,7 +20,7 @@ const etdsAudioStatus = document.getElementById("etds-audio-status");
 const etdsAudio = new Audio("assets/audio/etds.mp3");
 etdsAudio.preload = "auto";
 
-let scene10Step = "question";
+let scene10Step = "welcome";
 let etdsTinDone = false;
 let etdsPasswordDone = false;
 let etdsTypingSession = 0;
@@ -72,7 +73,17 @@ function updateEtdsLoginState() {
 function showEtdsQuestion() {
     etdsTypingSession += 1;
     scene10Step = "question";
+    scene10.classList.remove("welcome-visible", "login-visible", "message-visible", "continue-ready");
+    etdsMessageText.textContent = "";
+    etdsMessageHint.textContent = "";
+}
+
+
+function showEtdsWelcome() {
+    etdsTypingSession += 1;
+    scene10Step = "welcome";
     scene10.classList.remove("login-visible", "message-visible", "continue-ready");
+    scene10.classList.add("welcome-visible");
     etdsMessageText.textContent = "";
     etdsMessageHint.textContent = "";
 }
@@ -80,7 +91,7 @@ function showEtdsQuestion() {
 
 function showEtdsLogin() {
     scene10Step = "login";
-    scene10.classList.remove("message-visible", "continue-ready");
+    scene10.classList.remove("welcome-visible", "message-visible", "continue-ready");
     scene10.classList.add("login-visible");
 }
 
@@ -97,7 +108,7 @@ function resetEtdsLogin() {
 
 function showEtdsMessage(message, hint, step, canContinue) {
     scene10Step = step;
-    scene10.classList.remove("login-visible");
+    scene10.classList.remove("welcome-visible", "login-visible");
     scene10.classList.add("message-visible");
     scene10.classList.toggle("continue-ready", canContinue);
     etdsMessageText.textContent = message;
@@ -115,6 +126,13 @@ function hideEtdsAudioStatus() {
 }
 
 
+function stopEtdsAudio() {
+    etdsAudio.pause();
+    etdsAudio.currentTime = 0;
+    hideEtdsAudioStatus();
+}
+
+
 function openScene10() {
     document.querySelectorAll(".scene").forEach((scene) => {
         scene.classList.remove("active");
@@ -125,7 +143,7 @@ function openScene10() {
 
     etdsNo.disabled = false;
     resetEtdsLogin();
-    showEtdsQuestion();
+    showEtdsWelcome();
     hideEtdsAudioStatus();
 
     scene10BackgroundVideo.currentTime = 0;
@@ -144,6 +162,16 @@ function openScene10() {
 
 
 etdsAudio.addEventListener("ended", hideEtdsAudioStatus);
+
+
+scene10WelcomeClickLayer.addEventListener("click", () => {
+    if (scene10Step !== "welcome") {
+        return;
+    }
+
+    stopEtdsAudio();
+    showEtdsQuestion();
+});
 
 
 etdsYes.addEventListener("click", (event) => {

@@ -27,6 +27,11 @@
     z-index: 1;
 }
 
+.scene-11-progress {
+    --progress-angle: -90deg;
+    z-index: 11;
+}
+
 
 /* Scene 10 button styling is shared through .scene-10-back. */
 .scene-11-skip {
