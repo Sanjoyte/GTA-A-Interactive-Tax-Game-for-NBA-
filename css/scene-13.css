@@ -46,6 +46,11 @@
     z-index: 2;
 }
 
+.scene-13-progress {
+    --progress-angle: -45deg;
+    z-index: 25;
+}
+
 
 /* ============================================================
    PURPLE eAUDIT MESSAGE PANEL

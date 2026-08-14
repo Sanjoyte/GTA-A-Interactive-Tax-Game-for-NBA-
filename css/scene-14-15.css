@@ -22,6 +22,11 @@
     z-index: 1;
 }
 
+.scene-14-progress {
+    --progress-angle: 0deg;
+    z-index: 11;
+}
+
 
 /* ============================================================
    SCENE 15 — CLICK-ANYWHERE RESUME STATE

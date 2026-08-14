@@ -46,6 +46,11 @@
     z-index: 2;
 }
 
+.scene-12-progress {
+    --progress-angle: -45deg;
+    z-index: 25;
+}
+
 
 /* Scene 10's shared eTDS panel classes provide the exact box styling. */
 .scene-12-message-panel {
