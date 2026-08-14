@@ -354,6 +354,8 @@ function continueEauditSelection() {
     scene13.classList.add("selection-complete");
     scene13.classList.remove("selection-ready");
     eauditInstruction.textContent = `${selectedAuditCases.size} FILES READY FOR AUDIT`;
+
+    openScene14();
 }
 
 

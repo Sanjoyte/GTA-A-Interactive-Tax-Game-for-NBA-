@@ -61,9 +61,15 @@ const ereturnDashboard =
     );
 
 
-const ereturnDocumentCards =
-    document.querySelectorAll(
-        ".ereturn-document-card"
+const ereturnDocumentGrid =
+    document.getElementById(
+        "ereturn-document-grid"
+    );
+
+
+const ereturnSummaryTitle =
+    document.getElementById(
+        "ereturn-summary-title"
     );
 
 
@@ -80,35 +86,115 @@ const ereturnActionButton =
 
 
 const ereturnSummaryRounds = [
-    [
-        "Income from Employment = 11,72,000 BDT",
-        "Income from Rent = 6,00,000 BDT",
-        "Income from Other Sources (Honorarium) = 2,00,000 BDT",
-        "Total Income = 19,72,000"
-    ],
-    [
-        "Personal expense = 3,00,000 BDT",
-        "Accomodation = 4,71,192 BDT",
-        "Education = 75,000 BDT",
-        "Festival expense = 50,000 BDT",
-        "Total = 8,96,192 BDT"
-    ],
-    [
-        "Non-Agri Land = 67,00,000 BDT",
-        "Car = 60,00,000 BDT",
-        "Jewelry = 2,50,000 BDT",
-        "Furniture & Devices = 1,20,000 BDT",
-        "Bank & Cash in Hand = 40,78,000 BDT",
-        "Institutional Liabilities = 3,12,000 BDT",
-        "Net Wealth = BDT 1,68,36,000"
-    ],
-    [
-        "Tax Payable = 2,83,000 BDT",
-        "Rebate = 50,000 BDT",
-        "Tax credit = 10,000 BDT",
-        "Final tax liability = 2,23,000 BDT"
-    ]
+    {
+        title: "Income Details",
+        cards: [
+            {
+                id: "employment",
+                label: "Employment",
+                summary: "Income from Employment = 11,72,000 ৳"
+            },
+            {
+                id: "rent",
+                label: "Rent",
+                summary: "Income from Rent = 6,00,000 ৳"
+            },
+            {
+                id: "other-sources",
+                label: "Others",
+                summary: "Income from Other Sources (Honorarium) = 2,00,000 ৳"
+            }
+        ],
+        total: "Total Income = 19,72,000 ৳"
+    },
+    {
+        title: "Expenditure Details",
+        cards: [
+            {
+                id: "personal",
+                label: "Personal",
+                summary: "Personal expense = 3,00,000 ৳"
+            },
+            {
+                id: "accommodation",
+                label: "Accommodation",
+                summary: "Accomodation = 4,71,192 ৳"
+            },
+            {
+                id: "education",
+                label: "Education",
+                summary: "Education = 75,000 ৳"
+            },
+            {
+                id: "festival",
+                label: "Festival",
+                summary: "Festival expense = 50,000 ৳"
+            }
+        ],
+        total: "Total = 8,96,192 ৳"
+    },
+    {
+        title: "Asset & Liabilities",
+        cards: [
+            {
+                id: "land",
+                label: "Land",
+                summary: "Non-Agri Land = 67,00,000 ৳"
+            },
+            {
+                id: "car",
+                label: "Car",
+                summary: "Car = 60,00,000 ৳"
+            },
+            {
+                id: "jewelry",
+                label: "Jewelry",
+                summary: "Jewelry = 2,50,000 ৳"
+            },
+            {
+                id: "household",
+                label: "Household",
+                summary: "Furniture & Devices = 1,20,000 ৳"
+            },
+            {
+                id: "cash",
+                label: "Cash",
+                summary: "Bank & Cash in Hand = 40,78,000 ৳"
+            },
+            {
+                id: "liabilities",
+                label: "Liabilities",
+                summary: "Institutional Liabilities = 3,12,000 ৳"
+            }
+        ],
+        total: "Net Wealth = 1,68,36,000 ৳"
+    },
+    {
+        title: "Tax Calculation",
+        cards: [
+            {
+                id: "tax",
+                label: "Tax",
+                summary: "Tax Payable = 2,83,000 ৳"
+            },
+            {
+                id: "rebate",
+                label: "Rebate",
+                summary: "Rebate = 50,000 ৳"
+            },
+            {
+                id: "credit",
+                label: "Credit",
+                summary: "Tax credit = 10,000 ৳"
+            }
+        ],
+        total: "Final tax liability = 2,23,000 ৳"
+    }
 ];
+
+
+const ERETURN_DETAIL_REVEAL_DELAY = 140;
+const ERETURN_TOTAL_REVEAL_DELAY = 650;
 
 
 /* ============================================================
@@ -158,35 +244,74 @@ let ereturnSummarySession = 0;
 let ereturnSummaryRoundIndex = 0;
 
 
-function getEreturnSummarySource(lineIndex) {
-
-    const sourceCards =
-        Array.from(
-            ereturnDocumentCards
-        );
-
-    const sourceIndex =
-        Math.min(
-            lineIndex,
-            sourceCards.length - 1
-        );
-
-    return sourceCards[sourceIndex]
-        .dataset.document;
-
-}
-
-
 function renderEreturnSummaryRound() {
 
-    const summaryLines =
+    const summaryRound =
         ereturnSummaryRounds[
             ereturnSummaryRoundIndex
         ];
 
-    const lineElements =
-        summaryLines.map(
-            (lineText, lineIndex) => {
+    ereturnSummaryTitle.textContent =
+        summaryRound.title;
+
+    const documentCards =
+        summaryRound.cards.map(
+            (cardData) => {
+
+                const card =
+                    document.createElement(
+                        "button"
+                    );
+
+                card.className =
+                    "ereturn-document-card";
+
+                card.type =
+                    "button";
+
+                card.dataset.document =
+                    cardData.id;
+
+                card.setAttribute(
+                    "aria-label",
+                    `Reveal ${cardData.label} details`
+                );
+
+                card.setAttribute(
+                    "aria-pressed",
+                    "false"
+                );
+
+                const cardTitle =
+                    document.createElement(
+                        "span"
+                    );
+
+                cardTitle.className =
+                    "ereturn-page-title";
+
+                cardTitle.textContent =
+                    cardData.label;
+
+                card.append(cardTitle);
+
+                return card;
+
+            }
+        );
+
+    ereturnDocumentGrid.replaceChildren(
+        ...documentCards
+    );
+
+    ereturnDocumentGrid.style.setProperty(
+        "--ereturn-card-count",
+        String(summaryRound.cards.length)
+    );
+
+    const detailLines =
+        summaryRound.cards.map(
+            (cardData) => {
 
                 const line =
                     document.createElement(
@@ -196,36 +321,39 @@ function renderEreturnSummaryRound() {
                 line.className =
                     "ereturn-calculation-line";
 
-                if (
-                    lineIndex === summaryLines.length - 1
-                ) {
-
-                    line.classList.add(
-                        "ereturn-calculation-line--total"
-                    );
-
-                }
-
                 line.dataset.summarySource =
-                    getEreturnSummarySource(
-                        lineIndex
-                    );
+                    cardData.id;
 
                 line.textContent =
-                    lineText;
+                    cardData.summary;
 
                 return line;
 
             }
         );
 
+    const totalLine =
+        document.createElement(
+            "div"
+        );
+
+    totalLine.className =
+        "ereturn-calculation-line ereturn-calculation-line--total";
+
+    totalLine.dataset.summaryTotal =
+        "true";
+
+    totalLine.textContent =
+        summaryRound.total;
+
     ereturnCalculationLines.replaceChildren(
-        ...lineElements
+        ...detailLines,
+        totalLine
     );
 
     ereturnCalculationLines.classList.toggle(
         "ereturn-calculation-lines--dense",
-        summaryLines.length > 5
+        summaryRound.cards.length + 1 > 5
     );
 
     ereturnActionButton.textContent =
@@ -242,15 +370,19 @@ function resetEreturnSummarySelection() {
     ereturnSummarySession += 1;
     selectedReturnDocuments.clear();
 
-    ereturnDocumentCards.forEach(
-        (card) => {
+    ereturnDocumentGrid
+        .querySelectorAll(
+            ".ereturn-document-card"
+        )
+        .forEach(
+            (card) => {
 
-            card.classList.remove(
-                "selected"
-            );
+                card.classList.remove(
+                    "selected"
+                );
 
-        }
-    );
+            }
+        );
 
     scene7Step =
         "documents";
@@ -403,15 +535,19 @@ function resetScene7() {
         true;
 
 
-    ereturnDocumentCards.forEach(
-        (card) => {
+    ereturnDocumentGrid
+        .querySelectorAll(
+            ".ereturn-document-card"
+        )
+        .forEach(
+            (card) => {
 
-            card.classList.remove(
-                "selected"
-            );
+                card.classList.remove(
+                    "selected"
+                );
 
-        }
-    );
+            }
+        );
 
 
     renderEreturnSummaryRound();
@@ -599,18 +735,31 @@ function undoLastEreturnPageSelection() {
         documentToUndo
     );
 
-    ereturnDocumentCards.forEach(
-        (card) => {
+    ereturnDocumentGrid
+        .querySelectorAll(
+            ".ereturn-document-card"
+        )
+        .forEach(
+            (card) => {
 
-            card.classList.toggle(
-                "selected",
-                selectedReturnDocuments.has(
-                    card.dataset.document
-                )
-            );
+                card.classList.toggle(
+                    "selected",
+                    selectedReturnDocuments.has(
+                        card.dataset.document
+                    )
+                );
 
-        }
-    );
+                card.setAttribute(
+                    "aria-pressed",
+                    selectedReturnDocuments.has(
+                        card.dataset.document
+                    )
+                        ? "true"
+                        : "false"
+                );
+
+            }
+        );
 
     ereturnCalculationLines
         .querySelectorAll(
@@ -621,6 +770,7 @@ function undoLastEreturnPageSelection() {
 
                 line.classList.toggle(
                     "visible",
+                    line.dataset.summaryTotal !== "true" &&
                     selectedReturnDocuments.has(
                         line.dataset.summarySource
                     )
@@ -800,133 +950,139 @@ ereturnLoginButton.addEventListener(
    DOCUMENT SELECTION
    ============================================================ */
 
-ereturnDocumentCards.forEach(
-    (card) => {
+ereturnDocumentGrid.addEventListener(
+    "click",
+    (event) => {
 
-        card.addEventListener(
-            "click",
+        const card =
+            event.target.closest(
+                ".ereturn-document-card"
+            );
+
+        if (!card) {
+
+            return;
+
+        }
+
+        if (
+            scene7Step !== "documents"
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            selectedReturnDocuments.has(
+                card.dataset.document
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        selectedReturnDocuments.add(
+            card.dataset.document
+        );
+
+        const summarySession =
+            ereturnSummarySession;
+
+        card.classList.add(
+            "selected"
+        );
+
+        card.setAttribute(
+            "aria-pressed",
+            "true"
+        );
+
+
+        const summaryRound =
+            ereturnSummaryRounds[
+                ereturnSummaryRoundIndex
+            ];
+
+
+        const isFinalRequiredCard =
+            selectedReturnDocuments.size ===
+            summaryRound.cards.length;
+
+
+        const summaryLine =
+            ereturnCalculationLines
+                .querySelector(
+                    `[data-summary-source="${card.dataset.document}"]`
+                );
+
+
+        window.setTimeout(
             () => {
 
                 if (
-                    scene7Step !== "documents"
-                ) {
-
-                    return;
-
-                }
-
-
-                if (
+                    summarySession === ereturnSummarySession &&
                     selectedReturnDocuments.has(
                         card.dataset.document
                     )
                 ) {
 
+                    summaryLine.classList.add(
+                        "visible"
+                    );
+
+                }
+
+            },
+            ERETURN_DETAIL_REVEAL_DELAY
+        );
+
+
+        if (!isFinalRequiredCard) {
+
+            return;
+
+        }
+
+
+        window.setTimeout(
+            () => {
+
+                if (
+                    summarySession !== ereturnSummarySession ||
+                    selectedReturnDocuments.size !== summaryRound.cards.length
+                ) {
+
                     return;
 
                 }
 
 
-                selectedReturnDocuments.add(
-                    card.dataset.document
-                );
-
-                const summarySession =
-                    ereturnSummarySession;
-
-                card.classList.add(
-                    "selected"
-                );
-
-
                 ereturnCalculationLines
-                    .querySelectorAll(
-                        `[data-summary-source="${card.dataset.document}"]`
+                    .querySelector(
+                        "[data-summary-total]"
                     )
-                    .forEach(
-                        (line, index) => {
-
-                            window.setTimeout(
-                                () => {
-
-                                    if (
-                                        summarySession === ereturnSummarySession &&
-                                        selectedReturnDocuments.has(
-                                            card.dataset.document
-                                        )
-                                    ) {
-
-                                        line.classList.add(
-                                            "visible"
-                                        );
-
-                                    }
-
-                                },
-                                180 * index
-                            );
-
-                        }
+                    .classList.add(
+                        "visible"
                     );
 
 
-                const sourceLineCount =
-                    ereturnCalculationLines
-                        .querySelectorAll(
-                            `[data-summary-source="${card.dataset.document}"]`
-                        )
-                        .length;
+                scene7Step =
+                    "action-ready";
 
-
-                window.setTimeout(
-                    () => {
-
-                        if (
-                            summarySession !== ereturnSummarySession
-                        ) {
-
-                            return;
-
-                        }
-
-                        const allPagesSelected =
-                            selectedReturnDocuments.size ===
-                            ereturnDocumentCards.length;
-
-                        const allSummaryLinesVisible =
-                            ereturnCalculationLines
-                                .querySelectorAll(
-                                    ".ereturn-calculation-line.visible"
-                                )
-                                .length ===
-                            ereturnCalculationLines
-                                .querySelectorAll(
-                                    ".ereturn-calculation-line"
-                                )
-                                .length;
-
-                        if (
-                            allPagesSelected &&
-                            allSummaryLinesVisible
-                        ) {
-
-                            scene7Step =
-                                "action-ready";
-
-                            scene7.classList.add(
-                                "submit-ready"
-                            );
-
-                            ereturnActionButton.disabled =
-                                false;
-
-                        }
-
-                    },
-                    180 * Math.max(0, sourceLineCount - 1) + 30
+                scene7.classList.add(
+                    "submit-ready"
                 );
 
-            }
+                ereturnActionButton.disabled =
+                    false;
+
+            },
+            ERETURN_DETAIL_REVEAL_DELAY +
+            ERETURN_TOTAL_REVEAL_DELAY
         );
 
     }

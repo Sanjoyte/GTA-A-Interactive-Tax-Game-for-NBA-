@@ -1,0 +1,52 @@
+/* ============================================================
+   SCENES 14 + 15 — VIDEO FINALE
+   ============================================================ */
+
+.video-finale-scene {
+    display: none;
+}
+
+.video-finale-scene.active {
+    display: block;
+}
+
+.video-finale-media {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    background: #000000;
+    z-index: 1;
+}
+
+
+/* ============================================================
+   SCENE 15 — CLICK-ANYWHERE RESUME STATE
+   ============================================================ */
+
+.scene-15.awaiting-resume .game-stage {
+    cursor: pointer;
+}
+
+.scene-15.awaiting-resume .game-stage::after {
+    content: "CLICK ANYWHERE TO CONTINUE";
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    z-index: 12;
+    transform: translateX(-50%);
+    color: #ffffff;
+    font-family: "Press Start 2P", monospace;
+    font-size: clamp(0.62rem, 0.95vw, 1rem);
+    line-height: 1.4;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-shadow:
+        0 0.12rem 0 #000000,
+        0 0 0.9rem rgba(255, 255, 255, 0.82);
+    animation: eauditContinuePulse 1.15s steps(2, start) infinite;
+    pointer-events: none;
+}

@@ -121,7 +121,7 @@
 
     <link
         rel="stylesheet"
-        href="css/scene-7.css?v=4"
+        href="css/scene-7.css?v=6"
     >
 
 
@@ -182,6 +182,16 @@
     <link
         rel="stylesheet"
         href="css/scene-13.css?v=2"
+    >
+
+
+    <!-- =====================================================
+         SCENE 14 + 15 CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/scene-14-15.css?v=5"
     >
     
 </head>
@@ -1101,51 +1111,18 @@
                     <div
                         id="ereturn-document-grid"
                         class="ereturn-document-grid"
-                    >
-
-                        <button
-                            class="ereturn-document-card"
-                            type="button"
-                            data-document="income"
-                        >
-                            <span class="ereturn-page-label">Page 1</span>
-                            <span class="ereturn-page-title">Income Details</span>
-                        </button>
-
-                        <button
-                            class="ereturn-document-card"
-                            type="button"
-                            data-document="expenditure"
-                        >
-                            <span class="ereturn-page-label">Page 2</span>
-                            <span class="ereturn-page-title">Expenditure Details</span>
-                        </button>
-
-                        <button
-                            class="ereturn-document-card"
-                            type="button"
-                            data-document="assets"
-                        >
-                            <span class="ereturn-page-label">Page 3</span>
-                            <span class="ereturn-page-title">Asset &amp; Liabilities</span>
-                        </button>
-
-                        <button
-                            class="ereturn-document-card"
-                            type="button"
-                            data-document="calculation"
-                        >
-                            <span class="ereturn-page-label">Page 4</span>
-                            <span class="ereturn-page-title">Tax Calculation</span>
-                        </button>
-
-                    </div>
+                    ></div>
 
                     <div
                         id="ereturn-calculation-card"
                         class="ereturn-calculation-card"
                     >
-                        <div class="ereturn-summary-title">Summary</div>
+                        <div
+                            id="ereturn-summary-title"
+                            class="ereturn-summary-title"
+                        >
+                            Income Details
+                        </div>
 
                         <div
                             id="ereturn-calculation-lines"
@@ -1707,6 +1684,68 @@
 
 </section>
 
+
+<!-- =====================================================
+     SCENE 14 — eAUDIT VIDEO
+     ===================================================== -->
+
+<section
+    id="scene-14"
+    class="scene scene-14 video-finale-scene"
+>
+
+    <div
+        id="game-stage-scene-14"
+        class="game-stage"
+    >
+
+        <video
+            id="scene-14-video"
+            class="video-finale-media"
+            src="assets/video/eaudit.mp4"
+            preload="auto"
+            playsinline
+        ></video>
+
+        <button
+            id="scene-14-skip"
+            class="scene-13-back"
+            type="button"
+        >
+            SKIP
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCENE 15 — FINAL VIDEO
+     ===================================================== -->
+
+<section
+    id="scene-15"
+    class="scene scene-15 video-finale-scene"
+>
+
+    <div
+        id="game-stage-scene-15"
+        class="game-stage"
+    >
+
+        <video
+            id="scene-15-video"
+            class="video-finale-media"
+            src="assets/video/final.mp4"
+            preload="auto"
+            playsinline
+        ></video>
+
+    </div>
+
+</section>
+
     </main>
 
 
@@ -1730,7 +1769,7 @@
 
     <script src="js/scene-6.js?v=2"></script>
 
-    <script src="js/scene-7.js?v=3"></script>
+    <script src="js/scene-7.js?v=4"></script>
 
     <script src="js/scene-8.js?v=2"></script>
 
@@ -1742,7 +1781,11 @@
 
     <script src="js/scene-12.js"></script>
 
-    <script src="js/scene-13.js"></script>
+    <script src="js/scene-13.js?v=2"></script>
+
+    <script src="js/scene-14.js?v=2"></script>
+
+    <script src="js/scene-15.js?v=4"></script>
 
 </body>
 
