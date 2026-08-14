@@ -627,7 +627,7 @@ function createRandomTinNumber() {
 
     for (
         let digitIndex = 0;
-        digitIndex < 14;
+        digitIndex < 12;
         digitIndex += 1
     ) {
 

@@ -29,7 +29,7 @@ let etdsTypingSession = 0;
 function createEtdsTinNumber() {
     let tin = "";
 
-    for (let index = 0; index < 14; index += 1) {
+    for (let index = 0; index < 12; index += 1) {
         const minimumDigit = index === 0 ? 1 : 0;
         tin += Math.floor(Math.random() * (10 - minimumDigit)) + minimumDigit;
     }
