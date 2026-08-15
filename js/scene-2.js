@@ -19,18 +19,6 @@ const gameStage =
     );
 
 
-const startOverlay =
-    document.getElementById(
-        "start-overlay"
-    );
-
-
-const insertCoin =
-    document.getElementById(
-        "insert-coin"
-    );
-
-
 const rahmanCharacter =
     document.getElementById(
         "rahman-character"
@@ -57,13 +45,6 @@ const riponCharacter =
 scene2.classList.remove(
     "active"
 );
-
-scene2.classList.remove(
-    "game-active"
-);
-
-
-gameState.coinInserted = false;
 
 
 /* ============================================================
@@ -101,10 +82,6 @@ function openScene2() {
         "hidden"
     );
 
-    scene2.classList.remove(
-        "game-active"
-    );
-
     scene2.classList.add(
         "active"
     );
@@ -112,68 +89,6 @@ function openScene2() {
 
     gameState.currentScene =
         "scene-2";
-
-    gameState.coinInserted =
-        false;
-
-}
-
-
-/* ============================================================
-   INSERT COIN / START GAME
-   ============================================================ */
-
-/*
-    Clicking anywhere on the grey overlay
-    starts the game.
-*/
-
-startOverlay.addEventListener(
-    "click",
-    startGame
-);
-
-
-/* ============================================================
-   START GAME FUNCTION
-   ============================================================ */
-
-function startGame() {
-
-    /*
-        Prevent starting more than once.
-    */
-
-    if (gameState.coinInserted) {
-
-        return;
-
-    }
-
-
-    /*
-        Insert coin.
-    */
-
-    gameState.coinInserted = true;
-
-
-    /*
-        Activate Scene 2.
-    */
-
-    scene2.classList.add(
-        "game-active"
-    );
-
-
-    /*
-        Debug message.
-    */
-
-    console.log(
-        "Coin inserted. Game started."
-    );
 
 }
 
@@ -185,21 +100,6 @@ function startGame() {
 rahmanCharacter.addEventListener(
     "click",
     () => {
-
-        /*
-            Safety check.
-
-            This should normally be impossible
-            before the game starts because CSS
-            disables pointer events.
-        */
-
-        if (!gameState.coinInserted) {
-
-            return;
-
-        }
-
 
         /*
             Select Rahman.
@@ -243,17 +143,6 @@ rahmanCharacter.addEventListener(
     (event) => {
 
         /*
-            Game must be active.
-        */
-
-        if (!gameState.coinInserted) {
-
-            return;
-
-        }
-
-
-        /*
             Allow Enter or Space
             to select Rahman.
         */
@@ -287,13 +176,6 @@ riponCharacter.addEventListener(
             Clicking him does nothing except
             provide a console message.
         */
-
-        if (!gameState.coinInserted) {
-
-            return;
-
-        }
-
 
         console.log(
             "Mr. Ripon is locked."

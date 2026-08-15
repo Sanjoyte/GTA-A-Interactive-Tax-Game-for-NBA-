@@ -32,13 +32,6 @@ const gameState = {
 
 
     /*
-        Insert Coin / Game Start
-    */
-
-    coinInserted: false,
-
-
-    /*
         Progress tracking
     */
 
