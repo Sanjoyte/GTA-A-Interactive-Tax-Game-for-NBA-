@@ -347,7 +347,7 @@ scene6No.addEventListener(
         */
 
         scene6ResponseText.textContent =
-            "SORRY, BE A GOOD CITIZEN AND SUBMIT YOUR RETURN!";
+            "RETURN SUBMISSION IS MANDATORY FOR ALL TIN HOLDERS";
 
 
         scene6Response.classList.add(

@@ -154,8 +154,9 @@
         );
     color: #e5fff1;
     box-shadow:
-        0 0 1.8rem rgba(93, 222, 160, 0.38),
-        inset 0 0 2rem rgba(126, 238, 182, 0.1);
+        0 0 3.2rem rgba(93, 222, 160, 0.7),
+        0 0 6rem rgba(93, 222, 160, 0.35),
+        inset 0 0 2.2rem rgba(126, 238, 182, 0.18);
     text-align: center;
     z-index: 10;
     pointer-events: auto;

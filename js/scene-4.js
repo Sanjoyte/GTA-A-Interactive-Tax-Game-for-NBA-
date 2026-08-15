@@ -78,6 +78,73 @@ function showScene4Panel(panelClass) {
     }
 }
 
+let etinKeySoundContext = null;
+
+function getEtinKeySoundContext() {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) {
+        return null;
+    }
+
+    if (!etinKeySoundContext) {
+        etinKeySoundContext = new AudioContextClass();
+    }
+
+    if (etinKeySoundContext.state === "suspended") {
+        etinKeySoundContext.resume();
+    }
+
+    return etinKeySoundContext;
+}
+
+function playMechanicalKeySound() {
+    const context = getEtinKeySoundContext();
+    if (!context) {
+        return;
+    }
+
+    const now = context.currentTime;
+
+    const noiseDuration = 0.035;
+    const bufferSize = Math.max(1, Math.floor(context.sampleRate * noiseDuration));
+    const noiseBuffer = context.createBuffer(1, bufferSize, context.sampleRate);
+    const noiseData = noiseBuffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i += 1) {
+        noiseData[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+    }
+
+    const noiseSource = context.createBufferSource();
+    noiseSource.buffer = noiseBuffer;
+
+    const noiseFilter = context.createBiquadFilter();
+    noiseFilter.type = "highpass";
+    noiseFilter.frequency.value = 2200;
+
+    const noiseGain = context.createGain();
+    noiseGain.gain.setValueAtTime(0.32, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + noiseDuration);
+
+    noiseSource.connect(noiseFilter);
+    noiseFilter.connect(noiseGain);
+    noiseGain.connect(context.destination);
+
+    const thock = context.createOscillator();
+    thock.type = "square";
+    thock.frequency.setValueAtTime(130 + Math.random() * 45, now);
+
+    const thockGain = context.createGain();
+    thockGain.gain.setValueAtTime(0.16, now);
+    thockGain.gain.exponentialRampToValueAtTime(0.001, now + 0.03);
+
+    thock.connect(thockGain);
+    thockGain.connect(context.destination);
+
+    noiseSource.start(now);
+    noiseSource.stop(now + noiseDuration);
+    thock.start(now);
+    thock.stop(now + 0.03);
+}
+
 function typeIntoInput(input, value, onComplete) {
     let characterIndex = 0;
     const typingSession = scene4TypingSession;
@@ -89,6 +156,7 @@ function typeIntoInput(input, value, onComplete) {
         }
 
         input.value = value.slice(0, characterIndex + 1);
+        playMechanicalKeySound();
         characterIndex += 1;
 
         if (characterIndex < value.length) {
@@ -165,7 +233,9 @@ etinPassword.addEventListener("click", (event) => {
    ============================================================ */
 
 function makeRandomNid() {
-    return String(Math.floor(1000000 + Math.random() * 9000000));
+    const baseDigits = String(Math.floor(1000000 + Math.random() * 9000000));
+    const extraDigits = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
+    return baseDigits + extraDigits;
 }
 
 function resetEtinRegistration() {
