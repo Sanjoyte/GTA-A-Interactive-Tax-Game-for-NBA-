@@ -317,9 +317,9 @@
 .etin-progress {
     --progress-angle: -180deg;
     position: absolute;
-    left: clamp(1rem, 2.7vw, 3rem);
-    top: clamp(1rem, 3.2vh, 2.5rem);
-    width: clamp(8.2rem, 13vw, 13.5rem);
+    left: clamp(0.6rem, 1.2vw, 1.25rem);
+    top: clamp(0.6rem, 1.4vh, 1.25rem);
+    width: clamp(5.5rem, 8vw, 8.5rem);
     z-index: 25;
     color: #d8ffe9;
     font-family: "Orbitron", sans-serif;
@@ -395,9 +395,19 @@
     z-index: 6;
     transform: translateX(-50%);
     color: #e8fff3;
-    font-size: clamp(0.55rem, 0.78vw, 0.82rem);
+    font-size: clamp(0.42rem, 0.55vw, 0.6rem);
     font-weight: 800;
     text-shadow: 0 0 0.45rem #48dd91;
+}
+
+.etin-progress-label {
+    margin-top: 0.4rem;
+    color: #d8ffe9;
+    font-size: clamp(0.42rem, 0.6vw, 0.62rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-shadow: 0 0 0.4rem rgba(84, 255, 169, 0.55);
 }
 
 .etin-progress-tick {
@@ -587,6 +597,6 @@
     }
 
     .etin-progress {
-        width: clamp(6.5rem, 24vw, 8.5rem);
+        width: clamp(4.5rem, 16vw, 6rem);
     }
 }
