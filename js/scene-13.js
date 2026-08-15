@@ -14,43 +14,34 @@ const eauditSelectionSubmit = document.getElementById("eaudit-selection-submit")
 const eauditCaseData = [
     {
         number: 1,
-        title: "Material Turnover–Income Variance",
+        title: "Turnover Increased, Reported Income Decreased",
         level: "High",
-        percentage: 92,
-        reason: "Third-party information indicates an approximately threefold increase in sales, while declared income is lower than in the preceding assessment year.",
-        indicators: "Third-Party Data Variance | Material Income Discrepancy"
+        percentage: 92
     },
     {
         number: 2,
-        title: "Reconciled Source Data and Consistent Disclosures",
+        title: "Complete Data Consistency",
         level: "Low",
-        percentage: 14,
-        reason: "Tax deducted at source is fully reconciled with eTDS records, and the reported growth in assets is proportionate to declared income.",
-        indicators: "Full Data Reconciliation | Consistent Financial Profile"
+        percentage: 40,
+        colorOverride: "hsl(48 92% 50%)"
     },
     {
         number: 3,
-        title: "Material Refund Claim with Incomplete Evidence",
+        title: "Large Refund Claim",
         level: "High",
-        percentage: 87,
-        reason: "A material refund has been claimed; however, the supporting documentation is incomplete and does not sufficiently substantiate the claim.",
-        indicators: "Refund Exposure | Supporting-Evidence Deficiency"
+        percentage: 87
     },
     {
         number: 4,
-        title: "Consistent Filing and Transaction Profile",
+        title: "Small Business – Consistent Filing History",
         level: "Low",
-        percentage: 11,
-        reason: "Returns have been filed consistently over successive assessment years, with no material anomalies identified in the reported transaction pattern.",
-        indicators: "Sustained Filing Compliance | No Material Anomaly"
+        percentage: 11
     },
     {
         number: 5,
-        title: "System-Identified Multi-Parameter Risk Exposure",
+        title: "Tax Official’s Own File",
         level: "High",
-        percentage: 81,
-        reason: "The automated assessment is identity-neutral. This return has been flagged solely because two independent risk parameters exceeded their thresholds.",
-        indicators: "System-Driven Assessment | Two Risk Parameters Triggered"
+        percentage: 71
     }
 ];
 
@@ -68,7 +59,7 @@ const selectedAuditCases = new Set();
 
 function getRiskColor(percentage) {
     const normalizedRisk = Math.max(0, Math.min(1, percentage / 100));
-    const hue = Math.round(34 - normalizedRisk * 32);
+    const hue = Math.round(120 - normalizedRisk * 120);
     return `hsl(${hue} 82% 42%)`;
 }
 
@@ -81,8 +72,8 @@ function buildEauditCards() {
         card.className = "eaudit-case";
         card.type = "button";
         card.dataset.caseIndex = String(index);
-        card.style.setProperty("--risk-color", getRiskColor(caseData.percentage));
-        card.setAttribute("aria-label", `Reveal Case ${caseData.number}`);
+        card.style.setProperty("--risk-color", caseData.colorOverride || getRiskColor(caseData.percentage));
+        card.setAttribute("aria-label", `Reveal Return ${caseData.number}`);
 
         const inner = document.createElement("span");
         inner.className = "eaudit-case-inner";
@@ -93,11 +84,11 @@ function buildEauditCards() {
         const image = document.createElement("img");
         image.className = "eaudit-case-image";
         image.src = "assets/photos/case.png";
-        image.alt = `Case ${caseData.number}`;
+        image.alt = `Return ${caseData.number}`;
 
         const caption = document.createElement("span");
         caption.className = "eaudit-case-caption";
-        caption.textContent = `Case ${caseData.number}`;
+        caption.textContent = `Return ${caseData.number}`;
 
         front.append(image, caption);
 
@@ -106,11 +97,11 @@ function buildEauditCards() {
 
         const caseLabel = document.createElement("span");
         caseLabel.className = "eaudit-risk-case-label";
-        caseLabel.textContent = `Automated Risk Assessment • Case ${caseData.number}`;
+        caseLabel.textContent = `Return ${caseData.number} • Automated Risk Assessment`;
 
         const title = document.createElement("span");
         title.className = "eaudit-risk-title";
-        title.textContent = caseData.title;
+        title.textContent = `${caseData.number}. ${caseData.title}`;
 
         const metrics = document.createElement("span");
         metrics.className = "eaudit-risk-metrics";
@@ -142,15 +133,11 @@ function buildEauditCards() {
         percentage.append(percentageLabel, percentageValue);
         metrics.append(level, percentage);
 
-        const reason = document.createElement("span");
-        reason.className = "eaudit-risk-reason";
-        reason.textContent = `Assessment Basis: ${caseData.reason}`;
+        const statement = document.createElement("span");
+        statement.className = "eaudit-risk-statement";
+        statement.textContent = `${caseData.level.toUpperCase()}-RISK RETURN`;
 
-        const tags = document.createElement("span");
-        tags.className = "eaudit-risk-tags";
-        tags.textContent = `Risk Indicators: ${caseData.indicators}`;
-
-        risk.append(caseLabel, title, metrics, reason, tags);
+        risk.append(caseLabel, title, metrics, statement);
         inner.append(front, risk);
         card.append(inner);
 
@@ -206,7 +193,7 @@ function showEauditInvitation() {
 function showEauditCases() {
     scene13Step = "revealing";
     scene13.classList.add("cases-visible");
-    eauditInstruction.textContent = "SELECT A CASE TO REVIEW ITS AUTOMATED RISK ASSESSMENT";
+    eauditInstruction.textContent = "Select to Audit";
     resetEauditCards();
 }
 
@@ -219,7 +206,7 @@ function finishEauditCaseReveal(index) {
     const card = eauditCaseGrid.querySelector(`[data-case-index="${index}"]`);
     card.classList.remove("focused");
     card.classList.add("settled");
-    card.setAttribute("aria-label", `Case ${index + 1} risk assessment revealed`);
+    card.setAttribute("aria-label", `Return ${index + 1} risk assessment revealed`);
 
     eauditCaseAudios[index].onended = null;
 
@@ -234,7 +221,7 @@ function finishEauditCaseReveal(index) {
             caseCard.setAttribute("aria-pressed", "false");
         });
     } else {
-        eauditInstruction.textContent = "SELECT ANOTHER CASE TO REVIEW ITS RISK ASSESSMENT";
+        eauditInstruction.textContent = "SELECT ANOTHER RETURN TO REVIEW ITS RISK ASSESSMENT";
     }
 }
 
@@ -264,7 +251,7 @@ function revealEauditCase(index) {
     activeCaseIndex = index;
     card.classList.add("revealed", "focused");
     scene13.classList.add("card-revealing");
-    eauditInstruction.textContent = `CASE ${index + 1} RISK ASSESSMENT — CLICK ANYWHERE TO CLOSE`;
+    eauditInstruction.textContent = `RETURN ${index + 1} RISK ASSESSMENT — CLICK ANYWHERE TO CLOSE`;
 
     const audio = eauditCaseAudios[index];
     audio.currentTime = 0;
