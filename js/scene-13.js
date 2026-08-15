@@ -51,6 +51,9 @@ const eauditCaseAudios = eauditCaseData.map((caseData) => {
     return audio;
 });
 
+const eauditSelectPromptAudio = new Audio("assets/audio/select2.mp3");
+eauditSelectPromptAudio.preload = "auto";
+
 let scene13Step = "fact";
 let activeCaseIndex = null;
 let revealedCaseCount = 0;
@@ -153,6 +156,9 @@ function stopEauditCaseAudio() {
         audio.currentTime = 0;
         audio.onended = null;
     });
+
+    eauditSelectPromptAudio.pause();
+    eauditSelectPromptAudio.currentTime = 0;
 }
 
 
@@ -219,6 +225,11 @@ function finishEauditCaseReveal(index) {
         eauditInstruction.textContent = "SELECT 2 TO 5 FILES FOR AUDIT";
         eauditCaseGrid.querySelectorAll(".eaudit-case").forEach((caseCard) => {
             caseCard.setAttribute("aria-pressed", "false");
+        });
+
+        eauditSelectPromptAudio.currentTime = 0;
+        eauditSelectPromptAudio.play().catch((error) => {
+            console.log("Could not play select2 audio:", error);
         });
     } else {
         eauditInstruction.textContent = "SELECT ANOTHER RETURN TO REVIEW ITS RISK ASSESSMENT";
