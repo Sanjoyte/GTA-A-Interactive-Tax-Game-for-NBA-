@@ -230,35 +230,13 @@ etdsLoginButton.addEventListener("click", (event) => {
         return;
     }
 
-    showEtdsMessage(
-        "10,000 TAKA WAS DEDUCTED FROM HIM IN THE PREVIOUS YEAR.",
-        "CLICK TO CONTINUE",
-        "deduction",
-        true
-    );
-});
-
-
-scene10ClickLayer.addEventListener("click", () => {
-    if (scene10Step !== "deduction") {
-        return;
-    }
-
     scene10Step = "complete";
-    scene10.classList.remove("continue-ready");
-    etdsMessageHint.textContent = "";
-
     openScene11();
 });
 
 
 scene10Back.addEventListener("click", (event) => {
     event.stopPropagation();
-
-    if (scene10Step === "deduction" || scene10Step === "complete") {
-        showEtdsLogin();
-        return;
-    }
 
     if (scene10Step === "login") {
         if (etdsTin.value || etdsPassword.value) {
