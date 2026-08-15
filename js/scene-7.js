@@ -98,89 +98,89 @@ const ereturnSummaryRounds = [
             {
                 id: "employment",
                 label: "Employment",
-                summary: "Income from Employment = 11,72,000 ৳"
+                summary: "Income from Employment = ৳ 23,44,000 "
             },
             {
                 id: "rent",
                 label: "Rent",
-                summary: "Income from Rent = 6,00,000 ৳"
+                summary: "Income from Rent = ৳ 12,00,000 "
             },
             {
                 id: "other-sources",
-                label: "Others",
-                summary: "Income from Other Sources (Honorarium) = 2,00,000 ৳"
+                label: "Other Sources",
+                summary: "Income from Other Sources = ৳ 4,00,000 "
             }
         ],
-        total: "Total Income = 19,72,000 ৳"
+        total: "Total Income = ৳ 39,44,000 "
     },
     {
         title: "Expenditure Details",
         cards: [
             {
                 id: "personal",
-                label: "Personal",
-                summary: "Personal expense = 3,00,000 ৳"
+                label: "Personal Expense",
+                summary: "Personal expense = ৳ 3,00,000 "
             },
             {
                 id: "accommodation",
-                label: "Accommodation",
-                summary: "Accomodation = 4,71,192 ৳"
+                label: "Accommodation Expense",
+                summary: "Accomodation = ৳ 4,71,192 "
             },
             {
                 id: "education",
-                label: "Education",
-                summary: "Education = 75,000 ৳"
+                label: "Education Expense",
+                summary: "Education = ৳ 75,000 "
             },
             {
                 id: "festival",
                 label: "Festival",
-                summary: "Festival expense = 50,000 ৳"
+                summary: "Festival expense = ৳ 50,000 "
             }
         ],
-        total: "Total = 8,96,192 ৳"
+        total: "Total = ৳ 8,96,192 "
     },
     {
-        title: "Asset & Liabilities",
+        title: "Assets & Liabilities",
         cards: [
             {
                 id: "land",
                 label: "Land",
-                summary: "Non-Agri Land = 67,00,000 ৳"
+                summary: "Non-Agri Land = ৳ 67,00,000 "
             },
             {
                 id: "car",
-                label: "Car",
-                summary: "Car = 60,00,000 ৳"
+                label: "Personal Vehicle",
+                summary: "Car = ৳ 60,00,000 "
             },
             {
                 id: "jewelry",
                 label: "Jewelry",
-                summary: "Jewelry = 2,50,000 ৳"
+                summary: "Jewelry = ৳ 2,50,000 "
             },
             {
                 id: "household",
-                label: "Household",
-                summary: "Furniture & Devices = 1,20,000 ৳"
+                label: "Fixtures",
+                summary: "Furniture & Devices = ৳ 1,20,000 "
             },
             {
                 id: "cash",
-                label: "Cash",
-                summary: "Bank & Cash in Hand = 40,78,000 ৳"
+                label: "Cash and Bank",
+                summary: "Bank & Cash in Hand = ৳ 40,78,000 "
             },
             {
                 id: "liabilities",
-                label: "Liabilities",
-                summary: "Institutional Liabilities = 3,12,000 ৳"
+                label: "Liability",
+                summary: "Institutional Liabilities = ৳ 3,12,000 "
             }
         ],
-        total: "Net Wealth = 1,68,36,000 ৳"
+        total: "Net Wealth = ৳ 1,68,36,000 "
     },
     {
         title: "Tax Calculation",
         cards: [
             {
                 id: "tax",
-                label: "Tax",
+                label: "Tax Payable",
                 summary: "Tax Payable = 2,83,000 ৳"
             },
             {
@@ -190,7 +190,7 @@ const ereturnSummaryRounds = [
             },
             {
                 id: "credit",
-                label: "Credit",
+                label: "Tax Credit",
                 summary: "Tax credit = 10,000 ৳"
             }
         ],
@@ -623,24 +623,9 @@ function stopEreturnAudio() {
 
 function createRandomTinNumber() {
 
-    let tinNumber = "";
+  
 
-    for (
-        let digitIndex = 0;
-        digitIndex < 12;
-        digitIndex += 1
-    ) {
-
-        const minimumDigit =
-            digitIndex === 0 ? 1 : 0;
-
-        tinNumber += Math.floor(
-            Math.random() * (10 - minimumDigit)
-        ) + minimumDigit;
-
-    }
-
-    return tinNumber;
+    return `60056****529`;
 
 }
 
