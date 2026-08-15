@@ -69,8 +69,11 @@
 
     position: absolute;
 
-    right: 4%;
+    left: 50%;
     bottom: 13.5%;
+
+    transform:
+        translateX(-50%);
 
     z-index: 10;
 
@@ -150,6 +153,7 @@
 .scene-0-start:focus-visible {
 
     transform:
+        translateX(-50%)
         translateY(-0.16rem)
         scale(1.04);
 
@@ -170,6 +174,7 @@
 .scene-0-start:active {
 
     transform:
+        translateX(-50%)
         translateY(0.08rem)
         scale(0.98);
 

@@ -48,9 +48,17 @@
 }
 
 
-/* Scene 1's SKIP button reuses the Welcome scene button style. */
+/* Scene 1's SKIP button reuses the Welcome scene button style,
+   but keeps its own original position instead of Scene 0's
+   bottom-center placement. */
 .scene-1-skip {
     z-index: 12;
+
+    left: auto;
+    right: 4%;
+    bottom: 13.5%;
+
+    transform: none;
 
     border-color: #e5e7eb;
 
@@ -81,6 +89,10 @@
 
 .scene-1-skip:hover,
 .scene-1-skip:focus-visible {
+    transform:
+        translateY(-0.16rem)
+        scale(1.04);
+
     filter: brightness(1.18);
 
     box-shadow:
@@ -89,4 +101,28 @@
 
         inset 0 0.12rem 0
         rgba(255, 255, 255, 0.4);
+}
+
+
+.scene-1-skip:active {
+    transform:
+        translateY(0.08rem)
+        scale(0.98);
+}
+
+
+/* ============================================================
+   SKIP BUTTON — DISABLED (first 3s of playback)
+   ============================================================ */
+
+.scene-1-skip:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.5;
+
+    animation: none;
+
+    filter: none;
+
+    transform: none;
 }

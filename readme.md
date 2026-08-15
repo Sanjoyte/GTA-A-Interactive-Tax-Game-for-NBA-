@@ -1,8 +1,7 @@
 general implementation.
 
-when in scene 0 it needs to play a looping background audio assets/audio/welcome.mp3
-from scene 2 upto scene 13 will play a different background audio assets/audio/background.mp3
-from scene all buttons, click to continue all ineractable clicks needs to play assets/audio/click.mp3
+
+
 
 scene 0 is welcome screen
 
@@ -10,7 +9,7 @@ scene 0 is welcome screen
 scene 1 is opening video (first 3s skip button will show text welcome instead of skip and the button wont do anything it will start workin as usual as a skip button after 3s)
 scene 2 is character selection ( the screen dosent need to go grey when insert coin appears)
 scene 3 is serviece selection
-scene 4 is etin login (show a welcome message box appears "WELCOME TO eTIN PORTAL" with CLICK TO CONTINUE use the same message box font as the PRINT YOUR eTIN CERTIFICATE box. as of right now a mp3 keeps playing as soon as we enter scene 4 but now it needs to ,rpm)
+scene 4 is etin login 
 scene 5 is etin certificate print video
 scene 6 is etin to ereturn screen
 scene 7 is ereturn
