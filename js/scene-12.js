@@ -26,7 +26,7 @@ function openScene12() {
     gameState.currentScene = "scene-12";
 
     scene12ContinuePressed = false;
-    scene12MessageHint.textContent = "CLICK TO CONTINUE";
+    scene12MessageHint.textContent = "TAP TO CONTINUE";
     scene12ClickLayer.style.display = "block";
 
     scene12BackgroundVideo.currentTime = 0;
@@ -62,6 +62,6 @@ scene12Back.addEventListener("click", (event) => {
     }
 
     scene12ContinuePressed = false;
-    scene12MessageHint.textContent = "CLICK TO CONTINUE";
+    scene12MessageHint.textContent = "TAP TO CONTINUE";
     scene12ClickLayer.style.display = "block";
 });

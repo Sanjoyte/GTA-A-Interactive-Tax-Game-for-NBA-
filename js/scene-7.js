@@ -725,7 +725,7 @@ function showEreturnLogin() {
 
 
 /* ============================================================
-   WELCOME — CLICK TO CONTINUE
+   WELCOME — TAP TO CONTINUE
    ============================================================ */
 
 scene7WelcomeClickLayer.addEventListener(

@@ -14,5 +14,3 @@ SCENE 12 — eTDS VERIFICATION COMPLETE
 scene 13 eaudit
 scene 14 eaudit video 
 scene 15 final video 
-
-the back button needs to be removed when this message prompts"RETURN SUBMISSION IS MANDATORY FOR ALL TIN HOLDERS"
