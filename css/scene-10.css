@@ -242,6 +242,29 @@
     display: none;
     width: min(38%, 35rem);
     padding: clamp(1.6rem, 2.7vw, 3rem);
+    border-color: #ffc184;
+    box-shadow:
+        0 0 3rem rgba(255, 145, 50, 0.6),
+        0 0 1rem rgba(255, 190, 120, 0.5),
+        inset 0 0 2rem rgba(255, 164, 80, 0.16);
+    /* animation: etdsLoginGlow 2.2s ease-in-out infinite; */
+}
+
+@keyframes etdsLoginGlow {
+    0%,
+    100% {
+        box-shadow:
+            0 0 3rem rgba(255, 145, 50, 0.6),
+            0 0 1rem rgba(255, 190, 120, 0.5),
+            inset 0 0 2rem rgba(255, 164, 80, 0.16);
+    }
+
+    50% {
+        box-shadow:
+            0 0 4.2rem rgba(255, 145, 50, 0.85),
+            0 0 1.6rem rgba(255, 190, 120, 0.7),
+            inset 0 0 2.4rem rgba(255, 164, 80, 0.22);
+    }
 }
 
 .scene-10.login-visible .etds-login-panel {
