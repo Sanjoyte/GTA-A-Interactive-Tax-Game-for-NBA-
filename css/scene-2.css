@@ -62,6 +62,79 @@
 
 
 /* ============================================================
+   SELECT YOUR PLAYER TEXT
+   ============================================================ */
+
+.select-player-text {
+
+    /*
+        ============================================
+        SELECT YOUR PLAYER — POSITION AND SIZE
+        ============================================
+
+        Change ONLY these two values.
+
+        --select-player-top  = distance from the top (position)
+        --select-player-size = text size
+    */
+
+    --select-player-top: 6%;
+    --select-player-size: clamp(1.2rem, 3vw, 2.4rem);
+
+
+    position: absolute;
+
+    left: 50%;
+    top: var(--select-player-top);
+
+    transform: translate(-50%, 0);
+
+    z-index: 3;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: var(--select-player-size);
+
+    font-weight: 800;
+
+    letter-spacing: 0.25em;
+
+    color: #ffffff;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+
+    text-shadow:
+        0 0 0.5rem rgba(110, 230, 255, 0.9),
+        0 0 1.4rem rgba(70, 200, 255, 0.6);
+
+    animation:
+        selectPlayerBlink
+        1.2s
+        ease-in-out
+        infinite;
+
+}
+
+
+@keyframes selectPlayerBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.25;
+    }
+
+}
+
+
+/* ============================================================
    CHARACTERS CONTAINER
    ============================================================ */
 

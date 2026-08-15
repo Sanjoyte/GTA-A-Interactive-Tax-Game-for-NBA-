@@ -32,6 +32,34 @@ const scene3ClickLayer =
 
 
 /* ============================================================
+   SCENE 3 AUDIO
+   ============================================================ */
+
+const etinReqAudio =
+    new Audio("assets/audio/etinreq.mp3");
+
+etinReqAudio.preload = "auto";
+
+
+function playEtinReqAudio() {
+
+    etinReqAudio.currentTime = 0;
+
+    etinReqAudio.play().catch(
+        (error) => {
+
+            console.log(
+                "eTIN required audio blocked:",
+                error
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
    SCENE 3 STATE
    ============================================================ */
 
@@ -85,6 +113,15 @@ function openScene3() {
     selectedService = null;
 
     serviceStep = 0;
+
+
+    /* --------------------------------------------------------
+       Stop eTIN required audio
+       -------------------------------------------------------- */
+
+    etinReqAudio.pause();
+
+    etinReqAudio.currentTime = 0;
 
 
     /* --------------------------------------------------------
@@ -208,6 +245,15 @@ serviceCards.forEach(
                     "eTIN REQUIRED",
                     "CLICK TO CONTINUE"
                 );
+
+
+                /*
+                    Play the eTIN required
+                    audio as soon as the
+                    message window appears.
+                */
+
+                playEtinReqAudio();
 
 
                 /*
