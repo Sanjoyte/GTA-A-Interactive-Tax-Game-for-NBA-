@@ -101,7 +101,7 @@
 
     left: 50%;
 
-    top: 10%;
+    top: 27.8%;
 
     transform:
         translateX(-50%);
@@ -154,8 +154,7 @@
 
 .service-title {
 
-    margin-top:
-        12rem;
+    margin-top: 0;
 
     font-family: "Orbitron", sans-serif;
 
