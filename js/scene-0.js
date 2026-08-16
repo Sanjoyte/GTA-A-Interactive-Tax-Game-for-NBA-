@@ -39,9 +39,15 @@ function openScene0() {
     );
 
 
-    if (typeof stopJourneyLoopAudio === "function") {
+    /*
+        The background track runs through every scene, so
+        coming back here from Scene 15 keeps it playing
+        without a break.
+    */
 
-        stopJourneyLoopAudio();
+    if (typeof startBackgroundAudio === "function") {
+
+        startBackgroundAudio();
 
     }
 
@@ -90,13 +96,6 @@ function openScene0() {
 
             }
         );
-
-    }
-
-
-    if (typeof startScene0LoopAudio === "function") {
-
-        startScene0LoopAudio();
 
     }
 

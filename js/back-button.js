@@ -155,7 +155,8 @@ function stopTransientSceneAudio() {
         "stopEtinAudio",
         "stopEreturnAudio",
         "stopEtdsAudio",
-        "stopEauditCaseAudio"
+        "stopEauditCaseAudio",
+        "stopScene15CaptainAudio"
     ].forEach(
         (functionName) => {
 

@@ -43,38 +43,63 @@ const gameState = {
 
 
 /* ============================================================
-   GLOBAL LOOPING AUDIO
+   GLOBAL BACKGROUND AUDIO
+
+   One single looping track runs from Scene 0 all the way
+   through Scene 15.
+
+   Whenever a scene plays a voice over clip, the background
+   track steps aside and then continues the moment that clip
+   finishes or is skipped.
+
+   Scene videos are left alone on purpose — the background
+   track keeps playing over them.
    ============================================================ */
 
-const scene0LoopAudio =
-    new Audio(
-        "assets/audio/welcome.mp3"
-    );
+/*
+    The untouched browser constructor.
+
+    It is kept here because the patched constructor further
+    down needs it, and because the background track itself
+    must not register as a voice over clip.
+*/
+
+const NativeAudio = window.Audio;
 
 
-const journeyLoopAudio =
-    new Audio(
+const backgroundAudio =
+    new NativeAudio(
         "assets/audio/background.mp3"
     );
 
 
-scene0LoopAudio.loop = true;
-scene0LoopAudio.preload = "auto";
-
-journeyLoopAudio.loop = true;
-journeyLoopAudio.preload = "auto";
+backgroundAudio.loop = true;
+backgroundAudio.preload = "auto";
 
 
-let shouldPlayScene0Loop = false;
-let shouldPlayJourneyLoop = false;
+let shouldPlayBackgroundAudio = false;
 
 
-function playLoopingAudio(audio, label) {
+/*
+    Every voice over clip that is playing right now.
 
-    audio.play().catch((error) => {
+    The background track only continues once this set is
+    empty again, so two overlapping clips cannot bring it
+    back too early.
+*/
+
+const activeVoiceOverAudios = new Set();
+
+
+let backgroundResumeTimer = null;
+
+
+function playBackgroundAudio() {
+
+    backgroundAudio.play().catch((error) => {
 
         console.log(
-            `${label} loop could not autoplay yet:`,
+            "Background loop could not autoplay yet:",
             error
         );
 
@@ -83,98 +108,178 @@ function playLoopingAudio(audio, label) {
 }
 
 
-function startScene0LoopAudio() {
+function resumeBackgroundAudio() {
 
-    shouldPlayScene0Loop = true;
-    shouldPlayJourneyLoop = false;
+    window.clearTimeout(
+        backgroundResumeTimer
+    );
 
-    journeyLoopAudio.pause();
-
-    if (scene0LoopAudio.paused) {
-
-        playLoopingAudio(
-            scene0LoopAudio,
-            "Scene 0"
-        );
-
-    }
-
-}
+    backgroundResumeTimer = null;
 
 
-function stopScene0LoopAudio() {
+    if (!shouldPlayBackgroundAudio) {
 
-    shouldPlayScene0Loop = false;
-    scene0LoopAudio.pause();
-    scene0LoopAudio.currentTime = 0;
-
-}
-
-
-function startJourneyLoopAudio() {
-
-    shouldPlayJourneyLoop = true;
-    shouldPlayScene0Loop = false;
-
-    stopScene0LoopAudio();
-
-    if (journeyLoopAudio.paused) {
-
-        playLoopingAudio(
-            journeyLoopAudio,
-            "Scene 2-15"
-        );
+        return;
 
     }
 
-}
 
+    if (activeVoiceOverAudios.size > 0) {
 
-function stopJourneyLoopAudio() {
-
-    shouldPlayJourneyLoop = false;
-    journeyLoopAudio.pause();
-    journeyLoopAudio.currentTime = 0;
-
-}
-
-
-function resumeBlockedLoopAudio() {
-
-    if (
-        shouldPlayScene0Loop &&
-        scene0LoopAudio.paused
-    ) {
-
-        playLoopingAudio(
-            scene0LoopAudio,
-            "Scene 0"
-        );
+        return;
 
     }
 
-    if (
-        shouldPlayJourneyLoop &&
-        journeyLoopAudio.paused
-    ) {
 
-        playLoopingAudio(
-            journeyLoopAudio,
-            "Scene 2-15"
-        );
+    if (!backgroundAudio.paused) {
+
+        return;
 
     }
 
+
+    playBackgroundAudio();
+
 }
+
+
+/*
+    A clip that is restarted stops and starts again within
+    the same moment.
+
+    The tiny delay here keeps the background track from
+    flickering back in between those two steps, and is far
+    too short to be heard as a gap.
+*/
+
+function scheduleBackgroundResume() {
+
+    window.clearTimeout(
+        backgroundResumeTimer
+    );
+
+    backgroundResumeTimer =
+        window.setTimeout(
+            resumeBackgroundAudio,
+            40
+        );
+
+}
+
+
+function startBackgroundAudio() {
+
+    shouldPlayBackgroundAudio = true;
+
+    resumeBackgroundAudio();
+
+}
+
+
+function stopBackgroundAudio() {
+
+    shouldPlayBackgroundAudio = false;
+
+    window.clearTimeout(
+        backgroundResumeTimer
+    );
+
+    backgroundResumeTimer = null;
+
+    backgroundAudio.pause();
+    backgroundAudio.currentTime = 0;
+
+}
+
+
+/* ============================================================
+   VOICE OVER CLIPS
+
+   A registered clip pauses the background track while it
+   plays, and hands it back when it ends, is paused or is
+   stopped by a scene change.
+   ============================================================ */
+
+function registerVoiceOverAudio(audio) {
+
+    audio.addEventListener(
+        "play",
+        () => {
+
+            activeVoiceOverAudios.add(audio);
+
+            window.clearTimeout(
+                backgroundResumeTimer
+            );
+
+            backgroundResumeTimer = null;
+
+            backgroundAudio.pause();
+
+        }
+    );
+
+
+    [
+        "pause",
+        "ended",
+        "error",
+        "emptied"
+    ].forEach(
+        (eventName) => {
+
+            audio.addEventListener(
+                eventName,
+                () => {
+
+                    activeVoiceOverAudios.delete(audio);
+
+                    scheduleBackgroundResume();
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/*
+    Every scene builds its clips with `new Audio(...)`, so
+    registering them here means a new scene gets the same
+    behaviour without any extra wiring.
+
+    Videos use <video> elements and are never touched by
+    this.
+*/
+
+window.Audio = function PatchedAudio(source) {
+
+    const audio =
+        source === undefined
+            ? new NativeAudio()
+            : new NativeAudio(source);
+
+
+    registerVoiceOverAudio(audio);
+
+
+    return audio;
+
+};
+
+
+window.Audio.prototype = NativeAudio.prototype;
 
 
 document.addEventListener(
     "pointerdown",
-    resumeBlockedLoopAudio
+    resumeBackgroundAudio
 );
 
 
-startScene0LoopAudio();
+startBackgroundAudio();
 
 
 /* ============================================================

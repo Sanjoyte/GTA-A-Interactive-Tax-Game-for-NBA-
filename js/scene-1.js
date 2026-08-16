@@ -30,9 +30,14 @@ function openScene1() {
     );
 
 
-    if (typeof stopScene0LoopAudio === "function") {
+    /*
+        The opening video plays over the background track,
+        which simply keeps running.
+    */
 
-        stopScene0LoopAudio();
+    if (typeof startBackgroundAudio === "function") {
+
+        startBackgroundAudio();
 
     }
 

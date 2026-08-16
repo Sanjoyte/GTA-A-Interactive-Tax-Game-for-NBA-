@@ -7,9 +7,102 @@ const scene15Video = document.getElementById("scene-15-video");
 
 // const SCENE15_PAUSE_TIME = 21.3;
 
+/*
+    The mid video pause is switched off.
+
+    Infinity keeps the checks below valid while making sure
+    the pause point is never reached.
+*/
+
+const SCENE15_PAUSE_TIME = Infinity;
+
+
+/*
+    The captain clip starts exactly this far into the final
+    video.
+*/
+
+const SCENE15_CAPTAIN_TIME = 5.3;
+
+
 let scene15PauseReached = false;
 let scene15PauseMonitor = null;
 let scene15TransitionStarted = false;
+
+
+/* ============================================================
+   CAPTAIN AUDIO
+
+   Registered as a voice over clip by main.js, so the
+   background track pauses while it plays and continues as
+   soon as it is finished or stopped.
+   ============================================================ */
+
+const scene15CaptainAudio =
+    new Audio("assets/audio/captain.mp3");
+
+scene15CaptainAudio.preload = "auto";
+
+
+let scene15CaptainStarted = false;
+let scene15CaptainMonitor = null;
+
+
+function playScene15CaptainAudio() {
+
+    scene15CaptainStarted = true;
+
+    window.cancelAnimationFrame(scene15CaptainMonitor);
+    scene15CaptainMonitor = null;
+
+    scene15CaptainAudio.currentTime = 0;
+
+    scene15CaptainAudio.play().catch((error) => {
+        console.log("Could not play captain audio:", error);
+    });
+
+}
+
+
+function stopScene15CaptainAudio() {
+
+    window.cancelAnimationFrame(scene15CaptainMonitor);
+    scene15CaptainMonitor = null;
+
+    scene15CaptainStarted = false;
+
+    scene15CaptainAudio.pause();
+    scene15CaptainAudio.currentTime = 0;
+
+}
+
+
+/*
+    Watching the video clock instead of the wall clock keeps
+    the clip on its mark even if the video is paused or slow
+    to start.
+*/
+
+function monitorScene15Captain() {
+
+    if (
+        scene15CaptainStarted ||
+        !scene15.classList.contains("active")
+    ) {
+        scene15CaptainMonitor = null;
+        return;
+    }
+
+    if (scene15Video.currentTime >= SCENE15_CAPTAIN_TIME) {
+        playScene15CaptainAudio();
+        return;
+    }
+
+    scene15CaptainMonitor = window.requestAnimationFrame(
+        monitorScene15Captain
+    );
+
+}
 
 
 function monitorScene15Pause() {
@@ -49,6 +142,8 @@ function openScene15() {
     scene15PauseMonitor = null;
     scene15Video.currentTime = 0;
 
+    stopScene15CaptainAudio();
+
     const playPromise = scene15Video.play();
 
     if (playPromise !== undefined) {
@@ -58,6 +153,7 @@ function openScene15() {
     }
 
     monitorScene15Pause();
+    monitorScene15Captain();
 }
 
 
@@ -94,9 +190,7 @@ scene15Video.addEventListener("ended", () => {
     scene15.classList.remove("awaiting-resume");
     scene15.classList.add("video-finished");
 
-    if (typeof stopJourneyLoopAudio === "function") {
-        stopJourneyLoopAudio();
-    }
+    stopScene15CaptainAudio();
 
     if (
         scene15TransitionStarted ||

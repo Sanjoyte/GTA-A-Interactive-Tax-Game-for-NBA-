@@ -58,9 +58,9 @@ function openScene2() {
     );
 
 
-    if (typeof startJourneyLoopAudio === "function") {
+    if (typeof startBackgroundAudio === "function") {
 
-        startJourneyLoopAudio();
+        startBackgroundAudio();
 
     }
 
