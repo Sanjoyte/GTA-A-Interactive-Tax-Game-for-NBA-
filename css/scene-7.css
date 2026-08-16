@@ -720,8 +720,8 @@
         0 0 1.5rem rgba(64, 186, 255, 0.58);
 }
 
-.ereturn-document-card.selected::after {
-    content: "✓";
+.ereturn-document-card::after {
+    content: "";
     position: absolute;
     right: 4%;
     top: 50%;
@@ -730,12 +730,21 @@
     place-items: center;
     width: clamp(1.5rem, 2.2vw, 2.1rem);
     aspect-ratio: 1;
-    border: 0.1rem solid #b9efff;
+    border: 0.1rem solid #ffffff;
     border-radius: 50%;
-    background-color: #0878b8;
+    background-color: transparent;
     color: #ffffff;
     font-size: clamp(0.72rem, 1vw, 1rem);
     font-weight: 900;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.ereturn-document-card.selected::after {
+    content: "✓";
+    border-color: #ffffff;
+    background-color: #0878b8;
 }
 
 .ereturn-page-label {
