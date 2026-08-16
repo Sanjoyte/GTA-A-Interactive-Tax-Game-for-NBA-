@@ -91,6 +91,18 @@ const ereturnActionButton =
     );
 
 
+const ereturnTotalMessage =
+    document.getElementById(
+        "ereturn-total-message"
+    );
+
+
+const ereturnTotalText =
+    document.getElementById(
+        "ereturn-total-text"
+    );
+
+
 const ereturnSummaryRounds = [
     {
         title: "Income Details",
@@ -338,29 +350,19 @@ function renderEreturnSummaryRound() {
             }
         );
 
-    const totalLine =
-        document.createElement(
-            "div"
-        );
-
-    totalLine.className =
-        "ereturn-calculation-line ereturn-calculation-line--total";
-
-    totalLine.dataset.summaryTotal =
-        "true";
-
-    totalLine.textContent =
-        summaryRound.total;
-
     ereturnCalculationLines.replaceChildren(
-        ...detailLines,
-        totalLine
+        ...detailLines
     );
 
     ereturnCalculationLines.classList.toggle(
         "ereturn-calculation-lines--dense",
         summaryRound.cards.length + 1 > 5
     );
+
+    ereturnTotalText.textContent =
+        summaryRound.total;
+
+    hideEreturnTotalMessage();
 
     ereturnActionButton.textContent =
         ereturnSummaryRoundIndex ===
@@ -375,6 +377,8 @@ function resetEreturnSummarySelection() {
 
     ereturnSummarySession += 1;
     selectedReturnDocuments.clear();
+
+    hideEreturnTotalMessage();
 
     ereturnDocumentGrid
         .querySelectorAll(
@@ -609,6 +613,24 @@ function hideEreturnAudioStatus() {
 }
 
 
+function showEreturnTotalMessage() {
+
+    ereturnTotalMessage.classList.add(
+        "is-visible"
+    );
+
+}
+
+
+function hideEreturnTotalMessage() {
+
+    ereturnTotalMessage.classList.remove(
+        "is-visible"
+    );
+
+}
+
+
 function stopEreturnAudio() {
 
     ereturnAudio.pause();
@@ -806,7 +828,6 @@ function undoLastEreturnPageSelection() {
 
                 line.classList.toggle(
                     "visible",
-                    line.dataset.summaryTotal !== "true" &&
                     selectedReturnDocuments.has(
                         line.dataset.summarySource
                     )
@@ -814,6 +835,8 @@ function undoLastEreturnPageSelection() {
 
             }
         );
+
+    hideEreturnTotalMessage();
 
     scene7Step =
         "documents";
@@ -1097,13 +1120,7 @@ ereturnDocumentGrid.addEventListener(
                 }
 
 
-                ereturnCalculationLines
-                    .querySelector(
-                        "[data-summary-total]"
-                    )
-                    .classList.add(
-                        "visible"
-                    );
+                showEreturnTotalMessage();
 
 
                 scene7Step =
