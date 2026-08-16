@@ -1,6 +1,6 @@
 scene 0 is welcome screen
 scene 1 is opening video 
-scene 2 is character selection ( the screen dosent need to go grey when insert coin appears)
+scene 2 is character selection 
 scene 3 is serviece selection
 scene 4 is etin login 
 scene 5 is etin certificate print video

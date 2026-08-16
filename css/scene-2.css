@@ -245,22 +245,31 @@
             rgba(255,255,255,0.4)
         );
 
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+
 }
 
 
 /* ============================================================
-   RAHMAN FOCUS
+   RAHMAN HOVER
    ============================================================ */
 
+.character--rahman:hover,
 .character--rahman:focus-visible {
 
-    outline:
-        0.3rem
-        solid
-        #fff;
+    transform:
+        translate(-50%, -50%)
+        scale(1.03);
 
-    outline-offset:
-        0.8rem;
+    filter:
+        drop-shadow(
+            0 0 2rem
+            rgba(252, 251, 252, 0.72)
+        );
+
+    outline: none;
 
 }
 

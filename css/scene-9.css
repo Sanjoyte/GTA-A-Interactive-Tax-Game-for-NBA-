@@ -201,7 +201,7 @@
 }
 
 
-/* .scene-9-character--ripon:hover, */
+.scene-9-character--ripon:hover,
 .scene-9-character--ripon:focus-visible {
 
     transform:
@@ -211,7 +211,7 @@
     filter:
         drop-shadow(
             0 0 2rem
-            rgba(113, 225, 255, 0.72)
+            rgba(252, 251, 252, 0.72)
         );
 
     outline: none;
