@@ -78,8 +78,8 @@
         --select-player-size = text size
     */
 
-    --select-player-top: 6%;
-    --select-player-size: clamp(1.2rem, 3vw, 2.4rem);
+    --select-player-top: 3%;
+    --select-player-size: clamp(1.2rem, 3vw, 2.2rem);
 
 
     position: absolute;
