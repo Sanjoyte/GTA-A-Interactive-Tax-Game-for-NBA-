@@ -275,9 +275,9 @@
 
     width:
         clamp(
-            9rem,
-            16vw,
-            19rem
+            8rem,
+            14vw,
+            16.5rem
         );
 
     aspect-ratio: 1 / 1;
