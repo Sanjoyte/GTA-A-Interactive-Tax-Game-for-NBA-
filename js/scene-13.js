@@ -180,7 +180,12 @@ function showEauditFact() {
 
     const factDetail = document.createElement("span");
     factDetail.className = "eaudit-fact-detail";
-    factDetail.textContent = "49,54,469 eRETURNS HAVE BEEN FILED IN THE PREVIOUS YEAR.";
+
+    const factNumber = document.createElement("span");
+    factNumber.className = "eaudit-fact-number";
+    factNumber.textContent = "49,54,469";
+
+    factDetail.append(factNumber, " eRETURNS HAVE BEEN FILED IN THE PREVIOUS YEAR.");
 
     eauditMessageText.replaceChildren(factTitle, factDetail);
     eauditMessageContinue.style.display = "inline-block";

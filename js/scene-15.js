@@ -9,6 +9,7 @@ const scene15Video = document.getElementById("scene-15-video");
 
 let scene15PauseReached = false;
 let scene15PauseMonitor = null;
+let scene15TransitionStarted = false;
 
 
 function monitorScene15Pause() {
@@ -43,6 +44,7 @@ function openScene15() {
     gameState.currentScene = "scene-15";
 
     scene15PauseReached = false;
+    scene15TransitionStarted = false;
     window.cancelAnimationFrame(scene15PauseMonitor);
     scene15PauseMonitor = null;
     scene15Video.currentTime = 0;
@@ -95,6 +97,16 @@ scene15Video.addEventListener("ended", () => {
     if (typeof stopJourneyLoopAudio === "function") {
         stopJourneyLoopAudio();
     }
+
+    if (
+        scene15TransitionStarted ||
+        !scene15.classList.contains("active")
+    ) {
+        return;
+    }
+
+    scene15TransitionStarted = true;
+    openScene0();
 });
 
 

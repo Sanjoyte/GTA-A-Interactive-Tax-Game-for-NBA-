@@ -101,6 +101,11 @@
     text-shadow: 0 0 0.9rem rgba(255, 213, 74, 0.7);
 }
 
+.eaudit-fact-number {
+    font-size: clamp(1.5rem, 3.2vw, 3.4rem);
+    font-weight: 900;
+}
+
 .eaudit-continue {
     display: inline-block;
     margin-top: clamp(1.5rem, 3vh, 2.4rem);
