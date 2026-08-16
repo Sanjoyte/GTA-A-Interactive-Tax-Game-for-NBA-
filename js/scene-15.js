@@ -5,7 +5,7 @@
 const scene15 = document.getElementById("scene-15");
 const scene15Video = document.getElementById("scene-15-video");
 
-const SCENE15_PAUSE_TIME = 21.3;
+// const SCENE15_PAUSE_TIME = 21.3;
 
 let scene15PauseReached = false;
 let scene15PauseMonitor = null;
