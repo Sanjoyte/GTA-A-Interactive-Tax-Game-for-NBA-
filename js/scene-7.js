@@ -193,20 +193,20 @@ const ereturnSummaryRounds = [
             {
                 id: "tax",
                 label: "Tax Payable",
-                summary: "Tax Payable = 2,83,000 ৳"
+                summary: "Tax Payable = ৳ 2,83,000 "
             },
             {
                 id: "rebate",
                 label: "Rebate",
-                summary: "Rebate = 50,000 ৳"
+                summary: "Rebate = ৳ 50,000 "
             },
             {
                 id: "credit",
                 label: "Tax Credit",
-                summary: "Tax credit = 10,000 ৳"
+                summary: "Tax credit = ৳ 10,000 "
             }
         ],
-        total: "Final tax liability = 2,23,000 ৳"
+        total: "Final tax liability = ৳ 2,23,000 "
     }
 ];
 
