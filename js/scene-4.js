@@ -242,9 +242,8 @@ etinPassword.addEventListener("click", (event) => {
    ============================================================ */
 
 function makeRandomNid() {
-    const baseDigits = String(Math.floor(1000000 + Math.random() * 9000000));
-    const extraDigits = String(Math.floor(Math.random() * 1000)).padStart(3, "0");
-    return baseDigits + extraDigits;
+    
+    return '123****567';
 }
 
 function resetEtinRegistration() {
