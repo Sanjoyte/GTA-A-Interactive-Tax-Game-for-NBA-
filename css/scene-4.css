@@ -161,6 +161,7 @@
 
 .etin-input::placeholder {
     color: rgba(210, 255, 230, 0.68);
+    font-size: 0.7em;
 }
 
 .etin-input:focus {
