@@ -49,12 +49,6 @@ const scene7BackgroundVideo =
     );
 
 
-const scene7BackButton =
-    document.getElementById(
-        "scene-7-back"
-    );
-
-
 const scene7WelcomeClickLayer =
     document.getElementById(
         "scene-7-welcome-click-layer"
@@ -746,6 +740,154 @@ function showEreturnLogin() {
 }
 
 
+function showEreturnWelcome() {
+
+    scene7Step =
+        "welcome";
+
+
+    scene7.classList.remove(
+        "login-ready",
+        "dashboard-visible",
+        "submit-ready"
+    );
+
+
+    scene7.classList.add(
+        "welcome-visible"
+    );
+
+}
+
+
+/* ============================================================
+   REBUILD A COMPLETED SUMMARY ROUND
+
+   Fills a whole round in and leaves it ready to submit,
+   which is what the player last saw before moving on.
+   ============================================================ */
+
+function fillEreturnLogin() {
+
+    ereturnTypingSession += 1;
+
+    ereturnTin.value =
+        createRandomTinNumber();
+
+    ereturnPassword.value =
+        "password";
+
+    ereturnTinStarted = true;
+    ereturnPasswordStarted = true;
+    ereturnTinFilled = true;
+    ereturnPasswordFilled = true;
+
+    updateEreturnLoginState();
+
+}
+
+
+function completeEreturnSummaryRound(roundIndex) {
+
+    ereturnSummaryRoundIndex =
+        roundIndex;
+
+
+    resetEreturnSummarySelection();
+
+    renderEreturnSummaryRound();
+
+
+    /*
+        Cancel any reveal still queued from earlier clicks.
+    */
+
+    ereturnSummarySession += 1;
+
+
+    ereturnSummaryRounds[roundIndex].cards.forEach(
+        (cardData) => {
+
+            selectedReturnDocuments.add(
+                cardData.id
+            );
+
+
+            const card =
+                ereturnDocumentGrid.querySelector(
+                    `[data-document="${cardData.id}"]`
+                );
+
+            if (card) {
+
+                card.classList.add(
+                    "selected"
+                );
+
+                card.setAttribute(
+                    "aria-pressed",
+                    "true"
+                );
+
+            }
+
+
+            const summaryLine =
+                ereturnCalculationLines.querySelector(
+                    `[data-summary-source="${cardData.id}"]`
+                );
+
+            if (summaryLine) {
+
+                summaryLine.classList.add(
+                    "visible"
+                );
+
+            }
+
+        }
+    );
+
+
+    showEreturnTotalMessage();
+
+
+    scene7Step =
+        "action-ready";
+
+
+    scene7.classList.remove(
+        "welcome-visible"
+    );
+
+
+    scene7.classList.add(
+        "dashboard-visible",
+        "submit-ready"
+    );
+
+
+    ereturnActionButton.disabled =
+        false;
+
+}
+
+
+function showEreturnHandover() {
+
+    stopEreturnAudio();
+
+    fillEreturnLogin();
+
+    showEreturnLogin();
+
+    completeEreturnSummaryRound(
+        ereturnSummaryRounds.length - 1
+    );
+
+}
+
+
 /* ============================================================
    WELCOME — TAP TO CONTINUE
    ============================================================ */
@@ -920,50 +1062,89 @@ ereturnPassword.addEventListener(
 
 
 /* ============================================================
-   INTERNAL BACK BUTTON
+   SHARED BACK BUTTON
+
+   Scene 7 owns the blue palette.
+
+   Once every internal step has been rewound, the button
+   falls back to Scene 6.
    ============================================================ */
 
-scene7BackButton.addEventListener(
-    "click",
-    (event) => {
+registerSceneBackButton(
+    "scene-7",
+    {
 
-        event.stopPropagation();
+        theme: "ereturn",
 
+        previousScene: 6,
 
-        if (
-            scene7Step === "documents" ||
-            scene7Step === "action-ready"
-        ) {
+        resumeAtEnd: showEreturnHandover,
+
+        goBack: () => {
 
             if (
-                undoLastEreturnPageSelection()
+                scene7Step === "documents" ||
+                scene7Step === "action-ready"
             ) {
 
-                return;
+                if (
+                    undoLastEreturnPageSelection()
+                ) {
+
+                    return true;
+
+                }
+
+
+                /*
+                    Nothing selected in this round, so step
+                    back into the completed previous round.
+                */
+
+                if (ereturnSummaryRoundIndex > 0) {
+
+                    completeEreturnSummaryRound(
+                        ereturnSummaryRoundIndex - 1
+                    );
+
+                    return true;
+
+                }
+
+
+                showEreturnLogin();
+
+                return true;
 
             }
 
-            showEreturnLogin();
 
-            return;
+            if (
+                scene7Step === "login"
+            ) {
 
-        }
+                ereturnTin.value = "";
+                ereturnPassword.value = "";
+                ereturnTinFilled = false;
+                ereturnPasswordFilled = false;
+                ereturnTinStarted = false;
+                ereturnPasswordStarted = false;
+                ereturnTypingSession += 1;
+
+                updateEreturnLoginState();
+
+                showEreturnWelcome();
+
+                return true;
+
+            }
 
 
-        if (
-            scene7Step === "login" &&
-            (ereturnTinStarted || ereturnPasswordStarted)
-        ) {
+            /*
+                Welcome step — leave for Scene 6.
+            */
 
-            ereturnTin.value = "";
-            ereturnPassword.value = "";
-            ereturnTinFilled = false;
-            ereturnPasswordFilled = false;
-            ereturnTinStarted = false;
-            ereturnPasswordStarted = false;
-            ereturnTypingSession += 1;
-
-            updateEreturnLoginState();
+            return false;
 
         }
 

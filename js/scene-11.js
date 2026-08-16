@@ -4,7 +4,6 @@
 
 const scene11 = document.getElementById("scene-11");
 const scene11Video = document.getElementById("scene-11-video");
-const scene11Skip = document.getElementById("scene-11-skip");
 
 let scene11TransitionStarted = false;
 
@@ -65,10 +64,23 @@ scene11Video.addEventListener("ended", () => {
 });
 
 
-scene11Skip.addEventListener("click", (event) => {
-    event.stopPropagation();
-    console.log("Scene 11 SKIP clicked.");
-    completeScene11();
+/* ============================================================
+   SHARED BACK BUTTON
+
+   Scene 11 borrows the Scene 10 orange palette and always
+   returns to Scene 10.
+   ============================================================ */
+
+registerSceneBackButton("scene-11", {
+
+    theme: "etds",
+
+    previousScene: 10,
+
+    resumeAtEnd: () => holdVideoAtEnd(scene11Video),
+
+    goBack: () => false
+
 });
 
 

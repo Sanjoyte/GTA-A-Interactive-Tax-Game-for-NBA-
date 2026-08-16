@@ -50,9 +50,3 @@
     z-index: 1;
 
 }
-
-
-/* Scene 5 reuses the Scene 4 button design. */
-.scene-5-skip {
-    z-index: 10;
-}

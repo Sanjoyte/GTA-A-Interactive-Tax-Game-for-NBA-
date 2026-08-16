@@ -12,11 +12,6 @@ const scene5Video =
         "scene-5-video"
     );
 
-const scene5Skip =
-    document.getElementById(
-        "scene-5-skip"
-    );
-
 let scene5Transitioned = false;
 
 
@@ -116,18 +111,59 @@ scene5Video.addEventListener(
 
 
 /* ============================================================
-   SKIP VIDEO
+   TAP TO CONTINUE
+
+   Also resumes playback when the video is parked on its
+   last frame after the player came back from Scene 6.
    ============================================================ */
 
-scene5Skip.addEventListener(
+scene5.addEventListener(
     "click",
-    (event) => {
+    () => {
 
-        event.stopPropagation();
+        if (
+            scene5Video.paused &&
+            !scene5Video.ended &&
+            scene5.classList.contains("active")
+        ) {
 
-        finishScene5(
-            "video skipped"
-        );
+            scene5Video.play().catch(
+                (error) => {
+
+                    console.log(
+                        "Scene 5 video could not play after click:",
+                        error
+                    );
+
+                }
+            );
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   SHARED BACK BUTTON
+
+   Scene 5 borrows the Scene 4 green palette.
+
+   There is nothing to step through inside a video, so the
+   button always returns to Scene 4.
+   ============================================================ */
+
+registerSceneBackButton(
+    "scene-5",
+    {
+
+        theme: "etin",
+
+        previousScene: 4,
+
+        resumeAtEnd: () => holdVideoAtEnd(scene5Video),
+
+        goBack: () => false
 
     }
 );

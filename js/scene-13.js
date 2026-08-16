@@ -4,7 +4,6 @@
 
 const scene13 = document.getElementById("scene-13");
 const scene13BackgroundVideo = document.getElementById("scene-13-background");
-const scene13Back = document.getElementById("scene-13-back");
 const eauditMessageText = document.getElementById("eaudit-message-text");
 const eauditMessageContinue = document.getElementById("eaudit-message-continue");
 const eauditInstruction = document.getElementById("eaudit-instruction");
@@ -358,10 +357,6 @@ function continueEauditSelection() {
 
 
 scene13.addEventListener("click", (event) => {
-    if (event.target.closest("#scene-13-back")) {
-        return;
-    }
-
     if (scene13Step === "revealing" && activeCaseIndex !== null) {
         event.preventDefault();
         event.stopPropagation();
@@ -381,37 +376,59 @@ eauditSelectionSubmit.addEventListener("click", (event) => {
 });
 
 
-scene13Back.addEventListener("click", (event) => {
-    event.stopPropagation();
+/* ============================================================
+   SHARED BACK BUTTON
 
-    if (scene13Step === "invitation") {
-        showEauditFact();
-        return;
+   Scene 13 owns the purple palette.
+
+   Once the eAudit intro is back at the "DID YOU KNOW?" step,
+   the button falls back to Scene 12.
+   ============================================================ */
+
+registerSceneBackButton("scene-13", {
+
+    theme: "eaudit",
+
+    previousScene: 12,
+
+    goBack: () => {
+        if (scene13Step === "invitation") {
+            showEauditFact();
+            return true;
+        }
+
+        if (scene13Step === "complete") {
+            scene13Step = "selecting";
+            scene13.classList.remove("selection-complete");
+            scene13.classList.toggle("selection-ready", selectedAuditCases.size >= 2);
+            eauditInstruction.textContent = `${selectedAuditCases.size} FILES SELECTED FOR AUDIT`;
+            return true;
+        }
+
+        if (scene13Step === "selecting" && selectedAuditCases.size > 0) {
+            selectedAuditCases.clear();
+            eauditCaseGrid.querySelectorAll(".audit-selected").forEach((card) => {
+                card.classList.remove("audit-selected");
+                card.setAttribute("aria-pressed", "false");
+            });
+            scene13.classList.remove("selection-ready");
+            eauditInstruction.textContent = "SELECT 2 TO 5 FILES FOR AUDIT";
+            return true;
+        }
+
+        if (scene13Step === "revealing" || scene13Step === "selecting") {
+            resetEauditCards();
+            showEauditInvitation();
+            return true;
+        }
+
+        /*
+            "DID YOU KNOW?" step — leave for Scene 12.
+        */
+
+        return false;
     }
 
-    if (scene13Step === "complete") {
-        scene13Step = "selecting";
-        scene13.classList.remove("selection-complete");
-        scene13.classList.toggle("selection-ready", selectedAuditCases.size >= 2);
-        eauditInstruction.textContent = `${selectedAuditCases.size} FILES SELECTED FOR AUDIT`;
-        return;
-    }
-
-    if (scene13Step === "selecting" && selectedAuditCases.size > 0) {
-        selectedAuditCases.clear();
-        eauditCaseGrid.querySelectorAll(".audit-selected").forEach((card) => {
-            card.classList.remove("audit-selected");
-            card.setAttribute("aria-pressed", "false");
-        });
-        scene13.classList.remove("selection-ready");
-        eauditInstruction.textContent = "SELECT 2 TO 5 FILES FOR AUDIT";
-        return;
-    }
-
-    if (scene13Step === "revealing" || scene13Step === "selecting") {
-        resetEauditCards();
-        showEauditInvitation();
-    }
 });
 
 

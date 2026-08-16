@@ -193,7 +193,17 @@
         rel="stylesheet"
         href="css/scene-14-15.css?v=6"
     >
-    
+
+
+    <!-- =====================================================
+         SHARED BACK BUTTON CSS
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css/back-button.css?v=1"
+    >
+
 </head>
 
 
@@ -850,19 +860,6 @@
 
 
         <!-- =============================================
-             SCENE 4 INTERNAL BACK BUTTON
-             ============================================= -->
-
-        <button
-            id="scene-4-back"
-            class="scene-4-back"
-            type="button"
-        >
-            <span class="back-arrow-glyph">←</span>
-        </button>
-
-
-        <!-- =============================================
              CLICK LAYER
              ============================================= -->
 
@@ -925,18 +922,6 @@
             <div class="etin-progress-label">Progress Meter</div>
         </div>
 
-
-        <!-- =============================================
-             SKIP BUTTON
-             ============================================= -->
-
-        <button
-            id="scene-5-skip"
-            class="scene-4-back scene-5-skip"
-            type="button"
-        >
-            SKIP
-        </button>
 
     </div>
 
@@ -1066,17 +1051,6 @@
                 </div>
 
             </div>
-
-
-            <!-- SCENE 6 INTERNAL BACK BUTTON -->
-
-            <button
-                id="scene-6-back"
-                class="scene-4-back scene-6-back"
-                type="button"
-            >
-                <span class="back-arrow-glyph">←</span>
-            </button>
 
 
             <!-- CLICK LAYER -->
@@ -1303,17 +1277,6 @@
             </div>
 
 
-            <!-- SCENE 7 INTERNAL BACK BUTTON -->
-
-            <button
-                id="scene-7-back"
-                class="scene-7-back"
-                type="button"
-            >
-                <span class="back-arrow-glyph">←</span>
-            </button>
-
-
             <!-- WELCOME CLICK LAYER -->
 
             <div
@@ -1372,14 +1335,6 @@
             <div class="etin-progress-label">Progress Meter</div>
         </div>
 
-
-        <button
-            id="scene-8-skip"
-            class="scene-7-back scene-8-skip"
-            type="button"
-        >
-            SKIP
-        </button>
 
     </div>
 
@@ -1670,17 +1625,6 @@
             </div>
 
 
-            <!-- INTERNAL BACK BUTTON -->
-
-            <button
-                id="scene-10-back"
-                class="scene-10-back"
-                type="button"
-            >
-                <span class="back-arrow-glyph">←</span>
-            </button>
-
-
             <div
                 id="scene-10-click-layer"
                 class="scene-10-click-layer"
@@ -1743,14 +1687,6 @@
             <div class="etin-progress-label">Progress Meter</div>
         </div>
 
-
-        <button
-            id="scene-11-skip"
-            class="scene-10-back scene-11-skip"
-            type="button"
-        >
-            SKIP
-        </button>
 
     </div>
 
@@ -1831,15 +1767,6 @@
                 </div>
 
             </div>
-
-
-            <button
-                id="scene-12-back"
-                class="scene-10-back scene-12-back"
-                type="button"
-            >
-                <span class="back-arrow-glyph">←</span>
-            </button>
 
 
             <div
@@ -1963,16 +1890,6 @@
             </div>
 
 
-            <!-- INTERNAL BACK BUTTON -->
-
-            <button
-                id="scene-13-back"
-                class="scene-13-back"
-                type="button"
-            >
-                <span class="back-arrow-glyph">←</span>
-            </button>
-
         </div>
 
     </div>
@@ -2024,14 +1941,6 @@
             <div class="etin-progress-label">Progress Meter</div>
         </div>
 
-        <button
-            id="scene-14-skip"
-            class="scene-13-back"
-            type="button"
-        >
-            SKIP
-        </button>
-
     </div>
 
 </section>
@@ -2063,6 +1972,31 @@
 
 </section>
 
+    <!-- =====================================================
+         SHARED BACK BUTTON
+
+         Lives outside every scene so a single element can
+         be reused from Scene 3 to Scene 13.
+
+         The layer reuses .game-stage so the button stays
+         anchored to the 16:9 stage in every scene.
+         ===================================================== -->
+
+    <div
+        id="global-back-layer"
+        class="game-stage global-back-layer"
+    >
+
+        <button
+            id="global-back-button"
+            class="global-back-button"
+            type="button"
+        >
+            BACK
+        </button>
+
+    </div>
+
     </main>
 
 
@@ -2071,6 +2005,8 @@
          ========================================================= -->
 
     <script src="js/main.js?v=2"></script>
+
+    <script src="js/back-button.js?v=1"></script>
 
     <script src="js/scene-0.js"></script>
 

@@ -55,12 +55,6 @@ const scene6BackgroundVideo =
     );
 
 
-const scene6BackButton =
-document.getElementById(
-    "scene-6-back"
-);
-
-
 const scene6Progress =
 document.getElementById(
     "scene-6-progress"
@@ -195,20 +189,72 @@ function openScene6() {
 
 
 /* ============================================================
-   INTERNAL BACK BUTTON
+   REBUILD THE FINAL STATE OF SCENE 6
+
+   Used when Scene 7 hands control back, so the player lands
+   on "PROCEEDING TO eRETURN" instead of the question.
    ============================================================ */
 
-scene6BackButton.addEventListener(
-    "click",
-    (event) => {
+function showScene6Handover() {
 
-        event.stopPropagation();
+    scene6Step = 1;
 
-        if (
-            scene6Step === 1
-        ) {
 
-            resetScene6Question();
+    scene6Question.style.display =
+        "none";
+
+
+    scene6ResponseText.textContent =
+        "PROCEEDING TO eRETURN";
+
+
+    setScene6Progress(25);
+
+
+    scene6Response.classList.add(
+        "active"
+    );
+
+
+    scene6.classList.add(
+        "message-active"
+    );
+
+}
+
+
+/* ============================================================
+   SHARED BACK BUTTON
+
+   Scene 6 borrows the Scene 4 green palette.
+
+   The response step rewinds to the question, and the
+   question step falls back to Scene 5.
+   ============================================================ */
+
+registerSceneBackButton(
+    "scene-6",
+    {
+
+        theme: "etin",
+
+        previousScene: 5,
+
+        resumeAtEnd: showScene6Handover,
+
+        goBack: () => {
+
+            if (
+                scene6Step === 1
+            ) {
+
+                resetScene6Question();
+
+                return true;
+
+            }
+
+            return false;
 
         }
 

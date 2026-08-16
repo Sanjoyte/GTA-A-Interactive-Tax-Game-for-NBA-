@@ -4,7 +4,6 @@
 
 const scene10 = document.getElementById("scene-10");
 const scene10BackgroundVideo = document.getElementById("scene-10-background");
-const scene10Back = document.getElementById("scene-10-back");
 const scene10ClickLayer = document.getElementById("scene-10-click-layer");
 const scene10WelcomeClickLayer = document.getElementById("scene-10-welcome-click-layer");
 const etdsQuestionPanel = document.getElementById("etds-question-panel");
@@ -235,19 +234,64 @@ etdsLoginButton.addEventListener("click", (event) => {
 });
 
 
-scene10Back.addEventListener("click", (event) => {
-    event.stopPropagation();
+/* ============================================================
+   REBUILD THE FINAL STATE OF SCENE 10
 
-    if (scene10Step === "login") {
-        if (etdsTin.value || etdsPassword.value) {
+   Used when Scene 11 hands control back, so the player lands
+   on the filled-in login instead of the welcome text.
+   ============================================================ */
+
+function showEtdsHandover() {
+    stopEtdsAudio();
+    showEtdsLogin();
+
+    etdsTypingSession += 1;
+    etdsTin.value = createEtdsTinNumber();
+    etdsPassword.value = "password";
+    etdsTinDone = true;
+    etdsPasswordDone = true;
+
+    updateEtdsLoginState();
+}
+
+
+/* ============================================================
+   SHARED BACK BUTTON
+
+   Scene 10 owns the orange palette.
+
+   The button is hidden on the "WELCOME TO eTDS SYSTEM" text,
+   and previousScene is null, so it can never take the player
+   back to Scene 9.
+   ============================================================ */
+
+registerSceneBackButton("scene-10", {
+
+    theme: "etds",
+
+    previousScene: null,
+
+    resumeAtEnd: showEtdsHandover,
+
+    isVisible: () => scene10Step !== "welcome",
+
+    goBack: () => {
+        if (scene10Step === "login") {
             resetEtdsLogin();
-        } else {
             showEtdsQuestion();
+            return true;
         }
-        return;
+
+        if (scene10Step === "wrong") {
+            showEtdsQuestion();
+            return true;
+        }
+
+        if (scene10Step === "question") {
+            showEtdsWelcome();
+        }
+
+        return true;
     }
 
-    if (scene10Step === "wrong") {
-        showEtdsQuestion();
-    }
 });

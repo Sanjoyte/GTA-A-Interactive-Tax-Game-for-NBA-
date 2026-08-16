@@ -15,12 +15,6 @@ const scene8Video =
     );
 
 
-const scene8Skip =
-    document.getElementById(
-        "scene-8-skip"
-    );
-
-
 let scene8TransitionStarted = false;
 
 
@@ -152,21 +146,23 @@ scene8Video.addEventListener(
 
 
 /* ============================================================
-   SKIP BUTTON
+   SHARED BACK BUTTON
+
+   Scene 8 borrows the Scene 7 blue palette and always
+   returns to Scene 7.
    ============================================================ */
 
-scene8Skip.addEventListener(
-    "click",
-    (event) => {
+registerSceneBackButton(
+    "scene-8",
+    {
 
-        event.stopPropagation();
+        theme: "ereturn",
 
+        previousScene: 7,
 
-        console.log(
-            "Scene 8 SKIP clicked."
-        );
+        resumeAtEnd: () => holdVideoAtEnd(scene8Video),
 
-        completeScene8();
+        goBack: () => false
 
     }
 );

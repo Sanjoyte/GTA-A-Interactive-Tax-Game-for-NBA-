@@ -69,6 +69,14 @@ let serviceStep = 0;
 
 
 /*
+    Remembers the last card the player picked so the scene
+    can be rebuilt when Scene 4 hands control back.
+*/
+
+let lastSelectedService = null;
+
+
+/*
     serviceStep:
 
     0 = choosing service
@@ -202,6 +210,9 @@ serviceCards.forEach(
 
                 selectedService =
                     card.dataset.service;
+
+                lastSelectedService =
+                    selectedService;
 
 
                 console.log(
@@ -387,6 +398,172 @@ scene3ClickLayer.addEventListener(
 
 
             openScene4();
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   BACK TO SERVICE SELECTION
+   ============================================================ */
+
+function showServiceSelection() {
+
+    serviceStep = 0;
+
+    selectedService = null;
+
+
+    etinReqAudio.pause();
+
+    etinReqAudio.currentTime = 0;
+
+
+    serviceCardsContainer.classList.remove(
+        "locked"
+    );
+
+
+    serviceCards.forEach(
+        (card) => {
+
+            card.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    serviceMessage.classList.remove(
+        "active"
+    );
+
+    serviceMessageText.textContent = "";
+
+    serviceMessageHint.textContent = "";
+
+
+    scene3.classList.remove(
+        "message-active"
+    );
+
+}
+
+
+/* ============================================================
+   REBUILD THE FINAL STATE OF SCENE 3
+
+   Used when Scene 4 hands control back, so the player lands
+   on "TAKING YOU TO eTIN PORTAL" instead of the card grid.
+   ============================================================ */
+
+function showServiceHandover() {
+
+    const card =
+        Array.from(serviceCards).find(
+            (serviceCard) =>
+                serviceCard.dataset.service ===
+                lastSelectedService
+        ) || serviceCards[0];
+
+
+    selectedService =
+        card.dataset.service;
+
+    lastSelectedService =
+        selectedService;
+
+
+    card.classList.add(
+        "selected"
+    );
+
+
+    serviceCardsContainer.classList.add(
+        "locked"
+    );
+
+
+    etinReqAudio.pause();
+
+    etinReqAudio.currentTime = 0;
+
+
+    serviceStep = 2;
+
+
+    showServiceMessage(
+        "TAKING YOU TO eTIN PORTAL",
+        "TAP TO CONTINUE"
+    );
+
+
+    scene3.classList.add(
+        "message-active"
+    );
+
+}
+
+
+/* ============================================================
+   SHARED BACK BUTTON
+
+   Scene 3 borrows the Scene 7 blue palette.
+
+   The button only appears once a service has been picked,
+   so it can never take the player back to Scene 2.
+   ============================================================ */
+
+registerSceneBackButton(
+    "scene-3",
+    {
+
+        theme: "ereturn",
+
+        previousScene: null,
+
+        resumeAtEnd: showServiceHandover,
+
+        isVisible: () => serviceStep >= 1 && serviceStep <= 2,
+
+        goBack: () => {
+
+            /*
+                TAKING YOU TO eTIN PORTAL
+                        ↓
+                eTIN REQUIRED
+            */
+
+            if (serviceStep === 2) {
+
+                serviceStep = 1;
+
+                showServiceMessage(
+                    "eTIN REQUIRED",
+                    "TAP TO CONTINUE"
+                );
+
+                return true;
+
+            }
+
+
+            /*
+                eTIN REQUIRED
+                        ↓
+                SERVICE SELECTION
+            */
+
+            if (serviceStep === 1) {
+
+                showServiceSelection();
+
+            }
+
+            return true;
 
         }
 

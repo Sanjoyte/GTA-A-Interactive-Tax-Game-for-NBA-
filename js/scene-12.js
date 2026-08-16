@@ -6,7 +6,6 @@ const scene12 = document.getElementById("scene-12");
 const scene12BackgroundVideo = document.getElementById("scene-12-background");
 const scene12ClickLayer = document.getElementById("scene-12-click-layer");
 const scene12MessageHint = document.getElementById("scene-12-message-hint");
-const scene12Back = document.getElementById("scene-12-back");
 
 let scene12ContinuePressed = false;
 
@@ -54,14 +53,31 @@ scene12ClickLayer.addEventListener("click", () => {
 });
 
 
-scene12Back.addEventListener("click", (event) => {
-    event.stopPropagation();
+/* ============================================================
+   SHARED BACK BUTTON
 
-    if (!scene12ContinuePressed) {
-        return;
+   Scene 12 borrows the Scene 10 orange palette.
+
+   The message can be rewound once, after which the button
+   falls back to Scene 11.
+   ============================================================ */
+
+registerSceneBackButton("scene-12", {
+
+    theme: "etds",
+
+    previousScene: 11,
+
+    goBack: () => {
+        if (!scene12ContinuePressed) {
+            return false;
+        }
+
+        scene12ContinuePressed = false;
+        scene12MessageHint.textContent = "TAP TO CONTINUE";
+        scene12ClickLayer.style.display = "block";
+
+        return true;
     }
 
-    scene12ContinuePressed = false;
-    scene12MessageHint.textContent = "TAP TO CONTINUE";
-    scene12ClickLayer.style.display = "block";
 });

@@ -1,0 +1,335 @@
+/* ============================================================
+   SHARED BACK BUTTON
+
+   One single button reused by Scene 3 through Scene 13
+   (Scene 9 has no back button).
+
+   Position and size are identical in every scene.
+   Only the colour palette changes, driven by the
+   data-theme attribute set from js/back-button.js.
+   ============================================================ */
+
+
+/* ============================================================
+   TUNING VARIABLES
+
+   These are the only values that need to be edited to
+   move or resize the button in every scene at once.
+   ============================================================ */
+
+:root {
+
+    /*
+        Vertical position.
+
+        Measured as a percentage from the BOTTOM edge
+        of the 16:9 game stage.
+    */
+
+    --back-button-bottom: 8%;
+
+
+    /*
+        Horizontal position.
+
+        Measured as a percentage from the LEFT edge
+        of the 16:9 game stage.
+    */
+
+    --back-button-left: 3%;
+
+
+    /*
+        Height of the button.
+    */
+
+    --back-button-height: clamp(2.5rem, 3.6vw, 3.6rem);
+
+
+    /*
+        Secondary sizing.
+    */
+
+    --back-button-min-width: clamp(7.5rem, 11vw, 11.5rem);
+
+    --back-button-font-size: clamp(0.72rem, 1vw, 1rem);
+
+}
+
+
+/* ============================================================
+   OVERLAY LAYER
+
+   The layer reuses .game-stage so the button is always
+   anchored to the 16:9 stage and never drifts into the
+   letterbox bars.
+   ============================================================ */
+
+.global-back-layer {
+
+    background: transparent;
+
+    z-index: 400;
+
+    /*
+        The layer itself must never swallow scene clicks.
+    */
+
+    pointer-events: none;
+
+}
+
+
+/* ============================================================
+   BUTTON — SHARED SHAPE
+   ============================================================ */
+
+.global-back-button {
+
+    position: absolute;
+
+    left: var(--back-button-left);
+    bottom: var(--back-button-bottom);
+
+    height: var(--back-button-height);
+
+    min-width: var(--back-button-min-width);
+
+    padding:
+        0
+        clamp(1.2rem, 2.1vw, 2.4rem);
+
+    /*
+        Hidden until a scene registers the button.
+    */
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 0.12rem solid transparent;
+
+    border-radius: 0.25rem;
+
+    color: #ffffff;
+
+    font-family:
+        "Press Start 2P",
+        monospace;
+
+    font-size: var(--back-button-font-size);
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    letter-spacing: 0.08em;
+
+    cursor: pointer;
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.global-back-layer.is-visible
+.global-back-button {
+
+    display: inline-flex;
+
+}
+
+
+.global-back-button:hover,
+.global-back-button:focus-visible {
+
+    transform: translateY(-0.16rem);
+
+    filter: brightness(1.12);
+
+    outline: none;
+
+}
+
+
+.global-back-button:active {
+
+    transform:
+        translateY(0.08rem)
+        scale(0.98);
+
+}
+
+
+/* ============================================================
+   THEME — eTIN GREEN
+
+   Taken from the original Scene 4 back button.
+   Used by Scene 4, Scene 5 and Scene 6.
+   ============================================================ */
+
+.global-back-button[data-theme="etin"] {
+
+    border-color: #6fffd4;
+
+    background-color: #075b46;
+
+    background-image:
+        linear-gradient(
+            180deg,
+            #299b68 0%,
+            #087052 52%,
+            #034437 100%
+        );
+
+    text-shadow:
+        0 0.12rem 0 #022c22,
+        0 0 0.5rem rgba(0, 255, 204, 0.9);
+
+    box-shadow:
+        0 0 1rem rgba(0, 255, 204, 0.42),
+        inset 0 0.12rem 0 rgba(220, 255, 239, 0.28);
+
+}
+
+
+.global-back-button[data-theme="etin"]:hover,
+.global-back-button[data-theme="etin"]:focus-visible {
+
+    box-shadow:
+        0 0 1.4rem rgba(0, 255, 204, 0.66),
+        inset 0 0.12rem 0 rgba(220, 255, 239, 0.34);
+
+}
+
+
+/* ============================================================
+   THEME — eRETURN BLUE
+
+   Taken from the original Scene 7 back button.
+   Used by Scene 3, Scene 7 and Scene 8.
+   ============================================================ */
+
+.global-back-button[data-theme="ereturn"] {
+
+    border-color: #9ae8ff;
+
+    background-color: rgba(18, 77, 132, 0.96);
+
+    background-image:
+        linear-gradient(
+            180deg,
+            #526fd1 0%,
+            #314da8 52%,
+            #202d70 100%
+        );
+
+    text-shadow:
+        0 0.12rem 0 #11183e,
+        0 0 0.5rem rgba(116, 218, 255, 0.8);
+
+    box-shadow:
+        0 0 1rem rgba(78, 176, 255, 0.42),
+        inset 0 0.12rem 0 rgba(235, 250, 255, 0.3);
+
+}
+
+
+.global-back-button[data-theme="ereturn"]:hover,
+.global-back-button[data-theme="ereturn"]:focus-visible {
+
+    box-shadow:
+        0 0 1.5rem rgba(107, 207, 255, 0.65),
+        inset 0 0.12rem 0 rgba(235, 250, 255, 0.36);
+
+}
+
+
+/* ============================================================
+   THEME — eTDS ORANGE
+
+   Taken from the original Scene 10 back button.
+   Used by Scene 10, Scene 11 and Scene 12.
+   ============================================================ */
+
+.global-back-button[data-theme="etds"] {
+
+    border-color: #ffc58f;
+
+    background-color: #87370f;
+
+    background-image:
+        linear-gradient(
+            180deg,
+            #cf6824 0%,
+            #984117 52%,
+            #602409 100%
+        );
+
+    text-shadow:
+        0 0.12rem 0 #4a1a05;
+
+    box-shadow:
+        0 0 1rem rgba(255, 126, 39, 0.45),
+        inset 0 0.12rem 0 rgba(255, 241, 220, 0.28);
+
+}
+
+
+.global-back-button[data-theme="etds"]:hover,
+.global-back-button[data-theme="etds"]:focus-visible {
+
+    box-shadow:
+        0 0 1.5rem rgba(255, 152, 74, 0.68),
+        inset 0 0.12rem 0 rgba(255, 241, 220, 0.34);
+
+}
+
+
+/* ============================================================
+   THEME — eAUDIT PURPLE
+
+   Taken from the original Scene 13 back button.
+   Used by Scene 13.
+   ============================================================ */
+
+.global-back-button[data-theme="eaudit"] {
+
+    border-color: #dda7ff;
+
+    background-color: #5e248b;
+
+    background-image:
+        linear-gradient(
+            180deg,
+            #944ac1 0%,
+            #662b94 52%,
+            #3c185d 100%
+        );
+
+    text-shadow:
+        0 0.12rem 0 #2b0e43;
+
+    box-shadow:
+        0 0 1rem rgba(185, 91, 255, 0.46),
+        inset 0 0.12rem 0 rgba(247, 229, 255, 0.28);
+
+}
+
+
+.global-back-button[data-theme="eaudit"]:hover,
+.global-back-button[data-theme="eaudit"]:focus-visible {
+
+    box-shadow:
+        0 0 1.5rem rgba(202, 121, 255, 0.7),
+        inset 0 0.12rem 0 rgba(247, 229, 255, 0.34);
+
+}

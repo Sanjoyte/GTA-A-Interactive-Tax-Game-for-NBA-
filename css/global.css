@@ -69,12 +69,8 @@ body {
 
 }
 
-
 /* ============================================================
-   BACK BUTTON ARROW GLYPH
-   ============================================================ */
+   BACK BUTTON
 
-.back-arrow-glyph {
-    display: inline-block;
-    transform: scale(1.7);
-}
+   The shared back button lives in css/back-button.css.
+   ============================================================ */

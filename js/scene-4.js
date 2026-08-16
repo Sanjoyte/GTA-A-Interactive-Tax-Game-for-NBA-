@@ -5,7 +5,6 @@
 const scene4 = document.getElementById("scene-4");
 const scene4ClickLayer = document.getElementById("scene-4-click-layer");
 const scene4BackgroundVideo = document.getElementById("scene-4-background");
-const scene4BackButton = document.getElementById("scene-4-back");
 
 const etinUserId = document.getElementById("etin-user-id");
 const etinPassword = document.getElementById("etin-password");
@@ -199,6 +198,16 @@ function showEtinLogin() {
     setEtinProgress();
 }
 
+function showEtinWelcome() {
+    scene4TypingSession += 1;
+    resetEtinLogin();
+    resetEtinRegistration();
+    scene4Step = 0;
+    showScene4Panel("welcome-visible");
+    scene4.classList.add("waiting-for-click");
+    setEtinProgress();
+}
+
 etinUserId.addEventListener("click", (event) => {
     event.stopPropagation();
 
@@ -382,28 +391,90 @@ etinRegisterButton.addEventListener("click", (event) => {
     console.log("Showing Print Your eTIN Certificate.");
 });
 
-scene4BackButton.addEventListener("click", (event) => {
-    event.stopPropagation();
+/* ============================================================
+   REBUILD THE FINAL STATE OF SCENE 4
 
-    if (scene4Step === 5) {
-        showEtinRegistration();
-        return;
-    }
+   Used when Scene 5 hands control back, so the player lands
+   on "PRINT YOUR eTIN CERTIFICATE" instead of the welcome text.
+   ============================================================ */
 
-    if (scene4Step === 3 || scene4Step === 4) {
-        showEtinLogin();
-        if (isUserIdDone && isPasswordDone) {
-            scene4Step = 2;
-            setEtinProgress();
+function showEtinCertificate() {
+    scene4TypingSession += 1;
+    stopEtinAudio();
+
+    /*
+        The certificate is only reachable with a completed
+        login and a completed registration, so both are
+        refilled before it is shown.
+    */
+
+    etinUserId.value = ETIN_USER_ID_VALUE;
+    etinPassword.value = ETIN_PASSWORD_VALUE;
+    isUserIdStarted = true;
+    isPasswordStarted = true;
+    isUserIdDone = true;
+    isPasswordDone = true;
+    setButtonEnabled(etinLoginButton, true);
+
+    registrationFields.forEach((field) => {
+        field.input.value = field.value;
+        field.started = true;
+        field.done = true;
+    });
+
+    setButtonEnabled(etinRegisterButton, true);
+
+    scene4Step = 5;
+    showScene4Panel("certificate-visible");
+    scene4.classList.add("waiting-for-click");
+    setEtinProgress();
+}
+
+
+/* ============================================================
+   SHARED BACK BUTTON
+
+   Scene 4 owns the green palette.
+
+   The welcome text is the first step, so from there the
+   button hands control back to the end of Scene 3.
+   ============================================================ */
+
+registerSceneBackButton("scene-4", {
+
+    theme: "etin",
+
+    previousScene: 3,
+
+    resumeAtEnd: showEtinCertificate,
+
+    goBack: () => {
+        if (scene4Step === 5) {
+            showEtinRegistration();
+            return true;
         }
-        return;
+
+        if (scene4Step === 3 || scene4Step === 4) {
+            showEtinLogin();
+            if (isUserIdDone && isPasswordDone) {
+                scene4Step = 2;
+                setEtinProgress();
+            }
+            return true;
+        }
+
+        if (scene4Step === 1 || scene4Step === 2) {
+            showEtinWelcome();
+            return true;
+        }
+
+        /*
+            Welcome text — hand back to Scene 3.
+        */
+
+        return false;
     }
 
-    if (scene4Step === 1 || scene4Step === 2) {
-        scene4TypingSession += 1;
-        resetEtinLogin();
-        showEtinLogin();
-    }
 });
 
 function openScene5() {

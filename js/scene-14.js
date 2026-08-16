@@ -4,7 +4,6 @@
 
 const scene14 = document.getElementById("scene-14");
 const scene14Video = document.getElementById("scene-14-video");
-const scene14Skip = document.getElementById("scene-14-skip");
 
 let scene14TransitionStarted = false;
 
@@ -56,13 +55,6 @@ function openScene14() {
 
 scene14Video.addEventListener("ended", () => {
     console.log("Scene 14 video finished.");
-    completeScene14();
-});
-
-
-scene14Skip.addEventListener("click", (event) => {
-    event.stopPropagation();
-    console.log("Scene 14 SKIP clicked.");
     completeScene14();
 });
 

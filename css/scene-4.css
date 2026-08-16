@@ -67,64 +67,11 @@
 
 
 /* ============================================================
-   INTERNAL BACK BUTTON
+   BACK BUTTON
+
+   The green palette of the old Scene 4 back button now lives
+   in css/back-button.css as data-theme="etin".
    ============================================================ */
-
-.scene-4-back {
-    position: absolute;
-    right: 3%;
-    bottom: 12.8%;
-    z-index: 40;
-    min-width: clamp(8.5rem, 12.5vw, 13rem);
-    padding:
-        clamp(0.9rem, 1.2vw, 1.25rem)
-        clamp(1.7rem, 2.5vw, 2.8rem);
-    border: 0.12rem solid #6fffd4;
-    border-radius: 6px;
-
-    /* Both layers are fully opaque, so the video never shows through. */
-    background-color: #075b46;
-    background-image:
-        linear-gradient(
-            180deg,
-            #299b68 0%,
-            #087052 52%,
-            #034437 100%
-        );
-
-    color: #ffffff;
-    font-family: "Press Start 2P", Arial, Helvetica, sans-serif;
-    font-size: clamp(0.76rem, 1.08vw, 1.1rem);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: 0.04em;
-    text-shadow:
-        0 0.12rem 0 #022c22,
-        0 0 0.5rem rgba(0, 255, 204, 0.9);
-    box-shadow:
-        0 0 1rem rgba(0, 255, 204, 0.42),
-        inset 0 0.12rem 0 rgba(220, 255, 239, 0.28);
-    cursor: pointer;
-    opacity: 1;
-    transition:
-        transform 180ms ease,
-        filter 180ms ease,
-        box-shadow 180ms ease;
-}
-
-.scene-4-back:hover,
-.scene-4-back:focus-visible {
-    transform: translateY(-0.12rem);
-    filter: brightness(1.12);
-    box-shadow:
-        0 0 1.4rem rgba(0, 255, 204, 0.66),
-        inset 0 0.12rem 0 rgba(220, 255, 239, 0.34);
-    outline: none;
-}
-
-.scene-4-back:active {
-    transform: translateY(0.08rem) scale(0.98);
-}
 
 
 /* ============================================================
