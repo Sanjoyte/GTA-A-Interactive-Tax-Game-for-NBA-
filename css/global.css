@@ -68,3 +68,13 @@ body {
     overflow: hidden;
 
 }
+
+
+/* ============================================================
+   BACK BUTTON ARROW GLYPH
+   ============================================================ */
+
+.back-arrow-glyph {
+    display: inline-block;
+    transform: scale(1.7);
+}
