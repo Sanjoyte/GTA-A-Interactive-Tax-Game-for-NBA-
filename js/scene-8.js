@@ -150,6 +150,9 @@ scene8Video.addEventListener(
 
    Scene 8 borrows the Scene 7 blue palette and always
    returns to Scene 7.
+
+   No resumeAtEnd is registered, so the video would replay
+   from the beginning, matching Scene 5 and Scene 11.
    ============================================================ */
 
 registerSceneBackButton(
@@ -159,8 +162,6 @@ registerSceneBackButton(
         theme: "ereturn",
 
         previousScene: 7,
-
-        resumeAtEnd: () => holdVideoAtEnd(scene8Video),
 
         goBack: () => false
 

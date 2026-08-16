@@ -69,6 +69,9 @@ scene11Video.addEventListener("ended", () => {
 
    Scene 11 borrows the Scene 10 orange palette and always
    returns to Scene 10.
+
+   No resumeAtEnd is registered, so arriving here from
+   Scene 12 replays the video from the beginning.
    ============================================================ */
 
 registerSceneBackButton("scene-11", {
@@ -76,8 +79,6 @@ registerSceneBackButton("scene-11", {
     theme: "etds",
 
     previousScene: 10,
-
-    resumeAtEnd: () => holdVideoAtEnd(scene11Video),
 
     goBack: () => false
 

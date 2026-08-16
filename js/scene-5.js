@@ -111,10 +111,7 @@ scene5Video.addEventListener(
 
 
 /* ============================================================
-   TAP TO CONTINUE
-
-   Also resumes playback when the video is parked on its
-   last frame after the player came back from Scene 6.
+   PLAYBACK FALLBACK
    ============================================================ */
 
 scene5.addEventListener(
@@ -151,6 +148,9 @@ scene5.addEventListener(
 
    There is nothing to step through inside a video, so the
    button always returns to Scene 4.
+
+   No resumeAtEnd is registered, so arriving here from
+   Scene 6 replays the video from the beginning.
    ============================================================ */
 
 registerSceneBackButton(
@@ -160,8 +160,6 @@ registerSceneBackButton(
         theme: "etin",
 
         previousScene: 4,
-
-        resumeAtEnd: () => holdVideoAtEnd(scene5Video),
 
         goBack: () => false
 
