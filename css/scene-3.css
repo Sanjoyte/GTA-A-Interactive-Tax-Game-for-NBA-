@@ -532,6 +532,19 @@
 }
 
 
+.service-card-icon--currency {
+
+    font-family:
+        "Noto Sans Bengali",
+        "Orbitron",
+        sans-serif;
+
+    font-weight:
+        700;
+
+}
+
+
 /* ============================================================
    CARD TITLE
    ============================================================ */
