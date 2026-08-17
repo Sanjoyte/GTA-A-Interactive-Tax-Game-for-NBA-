@@ -58,6 +58,13 @@ function openScene9() {
     gameState.riponUnlocked =
         true;
 
+
+    /*
+        Same character selection voice over as Scene 2.
+    */
+
+    playCharAudio();
+
 }
 
 
@@ -71,6 +78,9 @@ scene9Ripon.addEventListener(
 
         gameState.selectedCharacter =
             "ripon";
+
+
+        stopCharAudio();
 
 
         scene9Ripon.classList.add(

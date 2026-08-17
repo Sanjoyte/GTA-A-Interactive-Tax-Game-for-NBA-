@@ -152,6 +152,7 @@ function refreshGlobalBackButton() {
 function stopTransientSceneAudio() {
 
     [
+        "stopCharAudio",
         "stopEtinAudio",
         "stopEreturnAudio",
         "stopEtdsAudio",

@@ -32,6 +32,46 @@ const riponCharacter =
 
 
 /* ============================================================
+   CHARACTER SELECTION AUDIO
+
+   Shared by Scene 2 and Scene 9, since both are character
+   selection screens.
+   ============================================================ */
+
+const charAudio =
+    new Audio("assets/audio/char.mp3");
+
+charAudio.preload = "auto";
+
+
+function playCharAudio() {
+
+    charAudio.currentTime = 0;
+
+    charAudio.play().catch(
+        (error) => {
+
+            console.log(
+                "Character selection audio blocked:",
+                error
+            );
+
+        }
+    );
+
+}
+
+
+function stopCharAudio() {
+
+    charAudio.pause();
+
+    charAudio.currentTime = 0;
+
+}
+
+
+/* ============================================================
    INITIAL STATE
    ============================================================ */
 
@@ -90,6 +130,9 @@ function openScene2() {
     gameState.currentScene =
         "scene-2";
 
+
+    playCharAudio();
+
 }
 
 
@@ -107,6 +150,9 @@ rahmanCharacter.addEventListener(
 
         gameState.selectedCharacter =
             "rahman";
+
+
+        stopCharAudio();
 
 
         console.log(
