@@ -5,16 +5,12 @@
 const scene15 = document.getElementById("scene-15");
 const scene15Video = document.getElementById("scene-15-video");
 
-// const SCENE15_PAUSE_TIME = 21.3;
-
 /*
-    The mid video pause is switched off.
-
-    Infinity keeps the checks below valid while making sure
-    the pause point is never reached.
+    The final video stops here and waits for a click before
+    it carries on.
 */
 
-const SCENE15_PAUSE_TIME = Infinity;
+const SCENE15_PAUSE_TIME = 50;
 
 
 /*
