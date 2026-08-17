@@ -283,6 +283,170 @@ startBackgroundAudio();
 
 
 /* ============================================================
+   BUTTON AND CARD CLICK SOUND
+
+   A short confirmation sound for buttons — login, register,
+   submit, yes, no, back — and for the character cards on the
+   Scene 2 and Scene 9 selection screens.
+
+   The clips are built from NativeAudio on purpose. The patched
+   constructor above registers a clip as a voice over, which
+   pauses the background track. A click sound must leave the
+   background music running, so it stays unregistered.
+   ============================================================ */
+
+const CLICK_SOUND_SOURCE = "assets/audio/button.mp3";
+
+
+/*
+    Anything a player presses to make something happen.
+
+    Scene 13 builds its case cards as real buttons at runtime,
+    and the listener below is delegated, so those are covered
+    without any extra wiring.
+*/
+
+const CLICK_SOUND_SELECTOR = [
+    "button",
+    "[role=\"button\"]",
+    ".character",
+    ".scene-9-character"
+].join(", ");
+
+
+/*
+    Elements that stay silent.
+
+    The "tap to continue" prompts are excluded by request —
+    they read as pacing, not as a pressed control.
+
+    Locked and completed character cards are excluded because
+    pressing one selects nothing, so a confirmation sound
+    would be telling the player the wrong thing.
+*/
+
+const CLICK_SOUND_EXCLUDED_SELECTOR = [
+    "[data-no-click-sound]",
+    "[class*=\"continue\"]",
+    "[disabled]",
+    "[aria-disabled=\"true\"]",
+    ".locked",
+    ".completed"
+].join(", ");
+
+
+/*
+    Two presses in quick succession should both be heard, so
+    the sound is spread across a small pool instead of one clip
+    that would have to cut itself off to start again.
+*/
+
+const CLICK_SOUND_POOL_SIZE = 4;
+
+
+const clickSoundPool = [];
+
+
+for (
+    let index = 0;
+    index < CLICK_SOUND_POOL_SIZE;
+    index += 1
+) {
+
+    const clickSound =
+        new NativeAudio(
+            CLICK_SOUND_SOURCE
+        );
+
+    clickSound.preload = "auto";
+
+    clickSoundPool.push(clickSound);
+
+}
+
+
+let clickSoundIndex = 0;
+
+
+function playClickSound() {
+
+    const clickSound =
+        clickSoundPool[clickSoundIndex];
+
+    clickSoundIndex =
+        (clickSoundIndex + 1) %
+        CLICK_SOUND_POOL_SIZE;
+
+
+    clickSound.currentTime = 0;
+
+    clickSound.play().catch((error) => {
+
+        console.log(
+            "Click sound blocked:",
+            error
+        );
+
+    });
+
+}
+
+
+/*
+    The listener runs on the capture phase.
+
+    Several scenes call stopPropagation inside their own click
+    handlers, which would swallow a bubbling listener, and
+    capture also means the sound starts before a handler
+    switches scenes out from under it.
+*/
+
+document.addEventListener(
+    "click",
+    (event) => {
+
+        const target = event.target;
+
+
+        if (!(target instanceof Element)) {
+
+            return;
+
+        }
+
+
+        const control =
+            target.closest(
+                CLICK_SOUND_SELECTOR
+            );
+
+
+        if (!control) {
+
+            return;
+
+        }
+
+
+        if (
+            control.matches(
+                CLICK_SOUND_EXCLUDED_SELECTOR
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        playClickSound();
+
+    },
+    true
+);
+
+
+/* ============================================================
    GLOBAL GAME INFORMATION
    ============================================================ */
 
