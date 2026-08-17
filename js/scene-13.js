@@ -21,8 +21,7 @@ const eauditCaseData = [
         number: 2,
         title: "Complete Data Consistency",
         level: "Low",
-        percentage: 40,
-        colorOverride: "hsl(48 92% 50%)"
+        percentage: 14
     },
     {
         number: 3,
@@ -40,7 +39,7 @@ const eauditCaseData = [
         number: 5,
         title: "Tax Official’s Own File",
         level: "High",
-        percentage: 71
+        percentage: 81
     }
 ];
 
@@ -59,10 +58,45 @@ let revealedCaseCount = 0;
 const selectedAuditCases = new Set();
 
 
+/*
+    Risk colour ramp.
+
+    The percentage is the only input, so changing a case's
+    percentage is the only thing needed to move its colour.
+    0 sits at the greenest end and 100 at the reddest, running
+    through yellow-green, amber and orange on the way.
+
+    Hue on its own is not enough. At a single fixed lightness
+    the greens and yellows come out far brighter than the reds,
+    and the revealed card prints white text over this colour,
+    so the low end of the scale washed the text out.
+
+    Lightness therefore climbs towards red and dips back across
+    the yellow band, which keeps every point on the scale dark
+    enough to carry that white text while leaving the red end
+    the most vivid.
+*/
+
+const RISK_GREEN_HUE = 120;
+
+const RISK_LIGHTNESS_BASE = 31.5;
+
+const RISK_LIGHTNESS_RISE = 18.5;
+
+const RISK_LIGHTNESS_YELLOW_DIP = 12;
+
+
 function getRiskColor(percentage) {
     const normalizedRisk = Math.max(0, Math.min(1, percentage / 100));
-    const hue = Math.round(120 - normalizedRisk * 120);
-    return `hsl(${hue} 82% 42%)`;
+
+    const hue = RISK_GREEN_HUE * (1 - normalizedRisk);
+
+    const lightness =
+        RISK_LIGHTNESS_BASE +
+        RISK_LIGHTNESS_RISE * normalizedRisk -
+        RISK_LIGHTNESS_YELLOW_DIP * Math.sin(Math.PI * normalizedRisk);
+
+    return `hsl(${hue.toFixed(1)} 82% ${lightness.toFixed(1)}%)`;
 }
 
 
@@ -74,7 +108,7 @@ function buildEauditCards() {
         card.className = "eaudit-case";
         card.type = "button";
         card.dataset.caseIndex = String(index);
-        card.style.setProperty("--risk-color", caseData.colorOverride || getRiskColor(caseData.percentage));
+        card.style.setProperty("--risk-color", getRiskColor(caseData.percentage));
         card.setAttribute("aria-label", `Reveal Return ${caseData.number}`);
 
         const inner = document.createElement("span");
@@ -99,7 +133,7 @@ function buildEauditCards() {
 
         const caseLabel = document.createElement("span");
         caseLabel.className = "eaudit-risk-case-label";
-        caseLabel.textContent = `Return ${caseData.number} • Automated Risk Assessment`;
+        caseLabel.textContent = `Return ${caseData.number}`;
 
         const title = document.createElement("span");
         title.className = "eaudit-risk-title";

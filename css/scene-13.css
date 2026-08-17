@@ -279,7 +279,7 @@
     background:
         linear-gradient(
             155deg,
-            color-mix(in srgb, var(--risk-color), white 20%),
+            color-mix(in srgb, var(--risk-color), white 12%),
             var(--risk-color)
         );
     color: #ffffff;
