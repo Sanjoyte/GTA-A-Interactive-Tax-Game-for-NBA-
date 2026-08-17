@@ -689,6 +689,8 @@ function typeEreturnValue(
                 characterIndex + 1
             );
 
+        playMechanicalKeySound();
+
         characterIndex += 1;
 
         if (

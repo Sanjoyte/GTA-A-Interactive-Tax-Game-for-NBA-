@@ -48,6 +48,7 @@ function typeEtdsValue(input, value, onComplete) {
         }
 
         input.value = value.slice(0, characterIndex + 1);
+        playMechanicalKeySound();
         characterIndex += 1;
 
         if (characterIndex < value.length) {
