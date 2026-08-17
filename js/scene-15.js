@@ -22,7 +22,7 @@ const SCENE15_PAUSE_TIME = Infinity;
     video.
 */
 
-const SCENE15_CAPTAIN_TIME = 5.3;
+const SCENE15_CAPTAIN_TIME = 62;
 
 
 let scene15PauseReached = false;
